@@ -46,6 +46,7 @@ import com.michaldrabik.ui_base.utilities.viewBinding
 import com.michaldrabik.ui_comments.CommentView
 import com.michaldrabik.ui_episodes.R
 import com.michaldrabik.ui_episodes.databinding.ViewEpisodeDetailsBinding
+import com.michaldrabik.ui_episodes.details.links.EpisodeLinksBottomSheet
 import com.michaldrabik.ui_model.Comment
 import com.michaldrabik.ui_model.Episode
 import com.michaldrabik.ui_model.Ids
@@ -152,7 +153,15 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
         viewModel.loadComments(ids.trakt, episode.season, episode.number)
       }
       episodeDetailsPostCommentButton.onClick { openPostCommentSheet() }
+      episodeDetailsLink.onClick { openEpisodeImdbLink(episode) }
     }
+  }
+
+  private fun openEpisodeImdbLink(episode: Episode) {
+    val bundle = EpisodeLinksBottomSheet.createBundle(episode)
+//    navigateToSafe(R.id.actionEpisodeDetailsToLink, args)
+//    findNavController().navigate(R.id.actionEpisodeDetailsToLink, bundle)
+    navigateTo(R.id.actionEpisodeDetailsDialogToLink, bundle)
   }
 
   private fun openRateDialog() {
