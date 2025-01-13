@@ -32,7 +32,7 @@ circleindicator = "2.1.6"
 logging-interceptor = "4.12.0"
 overscroll-decor = "1.1.1"
 junit = "5.11.4"
-mockk = "1.13.14"
+mockk = "1.13.16"
 truth = "1.4.4"
 core-testing = "2.2.0"
 
