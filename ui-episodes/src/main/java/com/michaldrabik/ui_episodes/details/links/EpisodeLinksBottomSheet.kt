@@ -17,6 +17,7 @@ import com.michaldrabik.ui_model.Episode
 import com.michaldrabik.ui_navigation.java.NavigationArgs
 import com.michaldrabik.ui_episodes.R
 import com.michaldrabik.ui_episodes.databinding.ViewEpisodeLinksBinding
+import com.michaldrabik.ui_model.IdTmdb
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.parcelize.Parcelize
 
@@ -25,6 +26,7 @@ class EpisodeLinksBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_li
 
   @Parcelize
   data class Options(
+    val showIdTmdb: IdTmdb,
     val ids: Ids,
     val title: String,
     val season: Int,
@@ -32,15 +34,16 @@ class EpisodeLinksBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_li
   ) : Parcelable
 
   companion object {
-    fun createBundle(episode: Episode): Bundle {
-      val options = Options(episode.ids, episode.title, episode.season, episode.number)
-      return bundleOf(NavigationArgs.ARG_OPTIONS to options)
-    }
+    fun createBundle(showIdTmdb: IdTmdb, episode: Episode): Bundle {
+      val options = Options(showIdTmdb, episode.ids, episode.title, episode.season, episode.number)
+      return bundleOf(NavigationArgs.ARG_EPISODE_LINK to options)
+      }
   }
 
   private val binding by viewBinding(ViewEpisodeLinksBinding::bind)
 
-  private val options by lazy { requireParcelable<Options>(NavigationArgs.ARG_OPTIONS) }
+  private val options by lazy { requireParcelable<Options>(NavigationArgs.ARG_EPISODE_LINK) }
+  private val showIdTmdb by lazy { options.showIdTmdb.id }
   private val ids by lazy { options.ids }
   private val title by lazy { options.title }
   private val season by lazy { options.season }
@@ -55,9 +58,9 @@ class EpisodeLinksBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_li
     super.onViewCreated(view, savedInstanceState)
     setupView()
   }
-  private val query = "$title season $season episode $episodeNumber"
 
   private fun setupView() {
+    val query = "$title season $season episode $episodeNumber"
     with(binding) {
       viewEpisodeLinksGoogle.onClick {
         openWebUrl("https://www.google.com/search?q=$query")
@@ -78,7 +81,7 @@ class EpisodeLinksBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_li
         isEnabled = false
       } else {
         onClick {
-          openWebUrl("https://www.themoviedb.org/Episode/${ids.tmdb.id}")
+          openWebUrl("https://www.themoviedb.org/tv/${showIdTmdb}/season/${season}/episode/${episodeNumber}")
         }
       }
     }
@@ -92,12 +95,12 @@ class EpisodeLinksBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_li
       } else {
         onClick {
           val i = Intent(Intent.ACTION_VIEW)
-          i.data = Uri.parse("imdb:///name/${ids.imdb.id}")
+          i.data = Uri.parse("imdb:///title/${ids.imdb.id}")
           try {
             startActivity(i)
           } catch (e: ActivityNotFoundException) {
             // IMDb App not installed. Start in web browser
-            openWebUrl("https://www.imdb.com/name/${ids.imdb.id}")
+            openWebUrl("https://www.imdb.com/title/${ids.imdb.id}")
           }
         }
       }
