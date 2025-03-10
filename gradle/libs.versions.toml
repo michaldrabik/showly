@@ -1,6 +1,6 @@
 [versions]
 
-agp = "8.8.2"
+agp = "8.9.0"
 androidLifecycle = "2.8.7"
 androidNavigation = "2.8.8"
 androidRoom = "2.6.1"
