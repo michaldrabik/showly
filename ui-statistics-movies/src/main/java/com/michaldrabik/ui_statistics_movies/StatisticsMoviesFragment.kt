@@ -49,7 +49,7 @@ class StatisticsMoviesFragment : BaseFragment<StatisticsMoviesViewModel>(R.layou
 
   private fun setupView() {
     with(binding) {
-      statisticsMoviesToolbar.setNavigationOnClickListener { activity?.onBackPressed() }
+      statisticsMoviesToolbar.setOnClickListener { activity?.onBackPressed() }
       statisticsMoviesRatings.onMovieClickListener = {
         openMovieDetails(it.movie.traktId)
       }

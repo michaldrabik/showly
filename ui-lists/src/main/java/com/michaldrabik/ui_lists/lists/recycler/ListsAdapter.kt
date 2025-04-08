@@ -1,3 +1,5 @@
+@file:Suppress("ktlint")
+
 package com.michaldrabik.ui_lists.lists.recycler
 
 import android.view.View

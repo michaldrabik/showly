@@ -25,6 +25,8 @@ interface EpisodesLocalDataSource {
     episodeTraktId: Long,
   ): Episode?
 
+  suspend fun getAll(episodesIds: List<Long>): List<Episode>
+
   suspend fun getAllForSeason(seasonTraktId: Long): List<Episode>
 
   suspend fun getAllByShowId(showTraktId: Long): List<Episode>
@@ -71,6 +73,8 @@ interface EpisodesLocalDataSource {
   ): Int
 
   suspend fun getWatchedCount(showTraktId: Long): Int
+
+  suspend fun getAllWatched(): List<Episode>
 
   suspend fun getAllWatchedForShows(showsIds: List<Long>): List<Episode>
 

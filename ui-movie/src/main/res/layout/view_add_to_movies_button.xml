@@ -87,7 +87,7 @@
       android:layout_marginStart="8dp"
       android:background="@drawable/bg_check_ripple"
       android:visibility="gone"
-      app:srcCompat="@drawable/ic_check"
+      app:srcCompat="@drawable/ic_check_big"
       app:tint="?android:textColorPrimary"
       tools:visibility="visible"
       />

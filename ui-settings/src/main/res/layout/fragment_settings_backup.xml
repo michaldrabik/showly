@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/settingsContent"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  tools:theme="@style/AppTheme"
+  >
+
+  <TextView
+    android:id="@+id/settingsCategoryBackup"
+    style="@style/Settings.Category"
+    android:text="@string/textSettingsBackup"
+    app:layout_constraintBottom_toTopOf="@id/settingsBackupImport"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    />
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/settingsBackupImport"
+    style="@style/Settings.ItemLayout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/settingsCategoryBackup"
+    >
+
+    <TextView
+      android:id="@+id/settingsBackupCrashImport"
+      style="@style/Settings.Title"
+      android:text="@string/textSettingsBackupImportTitle"
+      app:layout_constraintBottom_toTopOf="@id/settingsBackupCrashesDescImport"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_chainStyle="packed"
+      />
+
+    <TextView
+      android:id="@+id/settingsBackupCrashesDescImport"
+      style="@style/Settings.Summary"
+      android:layout_marginEnd="@dimen/spaceSmall"
+      android:text="@string/textSettingsBackupImportDescription"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintHorizontal_bias="0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/settingsBackupCrashImport"
+      />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/settingsBackupExport"
+    style="@style/Settings.ItemLayout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/settingsBackupImport"
+    >
+
+    <TextView
+      android:id="@+id/settingsBackupExportTitle"
+      style="@style/Settings.Title"
+      android:text="@string/textSettingsBackupExportTitle"
+      app:layout_constraintBottom_toTopOf="@id/settingsBackupExportDescription"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_chainStyle="packed"
+      />
+
+    <TextView
+      android:id="@+id/settingsBackupExportDescription"
+      style="@style/Settings.Summary"
+      android:layout_marginEnd="@dimen/spaceSmall"
+      android:text="@string/textSettingsBackupExportDescription"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintHorizontal_bias="0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/settingsBackupExportTitle"
+      />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

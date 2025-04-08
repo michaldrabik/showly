@@ -2,9 +2,9 @@ package com.michaldrabik.ui_settings.sections.misc
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import com.michaldrabik.common.Config
 import com.michaldrabik.ui_base.BaseFragment
@@ -47,6 +47,7 @@ class SettingsMiscFragment : BaseFragment<SettingsMiscViewModel>(R.layout.fragme
       settingsTwitterIcon.onClick { openWebLink(Config.TWITTER_URL) }
       settingsTraktIcon.onClick { openWebLink(Config.TRAKT_URL) }
       settingsTmdbIcon.onClick { openWebLink(Config.TMDB_URL) }
+      settingsInstagramIcon.onClick { openWebLink(Config.INSTAGRAM_URL) }
       settingsJustWatchIcon.onClick { openWebLink(Config.JUST_WATCH_URL) }
     }
   }
@@ -69,7 +70,7 @@ class SettingsMiscFragment : BaseFragment<SettingsMiscViewModel>(R.layout.fragme
     with(binding) {
       val id = "${settingsVersion.text}, ${settingsUserId.text}"
       val intent = Intent(Intent.ACTION_SENDTO).apply {
-        data = Uri.parse("mailto:")
+        data = "mailto:".toUri()
         putExtra(Intent.EXTRA_EMAIL, arrayOf(Config.DEVELOPER_MAIL))
         putExtra(Intent.EXTRA_SUBJECT, "Showly Message/Issue (Version: $id)")
       }

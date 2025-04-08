@@ -89,7 +89,7 @@ class SettingsRepository @Inject constructor(
   var country by StringPreference(preferences, COUNTRY, DEFAULT_COUNTRY)
   var dateFormat by StringPreference(preferences, DATE_FORMAT, DEFAULT_DATE_FORMAT)
 
-  var progressUpcomingDays by LongPreference(preferences, PROGRESS_UPCOMING_DAYS, 90)
+  var progressUpcomingDays by LongPreference(preferences, PROGRESS_UPCOMING_DAYS, 30)
   var isProgressUpcomingCollapsed by BooleanPreference(preferences, PROGRESS_UPCOMING_COLLAPSED)
   var isProgressOnHoldCollapsed by BooleanPreference(preferences, PROGRESS_ON_HOLD_COLLAPSED)
   var progressNextEpisodeType by EnumPreference(

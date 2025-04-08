@@ -86,7 +86,7 @@
       android:layout_marginEnd="@dimen/spaceSmall"
       android:adjustViewBounds="true"
       app:layout_constraintBottom_toTopOf="@id/settingsJustWatchDisclaimer"
-      app:layout_constraintEnd_toStartOf="@id/settingsTwitterIcon"
+      app:layout_constraintEnd_toStartOf="@id/settingsInstagramIcon"
       app:layout_constraintStart_toEndOf="@id/settingsTraktIcon"
       app:layout_constraintTop_toTopOf="parent"
       app:srcCompat="@drawable/ic_tmdb"
@@ -108,14 +108,27 @@
       />
 
     <ImageView
-      android:id="@+id/settingsTwitterIcon"
+      android:id="@+id/settingsInstagramIcon"
       android:layout_width="60dp"
       android:layout_height="40dp"
       android:layout_marginStart="@dimen/spaceTiny"
       android:adjustViewBounds="true"
       app:layout_constraintBottom_toTopOf="@id/settingsJustWatchDisclaimer"
-      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/settingsTwitterIcon"
       app:layout_constraintStart_toEndOf="@id/settingsTmdbIcon"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/ic_instagram"
+      />
+
+    <ImageView
+      android:id="@+id/settingsTwitterIcon"
+      android:layout_width="60dp"
+      android:layout_height="40dp"
+      android:layout_marginStart="@dimen/spaceMicro"
+      android:adjustViewBounds="true"
+      app:layout_constraintBottom_toTopOf="@id/settingsJustWatchDisclaimer"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@id/settingsInstagramIcon"
       app:layout_constraintTop_toTopOf="parent"
       app:srcCompat="@drawable/ic_twitter"
       />

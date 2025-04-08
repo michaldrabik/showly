@@ -22,6 +22,9 @@ interface SeasonsDao : SeasonsLocalDataSource {
   @Delete
   override suspend fun delete(items: List<Season>)
 
+  @Query("SELECT * FROM seasons WHERE id_trakt IN (:traktIds)")
+  override suspend fun getAll(traktIds: List<Long>): List<Season>
+
   @Transaction
   override suspend fun getAllByShowsIds(traktIds: List<Long>): List<Season> {
     val result = mutableListOf<Season>()
@@ -34,6 +37,9 @@ interface SeasonsDao : SeasonsLocalDataSource {
 
   @Query("SELECT * FROM seasons WHERE id_show_trakt IN (:traktIds)")
   override suspend fun getAllByShowsIdsChunk(traktIds: List<Long>): List<Season>
+
+  @Query("SELECT * FROM seasons WHERE is_watched = 1")
+  override suspend fun getAllWatched(): List<Season>
 
   @Query("SELECT * FROM seasons WHERE id_show_trakt IN (:traktIds) AND is_watched = 1")
   override suspend fun getAllWatchedForShows(traktIds: List<Long>): List<Season>

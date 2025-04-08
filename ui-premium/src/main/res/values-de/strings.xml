@@ -7,7 +7,7 @@
   <string name="textCustomImagesTitle">Benutzerdefinierte Bilder</string>
   <string name="textCustomImagesDesc">Lege deine eigenen Lieblingsposter und Fanart für Shows und Filme fest. Wähle ein Bild aus der Galerie oder lade deine eigene URL hoch.</string>
   <string name="textQuickRatingTitle">Schnelle Bewertungen</string>
-  <string name="textQuickRatingDesc">Vergesse nie einen Film oder eine Episode zu bewerten, die du gerade angesehen hast. Mit der Schnellbewertungsfunktion kannst du automatisch ein Werk bewerten, wenn du es als gesehen markieren.</string>
+  <string name="textQuickRatingDesc">Vergesse nie, einen Film oder eine Episode zu bewerten, die du gerade angesehen hast. Mit der Schnellbewertungsfunktion kannst du einen Eintrag automatisch bewerten, wenn du ihn als gesehen markierst.</string>
   <string name="textWidgetsTitle">Transparente Widgets</string>
   <string name="textWidgetsDesc">Die Hintergrundtransparenz von Widgets so einstellen, dass sie besser zu deinem Startbildschirm passen.</string>
   <string name="textNewsTitle">News</string>

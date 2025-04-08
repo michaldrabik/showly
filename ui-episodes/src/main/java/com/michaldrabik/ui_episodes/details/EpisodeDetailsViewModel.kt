@@ -65,10 +65,10 @@ class EpisodeDetailsViewModel @Inject constructor(
   private val signedInState = MutableStateFlow(false)
   private val ratingState = MutableStateFlow<RatingState?>(null)
   private val translationState = MutableStateFlow<Translation?>(null)
+  private val lastWatchedAtState = MutableStateFlow<ZonedDateTime?>(null)
   private val dateFormatState = MutableStateFlow<DateTimeFormatter?>(null)
   private val commentsDateFormatState = MutableStateFlow<DateTimeFormatter?>(null)
   private val spoilersState = MutableStateFlow<SpoilersSettings?>(null)
-  private val lastWatchedAtState = MutableStateFlow<ZonedDateTime?>(null)
 
   init {
     dateFormatState.value = dateFormatProvider.loadFullHourFormat()
@@ -170,6 +170,18 @@ class EpisodeDetailsViewModel @Inject constructor(
     }
   }
 
+  fun loadRatings(episode: Episode) {
+    viewModelScope.launch {
+      try {
+        ratingState.value = RatingState(rateLoading = true)
+        val rating = ratingsRepository.shows.loadRating(episode)
+        ratingState.value = RatingState(rateLoading = false, userRating = rating)
+      } catch (error: Throwable) {
+        ratingState.value = RatingState(rateLoading = false)
+      }
+    }
+  }
+
   fun loadCommentReplies(comment: Comment) {
     var current = uiState.value.comments?.toMutableList() ?: mutableListOf()
     if (current.any { it.parentId == comment.id }) return
@@ -255,22 +267,6 @@ class EpisodeDetailsViewModel @Inject constructor(
           else -> messageChannel.send(MessageEvent.Error(R.string.errorGeneral))
         }
         commentsState.value = current
-      }
-    }
-  }
-
-  fun loadRatings(episode: Episode) {
-    viewModelScope.launch {
-      try {
-        if (!userTraktManager.isAuthorized()) {
-          ratingState.value = RatingState(rateAllowed = false, rateLoading = false)
-          return@launch
-        }
-        ratingState.value = RatingState(rateAllowed = true, rateLoading = true)
-        val rating = ratingsRepository.shows.loadRating(episode)
-        ratingState.value = RatingState(rateAllowed = true, rateLoading = false, userRating = rating)
-      } catch (error: Throwable) {
-        ratingState.value = RatingState(rateAllowed = false, rateLoading = false)
       }
     }
   }

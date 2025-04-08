@@ -16,7 +16,7 @@ fun ViewGroup.showSnackbar(
   action: (() -> Unit)? = null,
 ): Snackbar =
   Snackbar.make(this, message, length).apply {
-    setTextMaxLines(5)
+    setTextMaxLines(10)
     setTextColor(textColor)
     setBackgroundTint(backgroundColor)
     setActionTextColor(textColor)

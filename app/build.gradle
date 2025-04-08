@@ -95,6 +95,7 @@ dependencies {
   implementation project(':data-local')
   implementation project(':repository')
   implementation project(':ui-base')
+  implementation project(':ui-backup')
   implementation project(':ui-model')
   implementation project(':ui-navigation')
   implementation project(':ui-trakt-sync')

@@ -47,6 +47,7 @@ dependencies {
   implementation project(':data-remote')
   implementation project(':repository')
   implementation project(':ui-base')
+  implementation project(':ui-backup')
   implementation project(':ui-model')
   implementation project(':ui-navigation')
 

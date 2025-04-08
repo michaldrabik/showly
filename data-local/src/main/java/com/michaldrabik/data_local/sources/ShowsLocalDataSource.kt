@@ -11,6 +11,8 @@ interface ShowsLocalDataSource {
 
   suspend fun getAll(ids: List<Long>): List<Show>
 
+  suspend fun getAllTmdbIds(traktIds: List<Long>): Map<Long, Long>
+
   suspend fun getAllChunked(ids: List<Long>): List<Show>
 
   suspend fun getById(traktId: Long): Show?

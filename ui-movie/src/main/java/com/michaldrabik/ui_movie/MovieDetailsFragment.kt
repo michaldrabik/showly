@@ -26,6 +26,7 @@ import com.michaldrabik.common.Config.IMAGE_FADE_DURATION_MS
 import com.michaldrabik.common.Config.SPOILERS_HIDE_SYMBOL
 import com.michaldrabik.common.Config.SPOILERS_REGEX
 import com.michaldrabik.common.Mode
+import com.michaldrabik.common.extensions.toLocalZone
 import com.michaldrabik.ui_base.BaseFragment
 import com.michaldrabik.ui_base.common.WidgetsProvider
 import com.michaldrabik.ui_base.common.sheets.date_selection.DateSelectionBottomSheet
@@ -174,9 +175,6 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
         if (imagePadded) {
           movieDetailsMainLayout
             .updatePadding(top = inset.top)
-        } else {
-          (movieDetailsShareButton.layoutParams as ViewGroup.MarginLayoutParams)
-            .updateMargins(top = inset.top)
         }
         movieDetailsMainContent.updatePadding(bottom = inset.bottom + dimenToPx(R.dimen.spaceNormal))
         (movieDetailsBackArrow.layoutParams as ViewGroup.MarginLayoutParams).updateMargins(top = inset.top)
@@ -191,12 +189,6 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
           renderTitleDescription(movie, translation, followedState, spoilers)
           renderExtraInfo(movie, meta)
           movieDetailsStatus.text = getString(movie.status.displayName)
-          movieDetailsShareButton.run {
-            isEnabled = movie.ids.imdb.id
-              .isNotBlank()
-            alpha = if (isEnabled) 1.0F else 0.35F
-            onClick { openShareSheet(movie) }
-          }
           movieDetailsActions.trailerChip.run {
             isEnabled = movie.trailer.isNotBlank()
             alpha = if (isEnabled) 1.0F else 0.35F
@@ -214,6 +206,12 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
             val bundle = CommentsFragment.createBundle(movie)
             navigateToSafe(R.id.actionMovieDetailsFragmentToComments, bundle)
           }
+          movieDetailsActions.shareChip.run {
+            isEnabled = movie.ids.imdb.id
+              .isNotBlank()
+            alpha = if (isEnabled) 1.0F else 0.35F
+            onClick { openShareSheet(movie) }
+          }
           movieDetailsAddButton.isEnabled = true
         }
         movieLoading?.let {
@@ -228,6 +226,10 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
             else -> movieDetailsAddButton.setState(ADD, it.withAnimation)
           }
           movieDetailsHideLabel.visibleIf(!it.isHidden)
+          movieDetailsWatchedBadge.visibleIf(it.isMyMovie && it.watchedAt != null)
+          it.watchedAt?.let { date ->
+            movieDetailsWatchedBadge.text = uiState.meta?.watchedAtDateFormat?.format(date.toLocalZone())
+          }
         }
         image?.let { renderImage(it) }
         listsCount?.let {
@@ -338,11 +340,7 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
       }
 
       onClick {
-        if (rating.rateAllowed == true) {
-          openRateDialog()
-        } else {
-          showSnack(MessageEvent.Info(R.string.textSignBeforeRateMovie))
-        }
+        openRateDialog()
       }
     }
   }
@@ -423,9 +421,11 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
 
   private fun openShareSheet(movie: Movie) {
     val intent = Intent().apply {
-      val text = "Hey! Check out ${movie.title}:\n" +
-        "https://trakt.tv/movies/${movie.ids.slug.id}\n" +
-        "https://www.imdb.com/title/${movie.ids.imdb.id}"
+      val text = "${movie.title}:" +
+        "\n" +
+        "https://www.imdb.com/title/${movie.ids.imdb.id}" +
+        "\n" +
+        "https://trakt.tv/movies/${movie.ids.slug.id}"
       action = Intent.ACTION_SEND
       putExtra(Intent.EXTRA_TEXT, text)
       type = "text/plain"

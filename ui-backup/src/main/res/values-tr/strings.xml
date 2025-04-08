@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="textBackupAndRestore">Yedekleme ve Geri Yükleme</string>
+  <string name="textBackupExport">Verileri dışa aktar</string>
+  <string name="textBackupExportDescription">Dizileriniz ve filmlerinizle ilgili verileri bir dosyaya dışa aktararak yedek oluşturun veya başka bir cihaza aktarın.</string>
+  <string name="textBackupImport">Verileri içe aktar</string>
+  <string name="textBackupImportDescription">Yedekleme dosyasından dizi ve film verilerinizi içe aktarın.\n\nMevcut koleksiyonunuz silinmeyecek, yalnızca eksik öğeler eklenecek.</string>
+  <string name="textBackupExportSuccess">Veriler başarıyla dışa aktarıldı.</string>
+  <string name="textBackupImportSuccess">Veriler başarıyla içe aktarıldı.</string>
+  <string name="errorImportCancelled">Veri içe aktarma iptal edildi.</string>
+</resources>

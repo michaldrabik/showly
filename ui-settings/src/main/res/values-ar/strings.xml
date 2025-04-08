@@ -65,6 +65,11 @@
   <string name="textSettingsDateSelectionMessage">حدد خِيار تحديد التاريخ الافتراضي.</string>
   <string name="textSettingsTabletColumnsTitle">عدد أعمدة القوائم</string>
   <string name="textSettingsTabletColumnsSummary">حدد عدد الأعمدة المفضلة للقوائم.</string>
+  <string name="textSettingsBackup">نسخة احتياطية واستعادة</string>
+  <string name="textSettingsBackupExportTitle">تصدير</string>
+  <string name="textSettingsBackupExportDescription">قم بتصدير بياناتك لإنشاء نسخة احتياطية أو نقلها إلى جهاز جديد.</string>
+  <string name="textSettingsBackupImportTitle">استيراد</string>
+  <string name="textSettingsBackupImportDescription">استيراد ملف النسخة الاحتياطية لاستعادة البيانات على هذا الجهاز.</string>
   <string name="textSettingsSpoilers">الحرق</string>
   <string name="textSettingsSpoilersShows">مسلسلات</string>
   <string name="textSettingsSpoilersShowsSummary">إدارة إعدادات الحرق للمسلسلات.</string>

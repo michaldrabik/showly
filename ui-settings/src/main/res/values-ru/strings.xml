@@ -61,6 +61,15 @@
   <string name="textSettingsStreamingServicesMessage">Отображать данные потоковых служб.</string>
   <string name="textSettingsProgressNextEpisodeTitle">Следующая серия</string>
   <string name="textSettingsProgressNextEpisodeMessage">Вычислить следующий эпизод с помощью:</string>
+  <string name="textSettingsDateSelectionTitle">Выбор даты</string>
+  <string name="textSettingsDateSelectionMessage">Выберите опцию выбора даты по умолчанию.</string>
+  <string name="textSettingsTabletColumnsTitle">Число колонок списков</string>
+  <string name="textSettingsTabletColumnsSummary">Выберите предпочтительный номер столбцов для списков.</string>
+  <string name="textSettingsBackup">Резервное копирование и восстановление</string>
+  <string name="textSettingsBackupExportTitle">Экспорт</string>
+  <string name="textSettingsBackupExportDescription">Экспортируйте данные, чтобы создать резервную копию или перенести их на новое устройство.</string>
+  <string name="textSettingsBackupImportTitle">Импорт</string>
+  <string name="textSettingsBackupImportDescription">Импортируйте файл резервной копии, чтобы восстановить данные на этом устройстве.</string>
   <string name="textSettingsSpoilers">Спойлеры</string>
   <string name="textSettingsSpoilersShows">Сериалы</string>
   <string name="textSettingsSpoilersShowsSummary">Управление настройками спойлеров для сериалов.</string>
@@ -100,6 +109,8 @@
   <string name="textSettingsSpoilersTapToRevealDescription">Нажмите на скрытый контент, чтобы временно его отобразить.</string>
   <string name="textNextEpisodeLastWatched">Последняя просмотренная серия</string>
   <string name="textNextEpisodeOldest">Ранее непросмотренная серия</string>
+  <string name="textDateSelectionAsk">Всегда спрашивать</string>
+  <string name="textDateSelectionNow">Всегда «Сейчас»</string>
   <string name="textThemeDark">Темная</string>
   <string name="textThemeLight">Светлая</string>
   <string name="textThemeSystem">Системная</string>

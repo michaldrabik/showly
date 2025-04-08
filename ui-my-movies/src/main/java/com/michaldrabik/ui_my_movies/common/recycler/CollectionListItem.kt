@@ -45,6 +45,7 @@ sealed class CollectionListItem(
     val sortType: SortType,
     val upcoming: UpcomingFilter,
     val genres: List<Genre>,
+    val count: Int,
   ) : CollectionListItem(
       movie = Movie.EMPTY,
       image = Image.createUnknown(ImageType.POSTER),

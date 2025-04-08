@@ -53,7 +53,7 @@ class HiddenLoadShowsCase @Inject constructor(
       val sortOrder = settingsRepository.sorting.hiddenShowsSortOrder
       val sortType = settingsRepository.sorting.hiddenShowsSortType
 
-      val filtersItem = loadFiltersItem(sortOrder, sortType)
+      var filtersItem = loadFiltersItem(sortOrder, sortType)
       val filtersNetworks = filtersItem.networks
         .flatMap { network -> network.channels.map { it } }
       val filtersGenres = filtersItem.genres.map { it.slug.lowercase() }
@@ -74,6 +74,8 @@ class HiddenLoadShowsCase @Inject constructor(
         .filterByNetwork(filtersNetworks)
         .filterByGenre(filtersGenres)
         .sortedWith(sorter.sort(sortOrder, sortType))
+
+      filtersItem = filtersItem.copy(count = hiddenItems.size)
 
       if (hiddenItems.isNotEmpty() || filtersItem.hasActiveFilters()) {
         listOf(filtersItem) + hiddenItems
@@ -104,6 +106,7 @@ class HiddenLoadShowsCase @Inject constructor(
       networks = settingsRepository.filters.hiddenShowsNetworks,
       genres = settingsRepository.filters.hiddenShowsGenres,
       upcoming = UpcomingFilter.OFF,
+      count = 0,
     )
 
   private fun CoroutineScope.toListItemAsync(

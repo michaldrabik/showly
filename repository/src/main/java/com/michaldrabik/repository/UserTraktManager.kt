@@ -31,7 +31,12 @@ class UserTraktManager @Inject constructor(
 
   suspend fun authorize(authCode: String) {
     val tokens = remoteSource.fetchAuthTokens(authCode)
-    tokenProvider.saveTokens(tokens.access_token, tokens.refresh_token)
+    tokenProvider.saveTokens(
+      accessToken = tokens.access_token,
+      refreshToken = tokens.refresh_token,
+      expiresIn = tokens.expires_in,
+      createdAt = tokens.created_at,
+    )
     val user = authorizedRemoteSource.fetchMyProfile()
     saveUser(user)
   }

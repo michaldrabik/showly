@@ -10,8 +10,7 @@
   <string name="textCommentDeleted">Ваш коментар видалено.</string>
   <string name="textCommentConfirmDeleteTitle">Видалити коментар</string>
   <string name="textCommentConfirmDelete">Ви дійсно бажаєте видалити цей коментар?</string>
-  <string name="textSignBeforeRate">Увійдіть, перш ніж оцінювати.</string>
-  <string name="textSignBeforeRateMovie">Увійдіть, перш ніж оцінювати.</string>
+  <string name="textSignBefore">Спочатку ввійдіть до вашого облікового запису Trakt.tv. Ви можете зробити це в Налаштуваннях.</string>
   <string name="errorCommentFormat">Ваш коментар повинен бути англійською і містити 5 слів або більше.</string>
   <string name="errorCommentDelete">Цей коментар більше не можна видалити.</string>
 </resources>

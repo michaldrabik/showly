@@ -65,6 +65,11 @@
   <string name="textSettingsDateSelectionMessage">Оберіть варіант вибору дати за замовчуванням.</string>
   <string name="textSettingsTabletColumnsTitle">Кількість стовпців у списках</string>
   <string name="textSettingsTabletColumnsSummary">Виберіть бажану кількість стовпців для списків.</string>
+  <string name="textSettingsBackup">Резервне копіювання &amp; Відновлення</string>
+  <string name="textSettingsBackupExportTitle">Експорт</string>
+  <string name="textSettingsBackupExportDescription">Експортуйте свої дані для створення резервної копії або перенесення на новий пристрій.</string>
+  <string name="textSettingsBackupImportTitle">Імпорт</string>
+  <string name="textSettingsBackupImportDescription">Імпортуйте файл резервної копії для відновлення даних на цьому пристрої.</string>
   <string name="textSettingsSpoilers">Спойлери</string>
   <string name="textSettingsSpoilersShows">Серіали</string>
   <string name="textSettingsSpoilersShowsSummary">Керування налаштуваннями спойлерів для серіалів.</string>

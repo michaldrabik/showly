@@ -7,10 +7,10 @@
   <string name="textStatisticsMoviesTotalTimeSpentHours">%s Stunden</string>
   <string name="textStatisticsMoviesTotalTimeSpentMinutes">%s Minuten</string>
   <string name="textStatisticsMoviesTotalTimeSpentDays">das sind ca. %s Tage.</string>
-  <string name="textStatisticsMoviesTotalMovies">Insgesamt geguckte Filme</string>
+  <string name="textStatisticsMoviesTotalMovies">Insgesamt geschaute Filme</string>
   <string name="textStatisticsMoviesTotalMoviesCount">%s Filme</string>
   <string name="textStatisticsMoviesTopGenre">Top Genre</string>
-  <string name="textStatisticsMoviesTopGenreSubValue">scheint so, als wären es ein paar mehr Genres. Tippe hier um mehr anzuzeigen.</string>
-  <string name="textStatisticsMoviesTopGenreSubValue2">scheint eine Tasse Tee zu sein.</string>
+  <string name="textStatisticsMoviesTopGenreSubValue">scheinen deine Sache zu sein. Tippe hier, um mehr anzuzeigen.</string>
+  <string name="textStatisticsMoviesTopGenreSubValue2">scheinen deine Sache zu sein.</string>
   <string name="textStatisticsMoviesRatings">Zuletzt Bewertet</string>
 </resources>

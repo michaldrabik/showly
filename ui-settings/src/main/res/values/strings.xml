@@ -67,8 +67,13 @@
   <string name="textSettingsTabletColumnsTitle">Lists Columns Number</string>
   <string name="textSettingsTabletColumnsSummary">Select preferred columns number for lists.</string>
 
-  <string name="textSettingsSpoilers">Spoilers</string>
+  <string name="textSettingsBackup">Backup &amp; Restore</string>
+  <string name="textSettingsBackupExportTitle">Export</string>
+  <string name="textSettingsBackupExportDescription">Export your data to create a backup or transfer it to new device.</string>
+  <string name="textSettingsBackupImportTitle">Import</string>
+  <string name="textSettingsBackupImportDescription">Import your backup file to restore data on this device.</string>
 
+  <string name="textSettingsSpoilers">Spoilers</string>
   <string name="textSettingsSpoilersShows">Shows</string>
   <string name="textSettingsSpoilersShowsSummary">Manage spoiler settings for shows.</string>
   <string name="textSettingsSpoilersShowsOverviewsMyTitle">My Shows</string>

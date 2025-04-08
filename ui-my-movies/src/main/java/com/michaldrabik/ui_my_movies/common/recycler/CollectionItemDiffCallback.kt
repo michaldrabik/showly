@@ -53,5 +53,6 @@ class CollectionItemDiffCallback : DiffUtil.ItemCallback<CollectionListItem>() {
     oldItem.upcoming == newItem.upcoming &&
       oldItem.sortOrder == newItem.sortOrder &&
       oldItem.genres == newItem.genres &&
-      oldItem.sortType == newItem.sortType
+      oldItem.sortType == newItem.sortType &&
+      oldItem.count == newItem.count
 }

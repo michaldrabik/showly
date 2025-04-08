@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="textBackupAndRestore">备份 &amp; 还原</string>
+  <string name="textBackupExport">导出数据</string>
+  <string name="textBackupExportDescription">将您的节目和电影数据导出至文件，方便建立备份或传输到新设备。</string>
+  <string name="textBackupImport">导入数据</string>
+  <string name="textBackupImportDescription">从备份文件导入节目和电影数据。\n\n您当前的收藏将保留，系统会添加缺失的项目。</string>
+  <string name="textBackupExportSuccess">数据成功导出。</string>
+  <string name="textBackupImportSuccess">数据成功导入。</string>
+  <string name="errorImportCancelled">数据导入已取消。</string>
+</resources>

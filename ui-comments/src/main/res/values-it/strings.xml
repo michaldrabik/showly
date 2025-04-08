@@ -10,8 +10,7 @@
   <string name="textCommentDeleted">Il tuo commento è stato eliminato.</string>
   <string name="textCommentConfirmDeleteTitle">Elimina commento</string>
   <string name="textCommentConfirmDelete">Sei sicuro di voler eliminare questo commento?</string>
-  <string name="textSignBeforeRate">Per favore accedi prima di valutare uno show.</string>
-  <string name="textSignBeforeRateMovie">Per favore accedi prima di valutare un film.</string>
+  <string name="textSignBefore">Per favore, prima di tutto accedi al tuo account Trakt.tv. Puoi farlo attraverso le impostazioni.</string>
   <string name="errorCommentFormat">Il tuo commento deve essere in inglese e avere 5 o più parole.</string>
   <string name="errorCommentDelete">Questo commento non può più essere eliminato.</string>
 </resources>

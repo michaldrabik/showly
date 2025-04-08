@@ -20,15 +20,15 @@
     android:id="@+id/statisticsCoordinator"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clipChildren="false"
     >
 
     <com.google.android.material.appbar.MaterialToolbar
       android:id="@+id/statisticsToolbar"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:background="?android:windowBackground"
       android:elevation="@dimen/elevationNormal"
-      app:contentInsetStartWithNavigation="0dp"
       app:layout_constraintBottom_toTopOf="@id/statisticsTotalTimeSpent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"

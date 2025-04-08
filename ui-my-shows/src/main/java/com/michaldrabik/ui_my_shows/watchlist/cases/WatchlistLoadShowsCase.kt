@@ -50,7 +50,7 @@ class WatchlistLoadShowsCase @Inject constructor(
         }
       val spoilers = settingsRepository.spoilers.getAll()
 
-      val filtersItem = loadFiltersItem()
+      var filtersItem = loadFiltersItem()
       val filtersNetworks = filtersItem.networks
         .flatMap { network -> network.channels.map { it } }
       val filtersGenres = filtersItem.genres.map { it.slug.lowercase() }
@@ -74,6 +74,8 @@ class WatchlistLoadShowsCase @Inject constructor(
             filters.filterGenres(item, filtersGenres)
         }.sortedWith(sorter.sort(filtersItem.sortOrder, filtersItem.sortType))
 
+      filtersItem = filtersItem.copy(count = showsItems.size)
+
       if (showsItems.isNotEmpty() || filtersItem.hasActiveFilters()) {
         listOf(filtersItem) + showsItems
       } else {
@@ -88,6 +90,7 @@ class WatchlistLoadShowsCase @Inject constructor(
       networks = settingsRepository.filters.watchlistShowsNetworks,
       genres = settingsRepository.filters.watchlistShowsGenres,
       upcoming = settingsRepository.filters.watchlistShowsUpcoming,
+      count = 0,
     )
 
   private fun CoroutineScope.toListItemAsync(

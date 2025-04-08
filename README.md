@@ -1,10 +1,9 @@
 ![Version](https://img.shields.io/github/v/tag/michaldrabik/showly-2.0?label=version)
 ![Build]( https://img.shields.io/github/actions/workflow/status/michaldrabik/showly-2.0/android.yml?branch=master)
+[![Crowdin](https://badges.crowdin.net/showly-android-app/localized.svg)](https://crowdin.com/project/showly-android-app)
+[![Crowdin](https://badges.crowdin.net/showly-ios-app/localized.svg)](https://crowdin.com/project/showly-ios-app)
+
 [![Twitter](https://img.shields.io/twitter/follow/AppShowly?style=social)](https://twitter.com/AppShowly)
-
-<a href="https://www.buymeacoffee.com/showly" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
-
-If you use and enjoy Showly OSS, consider buying me a coffee as a support for my work. Thanks!
 
 # Showly available on iOS 🍎
 
@@ -89,11 +88,19 @@ A few things surely could be addressed:
 
 Want to help translating Showly into your native language? Spotted a mistake?<br>
 Join the CrowdIn project which is used to manage translations:<br>
-https://crwd.in/showly-android-app <br>
 
-Translations status for 5 Aug 2024:
+Android: https://crowdin.com/project/showly-android-app <br>
+iOS: https://crowdin.com/project/showly-ios-app <br>
 
-![Screenshot 2024-08-05 at 11-32-21 Showly Android App dashboard in Crowdin](https://github.com/user-attachments/assets/5b5b1796-2ad7-4519-be63-e0a05c275406)
+Translations status for 20 Jan 2025:
+
+iOS:
+
+![image](https://github.com/user-attachments/assets/e09f6a03-6c90-43fa-8f91-f17de80e1d84)
+
+Android:
+
+![image](https://github.com/user-attachments/assets/24736105-a9be-49ef-864e-b4f2624671f6)
 
 ## FAQ
 

@@ -41,11 +41,14 @@ class RatingsMovieCase @Inject constructor(
     rating: Int,
   ) = withContext(dispatchers.IO) {
     check(rating in RATING_VALID_RANGE)
-    userTraktManager.checkAuthorization()
 
-    val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = idTrakt))
     try {
-      ratingsRepository.movies.addRating(movie, rating)
+      val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = idTrakt))
+      ratingsRepository.movies.addRating(
+        movie = movie,
+        rating = rating,
+        withSync = userTraktManager.isAuthorized(),
+      )
     } catch (error: Throwable) {
       handleError(error)
     }
@@ -53,11 +56,12 @@ class RatingsMovieCase @Inject constructor(
 
   suspend fun deleteRating(idTrakt: IdTrakt) =
     withContext(dispatchers.IO) {
-      userTraktManager.checkAuthorization()
-
       val movie = Movie.EMPTY.copy(ids = Ids.EMPTY.copy(trakt = idTrakt))
       try {
-        ratingsRepository.movies.deleteRating(movie)
+        ratingsRepository.movies.deleteRating(
+          movie = movie,
+          withSync = userTraktManager.isAuthorized(),
+        )
       } catch (error: Throwable) {
         handleError(error)
       }

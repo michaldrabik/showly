@@ -93,18 +93,6 @@
         tools:text="Game Of Thrones"
         />
 
-      <ImageView
-        android:id="@+id/showDetailsShareButton"
-        android:layout_width="@dimen/backArrowSize"
-        android:layout_height="@dimen/backArrowSize"
-        android:layout_marginEnd="@dimen/spaceSmall"
-        android:background="?android:attr/selectableItemBackground"
-        android:padding="@dimen/backArrowPadding"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_share"
-        />
-
       <View
         android:id="@+id/separator1"
         android:layout_width="0dp"
@@ -380,14 +368,29 @@
     android:visibility="gone"
     />
 
-  <ImageView
+  <FrameLayout
     android:id="@+id/showDetailsBackArrow"
     android:layout_width="@dimen/backArrowSize"
     android:layout_height="@dimen/backArrowSize"
-    android:layout_marginStart="@dimen/spaceSmall"
-    android:background="?android:attr/selectableItemBackground"
-    android:padding="@dimen/backArrowPadding"
-    app:srcCompat="@drawable/ic_arrow_back"
-    />
+    android:layout_marginStart="8dp"
+    >
+
+    <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_gravity="center"
+      android:padding="8dp"
+      app:srcCompat="@drawable/ic_circle"
+      app:tint="@color/colorBlackTranslucentMedium"
+      />
+
+    <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:padding="@dimen/backArrowPadding"
+      app:srcCompat="@drawable/ic_arrow_back"
+      />
+
+  </FrameLayout>
 
 </FrameLayout>

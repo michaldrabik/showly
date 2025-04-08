@@ -9,6 +9,15 @@
   <string name="textSortDateUpdated">最近更新</string>
   <string name="textSortRecentlyWatched">最近观看</string>
   <string name="textSortEpisodesLeft">剩余未看集数</string>
+  <string name="textSortRuntime">时长</string>
+  <string name="textPeriodThisWeek">本周</string>
+  <string name="textPeriodLastWeek">上周</string>
+  <string name="textPeriodThisMonth">本月</string>
+  <string name="textPeriodLastMonth">上月</string>
+  <string name="textPeriodLast30Days">最近 30 天</string>
+  <string name="textPeriodLast90Days">最近 90 天</string>
+  <string name="textPeriodLast365Days">最近 365 天</string>
+  <string name="textPeriodAllTime">所有时间</string>
   <string name="textHeaderRecentlyAdded">最近添加</string>
   <string name="textHeaderWatching">正在观看</string>
   <string name="textHeaderFinished">已完结</string>
@@ -32,6 +41,7 @@
   <string name="textTipWatchlistPinItem">点击并长按列表项可将其置顶。</string>
   <string name="textTipBottomModeMenu">在底部菜单区域向左或向右滑动可快速切换（剧集/电影）模式。</string>
   <string name="textTipListSwipeToDelete">滑动列表项可将其移除。</string>
+  <string name="textTipDefaultOption">可以在设置中调整默认选项</string>
   <string name="textGenreAction">动作</string>
   <string name="textGenreAdventure">冒险</string>
   <string name="textGenreAnimation">动画</string>
@@ -44,6 +54,7 @@
   <string name="textGenreHistory">历史</string>
   <string name="textGenreHorror">恐怖</string>
   <string name="textGenreScienceFiction">科幻</string>
+  <string name="textGenreRomance">爱情</string>
   <string name="textGenreThriller">惊悚</string>
   <string name="textGenreWar">战争</string>
   <string name="textGenreWestern">西部</string>

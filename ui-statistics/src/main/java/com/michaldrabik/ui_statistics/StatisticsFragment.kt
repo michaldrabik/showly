@@ -50,7 +50,7 @@ class StatisticsFragment : BaseFragment<StatisticsViewModel>(R.layout.fragment_s
 
   private fun setupView() {
     with(binding) {
-      statisticsToolbar.setNavigationOnClickListener { activity?.onBackPressed() }
+      statisticsToolbar.setOnClickListener { activity?.onBackPressed() }
       statisticsMostWatchedShows.run {
         onLoadMoreClickListener = { addLimit -> viewModel.loadData(addLimit) }
         onShowClickListener = {

@@ -1,7 +1,5 @@
 package com.michaldrabik.data_remote.trakt.model.request
 
-import com.michaldrabik.data_remote.trakt.model.Ids
-
 data class RatingRequest(
   val shows: List<RatingRequestValue>? = null,
   val movies: List<RatingRequestValue>? = null,
@@ -11,5 +9,10 @@ data class RatingRequest(
 
 data class RatingRequestValue(
   val rating: Int,
-  val ids: Ids?,
+  val rated_at: String,
+  val ids: RatingRequestIds,
+)
+
+data class RatingRequestIds(
+  val trakt: Long,
 )

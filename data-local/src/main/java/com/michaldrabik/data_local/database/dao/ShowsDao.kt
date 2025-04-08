@@ -1,6 +1,7 @@
 package com.michaldrabik.data_local.database.dao
 
 import androidx.room.Dao
+import androidx.room.MapColumn
 import androidx.room.Query
 import androidx.room.Transaction
 import com.michaldrabik.data_local.database.model.Show
@@ -17,6 +18,11 @@ interface ShowsDao :
 
   @Query("SELECT * FROM shows WHERE id_trakt IN (:ids)")
   override suspend fun getAll(ids: List<Long>): List<Show>
+
+  @Query("SELECT id_trakt, id_tmdb FROM shows WHERE id_trakt IN (:traktIds)")
+  override suspend fun getAllTmdbIds(
+    traktIds: List<Long>,
+  ): Map<@MapColumn(columnName = "id_trakt") Long, @MapColumn(columnName = "id_tmdb") Long>
 
   @Query("SELECT shows.id_trakt, shows.title FROM shows")
   override suspend fun getAllForSearch(): List<ShowSearch>

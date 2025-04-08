@@ -5,6 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.michaldrabik.common.errors.ErrorHelper
 import com.michaldrabik.common.errors.ShowlyError.CoroutineCancellation
 import com.michaldrabik.common.errors.ShowlyError.ResourceNotFoundError
+import com.michaldrabik.common.extensions.dateFromMillis
+import com.michaldrabik.common.extensions.nowUtc
+import com.michaldrabik.common.extensions.toUtcZone
 import com.michaldrabik.repository.UserTraktManager
 import com.michaldrabik.repository.images.MovieImagesProvider
 import com.michaldrabik.repository.settings.SettingsRepository
@@ -91,15 +94,17 @@ class MovieDetailsViewModel @Inject constructor(
       try {
         movie = mainCase.loadDetails(id)
 
-        val isSignedIn = userManager.isAuthorized()
-        val isMyMovie = async { myMoviesCase.isMyMovie(movie) }
+        val isMyMovie = async { myMoviesCase.getMyMovie(movie) }
         val isWatchlist = async { watchlistCase.isWatchlist(movie) }
         val isHidden = async { hiddenCase.isHidden(movie) }
+
+        val myMovie = isMyMovie.await()
         val isFollowed = FollowedState(
-          isMyMovie = isMyMovie.await(),
+          isMyMovie = myMovie != null,
           isWatchlist = isWatchlist.await(),
           isHidden = isHidden.await(),
           withAnimation = false,
+          watchedAt = myMovie?.updatedAt?.let { dateFromMillis(it) },
         )
 
         progressJob.cancel()
@@ -107,12 +112,13 @@ class MovieDetailsViewModel @Inject constructor(
         movieState.value = movie
         movieLoadingState.value = false
         followedState.value = isFollowed
-        ratingState.value = RatingState(rateAllowed = isSignedIn, rateLoading = false)
+        ratingState.value = RatingState(rateLoading = false)
         spoilersState.value = settingsRepository.spoilers.getAll()
         metaState.value = MovieDetailsMeta(
           dateFormat = dateFormatProvider.loadShortDayFormat(),
           commentsDateFormat = dateFormatProvider.loadFullHourFormat(),
-          isSignedIn = isSignedIn,
+          watchedAtDateFormat = dateFormatProvider.loadFullHourFormat(),
+          isSignedIn = userManager.isAuthorized(),
         )
 
         loadBackgroundImage(movie)
@@ -176,20 +182,14 @@ class MovieDetailsViewModel @Inject constructor(
   }
 
   fun loadUserRating() {
-    if (!userManager.isAuthorized()) {
-      return
-    }
     viewModelScope.launch {
       try {
-        ratingState.value = RatingState(rateLoading = true, rateAllowed = true)
+        ratingState.value = RatingState(rateLoading = true)
         val rating = ratingsCase.loadRating(movie)
-        ratingState.value = RatingState(
-          rateLoading = false,
-          rateAllowed = true,
-          userRating = rating ?: TraktRating.EMPTY,
-        )
+        ratingState.value =
+          RatingState(rateLoading = false, userRating = rating ?: TraktRating.EMPTY)
       } catch (error: Throwable) {
-        ratingState.value = RatingState(rateLoading = false, rateAllowed = true)
+        ratingState.value = RatingState(rateLoading = false)
         rethrowCancellation(error)
       }
     }
@@ -205,7 +205,9 @@ class MovieDetailsViewModel @Inject constructor(
         return@launch
       }
       myMoviesCase.addToMyMovies(movie, customDate)
-      followedState.value = FollowedState.inMyMovies()
+      followedState.value = FollowedState
+        .inMyMovies()
+        .copy(watchedAt = customDate?.toUtcZone() ?: nowUtc())
       eventChannel.send(RequestWidgetsUpdate)
     }
   }
@@ -228,7 +230,7 @@ class MovieDetailsViewModel @Inject constructor(
 
   fun removeFromMyMovies() {
     viewModelScope.launch {
-      val isMyMovie = myMoviesCase.isMyMovie(movie)
+      val isMyMovie = myMoviesCase.getMyMovie(movie) != null
       val isWatchlist = watchlistCase.isWatchlist(movie)
       val isHidden = hiddenCase.isHidden(movie)
 

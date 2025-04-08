@@ -109,7 +109,7 @@ class ShowDetailsViewModel @Inject constructor(
         showState.value = show
         showLoadingState.value = false
         followedState.value = isFollowed
-        ratingState.value = RatingState(rateAllowed = isSignedIn, rateLoading = false)
+        ratingState.value = RatingState(rateLoading = false)
         spoilersState.value = settingsRepository.spoilers.getAll()
         metaState.value = ShowDetailsMeta(
           isSignedIn = isSignedIn,
@@ -171,18 +171,13 @@ class ShowDetailsViewModel @Inject constructor(
 
   fun loadUserRating() {
     viewModelScope.launch {
-      val isSignedIn = userManager.isAuthorized()
-      if (!isSignedIn) return@launch
       try {
-        ratingState.value = RatingState(rateLoading = true, rateAllowed = true)
+        ratingState.value = RatingState(rateLoading = true)
         val rating = ratingsCase.loadRating(show)
-        ratingState.value = RatingState(
-          rateLoading = false,
-          rateAllowed = true,
-          userRating = rating ?: TraktRating.EMPTY,
-        )
+        ratingState.value =
+          RatingState(rateLoading = false, userRating = rating ?: TraktRating.EMPTY)
       } catch (error: Throwable) {
-        ratingState.value = RatingState(rateLoading = false, rateAllowed = true)
+        ratingState.value = RatingState(rateLoading = false)
         rethrowCancellation(error)
       }
     }

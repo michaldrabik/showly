@@ -61,6 +61,8 @@ interface TraktSyncService {
     @Body request: SyncExportRequest,
   )
 
+  // Ratings
+
   @POST("sync/ratings")
   suspend fun postRating(
     @Body request: RatingRequest,

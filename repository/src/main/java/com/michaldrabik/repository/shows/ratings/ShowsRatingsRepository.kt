@@ -1,9 +1,11 @@
 package com.michaldrabik.repository.shows.ratings
 
+import com.michaldrabik.common.extensions.dateIsoStringFromMillis
 import com.michaldrabik.common.extensions.nowUtc
+import com.michaldrabik.common.extensions.toMillis
+import com.michaldrabik.common.extensions.toUtcZone
 import com.michaldrabik.data_local.LocalDataSource
 import com.michaldrabik.data_local.database.model.Rating
-import com.michaldrabik.data_local.utilities.TransactionsProvider
 import com.michaldrabik.data_remote.trakt.AuthorizedTraktRemoteDataSource
 import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.ui_model.Episode
@@ -14,6 +16,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
 import timber.log.Timber
+import java.time.temporal.ChronoUnit.SECONDS
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -22,7 +25,6 @@ class ShowsRatingsRepository @Inject constructor(
   val external: ShowsExternalRatingsRepository,
   private val remoteSource: AuthorizedTraktRemoteDataSource,
   private val localSource: LocalDataSource,
-  private val transactions: TransactionsProvider,
   private val mappers: Mappers,
 ) {
 
@@ -36,30 +38,78 @@ class ShowsRatingsRepository @Inject constructor(
   suspend fun preloadRatings() =
     supervisorScope {
       suspend fun preloadShowsRatings() {
-        val ratings = remoteSource.fetchShowsRatings()
-        val entities = ratings
+        val remoteRatings = remoteSource.fetchShowsRatings()
+        val localRatings = localSource.ratings
+          .getAllByType(TYPE_SHOW)
+          .map { mappers.userRatings.fromDatabase(it) }
+
+        val entities = remoteRatings
           .filter { it.rated_at != null && it.show.ids.trakt != null }
           .map { mappers.userRatings.toDatabaseShow(it) }
+          .filter { remoteRating ->
+            val localRating = localRatings.find { remoteRating.idTrakt == it.idTrakt.id }
+            if (localRating != null) {
+              return@filter localRating.ratedAt
+                .toUtcZone()
+                .truncatedTo(SECONDS)
+                .isBefore(remoteRating.ratedAt.toUtcZone().truncatedTo(SECONDS))
+            }
+            true
+          }
+
         localSource.ratings.replaceAll(entities, TYPE_SHOW)
       }
 
       suspend fun preloadEpisodesRatings() {
-        val ratings = remoteSource.fetchEpisodesRatings()
-        val entities = ratings
+        val remoteRatings = remoteSource.fetchEpisodesRatings()
+        val localRatings = localSource.ratings
+          .getAllByType(TYPE_EPISODE)
+          .map { mappers.userRatings.fromDatabase(it) }
+
+        val entities = remoteRatings
           .filter { it.rated_at != null && it.episode.ids.trakt != null }
           .map { mappers.userRatings.toDatabaseEpisode(it) }
+          .filter { remoteRating ->
+            val localRating = localRatings.find { remoteRating.idTrakt == it.idTrakt.id }
+            if (localRating != null) {
+              return@filter localRating.ratedAt
+                .toUtcZone()
+                .truncatedTo(SECONDS)
+                .isBefore(remoteRating.ratedAt.toUtcZone().truncatedTo(SECONDS))
+            }
+            true
+          }
+
         localSource.ratings.replaceAll(entities, TYPE_EPISODE)
       }
 
       suspend fun preloadSeasonsRatings() {
-        val ratings = remoteSource.fetchSeasonsRatings()
-        val entities = ratings
+        val remoteRatings = remoteSource.fetchSeasonsRatings()
+        val localRatings = localSource.ratings
+          .getAllByType(TYPE_SEASON)
+          .map { mappers.userRatings.fromDatabase(it) }
+
+        val entities = remoteRatings
           .filter { it.rated_at != null && it.season.ids.trakt != null }
           .map { mappers.userRatings.toDatabaseSeason(it) }
+          .filter { remoteRating ->
+            val localRating = localRatings.find { remoteRating.idTrakt == it.idTrakt.id }
+            if (localRating != null) {
+              return@filter localRating.ratedAt
+                .toUtcZone()
+                .truncatedTo(SECONDS)
+                .isBefore(remoteRating.ratedAt.toUtcZone().truncatedTo(SECONDS))
+            }
+            true
+          }
+
         localSource.ratings.replaceAll(entities, TYPE_SEASON)
       }
 
-      val errorHandler = CoroutineExceptionHandler { _, _ -> Timber.e("Failed to preload some of ratings.") }
+      val errorHandler = CoroutineExceptionHandler { _, _ ->
+        Timber.e("Failed to preload some of ratings.")
+      }
+
       launch(errorHandler) { preloadShowsRatings() }
       launch(errorHandler) { preloadEpisodesRatings() }
       launch(errorHandler) { preloadSeasonsRatings() }
@@ -70,6 +120,16 @@ class ShowsRatingsRepository @Inject constructor(
     return ratings.map {
       mappers.userRatings.fromDatabase(it)
     }
+  }
+
+  suspend fun loadSeasonsRatings(): List<Rating> {
+    val ratings = localSource.ratings.getAllByType(TYPE_SEASON)
+    return ratings
+  }
+
+  suspend fun loadEpisodesRatings(): List<Rating> {
+    val ratings = localSource.ratings.getAllByType(TYPE_EPISODE)
+    return ratings
   }
 
   suspend fun loadRatings(shows: List<Show>): List<TraktRating> {
@@ -111,67 +171,87 @@ class ShowsRatingsRepository @Inject constructor(
   suspend fun addRating(
     show: Show,
     rating: Int,
+    withSync: Boolean,
   ) {
-    remoteSource.postRating(
-      mappers.show.toNetwork(show),
-      rating,
-    )
-    val entity = mappers.userRatings.toDatabaseShow(show, rating, nowUtc())
+    val ratedAt = nowUtc()
+    if (withSync) {
+      remoteSource.postRating(
+        mappers.show.toNetwork(show),
+        rating,
+        dateIsoStringFromMillis(ratedAt.toMillis()),
+      )
+    }
+    val entity = mappers.userRatings.toDatabaseShow(show, rating, ratedAt)
     localSource.ratings.replace(entity)
   }
 
   suspend fun addRating(
     episode: Episode,
     rating: Int,
+    withSync: Boolean,
   ) {
-    remoteSource.postRating(
-      mappers.episode.toNetwork(episode),
-      rating,
-    )
-    val entity = mappers.userRatings.toDatabaseEpisode(episode, rating, nowUtc())
+    val ratedAt = nowUtc()
+    if (withSync) {
+      remoteSource.postRating(
+        mappers.episode.toNetwork(episode),
+        rating,
+        dateIsoStringFromMillis(ratedAt.toMillis()),
+      )
+    }
+    val entity = mappers.userRatings.toDatabaseEpisode(episode, rating, ratedAt)
     localSource.ratings.replace(entity)
   }
 
   suspend fun addRating(
     season: Season,
     rating: Int,
+    withSync: Boolean,
   ) {
-    remoteSource.postRating(
-      mappers.season.toNetwork(season),
-      rating,
-    )
-    val entity = mappers.userRatings.toDatabaseSeason(season, rating, nowUtc())
+    val ratedAt = nowUtc()
+    if (withSync) {
+      remoteSource.postRating(
+        mappers.season.toNetwork(season),
+        rating,
+        dateIsoStringFromMillis(ratedAt.toMillis()),
+      )
+    }
+    val entity = mappers.userRatings.toDatabaseSeason(season, rating, ratedAt)
     localSource.ratings.replace(entity)
   }
 
-  suspend fun deleteRating(show: Show) {
-    remoteSource.deleteRating(
-      mappers.show.toNetwork(show),
-    )
+  suspend fun deleteRating(
+    show: Show,
+    withSync: Boolean,
+  ) {
+    if (withSync) {
+      remoteSource.deleteRating(
+        mappers.show.toNetwork(show),
+      )
+    }
     localSource.ratings.deleteByType(show.traktId, TYPE_SHOW)
   }
 
-  suspend fun deleteRating(episode: Episode) {
-    remoteSource.deleteRating(
-      mappers.episode.toNetwork(episode),
-    )
+  suspend fun deleteRating(
+    episode: Episode,
+    withSync: Boolean,
+  ) {
+    if (withSync) {
+      remoteSource.deleteRating(
+        mappers.episode.toNetwork(episode),
+      )
+    }
     localSource.ratings.deleteByType(episode.ids.trakt.id, TYPE_EPISODE)
   }
 
-  suspend fun deleteRating(season: Season) {
-    remoteSource.deleteRating(
-      mappers.season.toNetwork(season),
-    )
-    localSource.ratings.deleteByType(season.ids.trakt.id, TYPE_SEASON)
-  }
-
-  suspend fun clear() {
-    with(localSource) {
-      transactions.withTransaction {
-        ratings.deleteAllByType(TYPE_EPISODE)
-        ratings.deleteAllByType(TYPE_SEASON)
-        ratings.deleteAllByType(TYPE_SHOW)
-      }
+  suspend fun deleteRating(
+    season: Season,
+    withSync: Boolean,
+  ) {
+    if (withSync) {
+      remoteSource.deleteRating(
+        mappers.season.toNetwork(season),
+      )
     }
+    localSource.ratings.deleteByType(season.ids.trakt.id, TYPE_SEASON)
   }
 }

@@ -93,18 +93,6 @@
         tools:text="Lord Of The Rings"
         />
 
-      <ImageView
-        android:id="@+id/movieDetailsShareButton"
-        android:layout_width="@dimen/backArrowSize"
-        android:layout_height="@dimen/backArrowSize"
-        android:layout_marginEnd="@dimen/spaceSmall"
-        android:background="?android:attr/selectableItemBackground"
-        android:padding="@dimen/backArrowPadding"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_share"
-        />
-
       <View
         android:id="@+id/separator1"
         android:layout_width="0dp"
@@ -166,11 +154,39 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spaceBig"
-        app:layout_constraintBottom_toTopOf="@id/movieDetailsManageListsLabel"
+        app:layout_constraintBottom_toTopOf="@id/movieDetailsWatchedBadge"
         app:layout_constraintEnd_toEndOf="@id/movieDetailsImageGuidelineVertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/movieDetailsStatus"
         />
+
+      <TextView
+        android:id="@+id/movieDetailsWatchedBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="@dimen/spaceNormal"
+        android:drawablePadding="@dimen/spaceTiny"
+        android:elevation="@dimen/elevationTiny"
+        android:gravity="start|center_vertical"
+        android:includeFontPadding="false"
+        android:paddingStart="4dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="6dp"
+        android:paddingBottom="4dp"
+        android:textAlignment="gravity"
+        android:textColor="?colorAccent"
+        android:textSize="12sp"
+        android:translationY="-2dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/movieDetailsManageListsLabel"
+        app:layout_constraintEnd_toEndOf="@id/movieDetailsImageGuidelineVertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/movieDetailsAddButton"
+        tools:text="Wednesday, 27 June 2019"
+        tools:visibility="visible"
+        />
+
 
       <TextView
         android:id="@+id/movieDetailsManageListsLabel"
@@ -193,7 +209,8 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/movieDetailsAddButton"
+        app:layout_constraintTop_toBottomOf="@id/movieDetailsWatchedBadge"
+        app:layout_goneMarginTop="@dimen/spaceNormal"
         />
 
       <TextView
@@ -353,14 +370,29 @@
     android:visibility="gone"
     />
 
-  <ImageView
+  <FrameLayout
     android:id="@+id/movieDetailsBackArrow"
     android:layout_width="@dimen/backArrowSize"
     android:layout_height="@dimen/backArrowSize"
-    android:layout_marginStart="@dimen/spaceSmall"
-    android:background="?android:attr/selectableItemBackground"
-    android:padding="@dimen/backArrowPadding"
-    app:srcCompat="@drawable/ic_arrow_back"
-    />
+    android:layout_marginStart="8dp"
+    >
+
+    <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_gravity="center"
+      android:padding="8dp"
+      app:srcCompat="@drawable/ic_circle"
+      app:tint="@color/colorBlackTranslucentMedium"
+      />
+
+    <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:padding="@dimen/backArrowPadding"
+      app:srcCompat="@drawable/ic_arrow_back"
+      />
+
+  </FrameLayout>
 
 </FrameLayout>

@@ -796,6 +796,20 @@
       app:destination="@id/settingsSpoilersEpisodesDialog"
       app:launchSingleTop="true"
       />
+    <action
+      android:id="@+id/actionSettingsFragmentToBackupExport"
+      app:destination="@id/backupExportFragment"
+      app:enterAnim="@anim/anim_fade_in"
+      app:launchSingleTop="true"
+      app:popExitAnim="@anim/anim_fade_out"
+      />
+    <action
+      android:id="@+id/actionSettingsFragmentToBackupImport"
+      app:destination="@id/backupImportFragment"
+      app:enterAnim="@anim/anim_fade_in"
+      app:launchSingleTop="true"
+      app:popExitAnim="@anim/anim_fade_out"
+      />
   </fragment>
 
   <fragment
@@ -848,6 +862,18 @@
     android:id="@+id/premiumFragment"
     android:name="com.michaldrabik.ui_premium.PremiumFragment"
     android:label="fragmentPremium"
+    />
+
+  <fragment
+    android:id="@+id/backupExportFragment"
+    android:name="com.michaldrabik.ui_backup.features.export.BackupExportFragment"
+    android:label="fragmentBackupExport"
+    />
+
+  <fragment
+    android:id="@+id/backupImportFragment"
+    android:name="com.michaldrabik.ui_backup.features.import_.BackupImportFragment"
+    android:label="fragmentBackupImport"
     />
 
   <dialog

@@ -69,6 +69,11 @@
   <string name="textSettingsDateSelectionMessage">Vælg standardindstilling for datovalg.</string>
   <string name="textSettingsTabletColumnsTitle">Antal Kolonner i Lister</string>
   <string name="textSettingsTabletColumnsSummary">Vælg foretrukne antal kolonner i lister.</string>
+  <string name="textSettingsBackup">Backup &amp; Gendan</string>
+  <string name="textSettingsBackupExportTitle">Eksport</string>
+  <string name="textSettingsBackupExportDescription">Eksportér dine data for at lave en backup eller overføre dem til en ny enhed.</string>
+  <string name="textSettingsBackupImportTitle">Import</string>
+  <string name="textSettingsBackupImportDescription">Importer din backupfil for at gendanne data på denne enhed.</string>
   <string name="textSettingsSpoilers">Spoilere</string>
   <string name="textSettingsSpoilersShows">Serier</string>
   <string name="textSettingsSpoilersShowsSummary">Administrer spoiler indstillinger for serier.</string>

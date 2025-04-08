@@ -48,6 +48,13 @@
       app:chipIcon="@drawable/ic_link"
       />
 
+    <com.google.android.material.chip.Chip
+      android:id="@+id/shareChip"
+      style="@style/ShowlyChip.Button"
+      android:text="@string/textShare"
+      app:chipIcon="@drawable/ic_share"
+      />
+
   </com.google.android.material.chip.ChipGroup>
 
 </HorizontalScrollView>

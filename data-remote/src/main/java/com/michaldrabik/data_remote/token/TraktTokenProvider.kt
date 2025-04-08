@@ -17,11 +17,11 @@ import okhttp3.internal.closeQuietly
 import org.json.JSONObject
 import timber.log.Timber
 import java.io.IOException
-import java.time.Duration
 import javax.inject.Named
 import javax.inject.Singleton
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
+import kotlin.time.Duration.Companion.seconds
 
 @SuppressLint("ApplySharedPref")
 @Singleton
@@ -34,13 +34,11 @@ internal class TraktTokenProvider(
   companion object {
     private const val KEY_ACCESS_TOKEN = "TRAKT_ACCESS_TOKEN"
     private const val KEY_REFRESH_TOKEN = "TRAKT_REFRESH_TOKEN"
-    private const val KEY_TIMESTAMP = "TRAKT_ACCESS_TOKEN_TIMESTAMP"
-
-    private val TRAKT_TOKEN_REFRESH_COOLDOWN: Duration = Duration.ofHours(12)
+    private const val KEY_TOKEN_CREATED_AT = "TRAKT_ACCESS_TOKEN_TIMESTAMP"
+    private const val KEY_TOKEN_EXPIRES_AT = "TRAKT_ACCESS_TOKEN_EXPIRES_TIMESTAMP"
   }
 
   private var token: String? = null
-  private var lastRefreshCheck: Long = 0
 
   override fun getToken(): String? {
     if (token == null) {
@@ -52,13 +50,20 @@ internal class TraktTokenProvider(
   override fun saveTokens(
     accessToken: String,
     refreshToken: String,
+    expiresIn: Long,
+    createdAt: Long,
   ) {
+    val createdAtMillis = createdAt.seconds.inWholeMilliseconds
+    val expiresAtMillis = createdAtMillis + expiresIn.seconds.inWholeMilliseconds
+
     sharedPreferences
       .edit()
       .putString(KEY_ACCESS_TOKEN, accessToken)
       .putString(KEY_REFRESH_TOKEN, refreshToken)
-      .putLong(KEY_TIMESTAMP, System.currentTimeMillis())
+      .putLong(KEY_TOKEN_CREATED_AT, createdAtMillis)
+      .putLong(KEY_TOKEN_EXPIRES_AT, expiresAtMillis)
       .commit()
+
     token = null
   }
 
@@ -68,24 +73,36 @@ internal class TraktTokenProvider(
       .clear()
       .remove(KEY_ACCESS_TOKEN)
       .remove(KEY_REFRESH_TOKEN)
-      .remove(KEY_TIMESTAMP)
+      .remove(KEY_TOKEN_CREATED_AT)
+      .remove(KEY_TOKEN_EXPIRES_AT)
       .commit()
+
     token = null
   }
 
   override fun shouldRefresh(): Boolean {
-    val now = System.currentTimeMillis()
-    if (lastRefreshCheck > 0L && now - lastRefreshCheck < TRAKT_TOKEN_REFRESH_COOLDOWN.toMillis()) {
+    Timber.d("Checking if token should be refreshed...")
+    val nowMillis = System.currentTimeMillis()
+
+    val tokenCreatedAt = sharedPreferences.getLong(KEY_TOKEN_CREATED_AT, 0L)
+    val tokenExpiresAt = sharedPreferences.getLong(KEY_TOKEN_EXPIRES_AT, 0L)
+
+    if (tokenCreatedAt == 0L) {
+      Timber.d("No timestamp available.")
       return false
     }
-    lastRefreshCheck = now
-    val timestamp = sharedPreferences.getLong(KEY_TIMESTAMP, 0L)
-    if (timestamp == 0L) {
-      return false
-    }
-    if (now - timestamp > Config.TRAKT_TOKEN_REFRESH_DURATION.toMillis()) {
+
+    if (nowMillis - tokenCreatedAt > Config.TRAKT_TOKEN_REFRESH_DURATION.toMillis()) {
+      Timber.d("Token should be refreshed.")
       return true
     }
+
+    if (tokenExpiresAt in 1..nowMillis) {
+      Timber.d("Token expired. Should be refreshed.")
+      return true
+    }
+
+    Timber.d("Token should not be refreshed.")
     return false
   }
 

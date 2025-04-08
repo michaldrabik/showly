@@ -13,8 +13,6 @@ interface RatingsLocalDataSource {
     type: String,
   ): List<Rating>
 
-  suspend fun deleteAllByType(type: String)
-
   suspend fun deleteByType(
     traktId: Long,
     type: String,

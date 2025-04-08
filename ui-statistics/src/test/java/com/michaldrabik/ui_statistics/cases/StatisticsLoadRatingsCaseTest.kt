@@ -3,7 +3,6 @@ package com.michaldrabik.ui_statistics.cases
 import BaseMockTest
 import com.google.common.truth.Truth.assertThat
 import com.michaldrabik.repository.RatingsRepository
-import com.michaldrabik.repository.UserTraktManager
 import com.michaldrabik.repository.images.ShowImagesProvider
 import com.michaldrabik.repository.shows.ShowsRepository
 import com.michaldrabik.ui_model.IdTrakt
@@ -13,10 +12,8 @@ import com.michaldrabik.ui_model.ImageType
 import com.michaldrabik.ui_model.Show
 import com.michaldrabik.ui_model.TraktRating
 import com.michaldrabik.ui_statistics.views.ratings.recycler.StatisticsRatingItem
-import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
-import io.mockk.just
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
@@ -26,7 +23,6 @@ import java.time.ZonedDateTime
 @Suppress("EXPERIMENTAL_API_USAGE")
 class StatisticsLoadRatingsCaseTest : BaseMockTest() {
 
-  @MockK lateinit var userTraktManager: UserTraktManager
   @MockK lateinit var showsRepository: ShowsRepository
   @MockK lateinit var ratingsRepository: RatingsRepository
   @MockK lateinit var showImagesProvider: ShowImagesProvider
@@ -38,22 +34,11 @@ class StatisticsLoadRatingsCaseTest : BaseMockTest() {
     super.setUp()
 
     SUT = StatisticsLoadRatingsCase(
-      userTraktManager,
       showsRepository,
       ratingsRepository,
       showImagesProvider,
     )
   }
-
-  @Test
-  fun `Should return empty list if not authorized`() =
-    runTest {
-      coEvery { userTraktManager.isAuthorized() } returns false
-
-      val result = SUT.loadRatings()
-
-      assertThat(result).isEmpty()
-    }
 
   @Test
   fun `Should load sorted ratings properly`() =
@@ -74,8 +59,6 @@ class StatisticsLoadRatingsCaseTest : BaseMockTest() {
 
       val image = Image.createUnknown(ImageType.POSTER)
 
-      coEvery { userTraktManager.checkAuthorization() } just Runs
-      coEvery { userTraktManager.isAuthorized() } returns true
       coEvery { ratingsRepository.shows.loadShowsRatings() } returns ratings
       coEvery { showsRepository.myShows.loadAll(any()) } returns shows
       coEvery { showImagesProvider.findCachedImage(any(), any()) } returns image

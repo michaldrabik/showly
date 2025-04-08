@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="textNextEpisode">Nächste Folge:</string>
-  <string name="textInMyShows">In Meine Serien</string>
+  <string name="textInMyShows">In meinen Serien</string>
   <string name="textInWatchlist">Im Watchlist</string>
   <string name="textInHidden">Versteckt</string>
   <string name="textShowQuickProgressTitle">Schneller Fortschritt</string>
@@ -14,7 +14,7 @@
   <string name="textSeasons">Staffel:</string>
   <string name="textSeasonsEmpty">Staffel nicht verfügbar.</string>
   <string name="textTrailer">Trailer</string>
-  <string name="textYouMayAlsoLike">Vielleicht mögen Sie auch</string>
+  <string name="textYouMayAlsoLike">Vielleicht magst du auch</string>
   <string name="textRuntimeLeftHours">Noch ~%sh %sm</string>
   <string name="textRuntimeLeftMinutes">Noch ~%sm</string>
   <string name="textShowManageLists">Listen verwalten</string>

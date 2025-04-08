@@ -23,6 +23,8 @@
         android:pathData="M 18 6 L 6 18"
         android:strokeWidth="1.8"
         android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
         android:trimPathStart="1"
         />
       <path
@@ -30,7 +32,9 @@
         android:pathData="M 6 6 L 20 20"
         android:strokeWidth="1.8"
         android:strokeColor="#FFFFFF"
-        android:trimPathStart="0.48"
+        android:strokeLineCap="round"
+        android:trimPathStart="0.53"
+        android:trimPathEnd="0.955"
         />
     </vector>
   </aapt:attr>
@@ -38,20 +42,20 @@
     <aapt:attr name="android:animation">
       <set>
         <objectAnimator
-          android:duration="420"
+          android:duration="500"
           android:interpolator="@android:interpolator/fast_out_slow_in"
           android:propertyName="trimPathStart"
-          android:startOffset="166"
-          android:valueFrom="0.48"
+          android:startOffset="300"
+          android:valueFrom="0.53"
           android:valueTo="0"
           android:valueType="floatType"
           />
         <objectAnimator
-          android:duration="420"
+          android:duration="500"
           android:interpolator="@android:interpolator/fast_out_slow_in"
           android:propertyName="trimPathEnd"
-          android:startOffset="166"
-          android:valueFrom="1"
+          android:startOffset="300"
+          android:valueFrom="0.955"
           android:valueTo="0.86"
           android:valueType="floatType"
           />
@@ -61,10 +65,10 @@
   <target android:name="ne_stem">
     <aapt:attr name="android:animation">
       <objectAnimator
-        android:duration="234"
+        android:duration="314"
         android:interpolator="@android:interpolator/fast_out_slow_in"
         android:propertyName="trimPathStart"
-        android:startOffset="382"
+        android:startOffset="522"
         android:valueFrom="1"
         android:valueTo="0"
         android:valueType="floatType"
@@ -74,10 +78,10 @@
   <target android:name="oval">
     <aapt:attr name="android:animation">
       <objectAnimator
-        android:duration="336"
+        android:duration="416"
         android:interpolator="@android:anim/accelerate_decelerate_interpolator"
         android:propertyName="trimPathStart"
-        android:startOffset="0"
+        android:startOffset="134"
         android:valueFrom="0"
         android:valueTo="1"
         android:valueType="floatType"
@@ -88,19 +92,19 @@
     <aapt:attr name="android:animation">
       <set>
         <objectAnimator
-          android:duration="420"
+          android:duration="500"
           android:interpolator="@android:interpolator/fast_out_slow_in"
           android:propertyName="translateX"
-          android:startOffset="166"
+          android:startOffset="300"
           android:valueFrom="0"
           android:valueTo="-6.7"
           android:valueType="floatType"
           />
         <objectAnimator
-          android:duration="420"
+          android:duration="500"
           android:interpolator="@android:interpolator/fast_out_slow_in"
           android:propertyName="translateY"
-          android:startOffset="166"
+          android:startOffset="300"
           android:valueFrom="0"
           android:valueTo="-6.7"
           android:valueType="floatType"

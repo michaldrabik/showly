@@ -1,7 +1,6 @@
 package com.michaldrabik.ui_statistics.cases
 
 import com.michaldrabik.repository.RatingsRepository
-import com.michaldrabik.repository.UserTraktManager
 import com.michaldrabik.repository.images.ShowImagesProvider
 import com.michaldrabik.repository.shows.ShowsRepository
 import com.michaldrabik.ui_model.ImageType
@@ -11,7 +10,6 @@ import javax.inject.Inject
 
 @ViewModelScoped
 class StatisticsLoadRatingsCase @Inject constructor(
-  private val userTraktManager: UserTraktManager,
   private val showsRepository: ShowsRepository,
   private val ratingsRepository: RatingsRepository,
   private val imagesProvider: ShowImagesProvider,
@@ -22,10 +20,6 @@ class StatisticsLoadRatingsCase @Inject constructor(
   }
 
   suspend fun loadRatings(): List<StatisticsRatingItem> {
-    if (!userTraktManager.isAuthorized()) {
-      return emptyList()
-    }
-
     val ratings = ratingsRepository.shows.loadShowsRatings()
 
     val ratingsIds = ratings.map { it.idTrakt }

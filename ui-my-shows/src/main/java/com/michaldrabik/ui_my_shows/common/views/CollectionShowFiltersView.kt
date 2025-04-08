@@ -55,6 +55,9 @@ class CollectionShowFiltersView : FrameLayout {
         ASCENDING -> R.drawable.ic_arrow_alt_up
         DESCENDING -> R.drawable.ic_arrow_alt_down
       }
+
+      followedShowsCountText.text = "${item.count}"
+
       followedShowsSortingChip.closeIcon = ContextCompat.getDrawable(context, sortIcon)
       followedShowsSortingChip.text = context.getText(item.sortOrder.displayString)
 

@@ -56,7 +56,6 @@ class HiddenLoadMoviesCase @Inject constructor(
       val sortType = settingsRepository.sorting.hiddenMoviesSortType
       val genres = settingsRepository.filters.hiddenMoviesGenres
 
-      val filtersItem = loadFiltersItem(sortOrder, sortType, genres)
       val moviesItems = moviesRepository.hiddenMovies
         .loadAll()
         .map {
@@ -74,6 +73,13 @@ class HiddenLoadMoviesCase @Inject constructor(
         .filterByGenre(genres.map { it.slug.lowercase() })
         .sortedWith(sorter.sort(sortOrder, sortType))
 
+      val filtersItem = loadFiltersItem(
+        sortOrder = sortOrder,
+        sortType = sortType,
+        genres = genres,
+        count = moviesItems.size,
+      )
+
       if (moviesItems.isNotEmpty() || filtersItem.hasActiveFilters()) {
         listOf(filtersItem) + moviesItems
       } else {
@@ -85,12 +91,14 @@ class HiddenLoadMoviesCase @Inject constructor(
     sortOrder: SortOrder,
     sortType: SortType,
     genres: List<Genre>,
+    count: Int,
   ): CollectionListItem.FiltersItem =
     CollectionListItem.FiltersItem(
       sortOrder = sortOrder,
       sortType = sortType,
       genres = genres,
       upcoming = UpcomingFilter.OFF,
+      count = count,
     )
 
   private fun List<CollectionListItem.MovieItem>.filterByQuery(query: String) =

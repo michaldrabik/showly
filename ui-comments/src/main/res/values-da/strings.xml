@@ -10,8 +10,7 @@
   <string name="textCommentDeleted">Din kommentar er blevet slettet.</string>
   <string name="textCommentConfirmDeleteTitle">Slet kommentar</string>
   <string name="textCommentConfirmDelete">Er du sikker på, at du vil slette denne kommentar?</string>
-  <string name="textSignBeforeRate">Log venligst ind før du bedømmer en serie.</string>
-  <string name="textSignBeforeRateMovie">Log venligst ind før du bedømmer en film.</string>
+  <string name="textSignBefore">Log venligst ind på din Trakt.tv-konto først. Du kan gøre dette gennem indstillingerne.</string>
   <string name="errorCommentFormat">Din kommentar skal være på engelsk, og have 5 ord eller flere.</string>
   <string name="errorCommentDelete">Denne kommentar kan ikke længere slettes.</string>
 </resources>

@@ -171,9 +171,6 @@ class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment
         if (imagePadded) {
           showDetailsMainLayout
             .updatePadding(top = inset.top)
-        } else {
-          (showDetailsShareButton.layoutParams as MarginLayoutParams)
-            .updateMargins(top = inset.top)
         }
         showDetailsMainContent.updatePadding(bottom = inset.bottom + dimenToPx(R.dimen.spaceNormal))
         (showDetailsBackArrow.layoutParams as MarginLayoutParams).updateMargins(top = inset.top)
@@ -195,12 +192,6 @@ class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment
           showDetailsStatus.text = getString(show.status.displayName)
           renderTitleDescription(show, translation, followedState, spoilers)
           renderExtraInfo(show)
-          showDetailsShareButton.run {
-            isEnabled = show.ids.imdb.id
-              .isNotBlank()
-            alpha = if (isEnabled) 1.0F else 0.35F
-            onClick { openShareSheet(show) }
-          }
           showDetailsActions.trailerChip.run {
             isEnabled = show.trailer.isNotBlank()
             alpha = if (isEnabled) 1.0F else 0.35F
@@ -211,6 +202,12 @@ class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment
           showDetailsActions.linksChip.onClick {
             val args = LinksBottomSheet.createBundle(show)
             navigateToSafe(R.id.actionShowDetailsFragmentToLinks, args)
+          }
+          showDetailsActions.shareChip.run {
+            isEnabled = show.ids.imdb.id
+              .isNotBlank()
+            alpha = if (isEnabled) 1.0F else 0.35F
+            onClick { openShareSheet(show) }
           }
           showDetailsActions.commentsChip.onClick {
             val bundle = CommentsFragment.createBundle(show)
@@ -330,11 +327,7 @@ class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment
       }
 
       onClick {
-        if (rating.rateAllowed == true) {
-          openRateDialog()
-        } else {
-          showSnack(MessageEvent.Info(R.string.textSignBeforeRate))
-        }
+        openRateDialog()
       }
     }
   }
@@ -395,9 +388,11 @@ class ShowDetailsFragment : BaseFragment<ShowDetailsViewModel>(R.layout.fragment
 
   private fun openShareSheet(show: Show) {
     val intent = Intent().apply {
-      val text = "Hey! Check out ${show.title}:\n" +
-        "https://trakt.tv/shows/${show.ids.slug.id}\n" +
-        "https://www.imdb.com/title/${show.ids.imdb.id}"
+      val text = "${show.title}:" +
+        "\n" +
+        "https://www.imdb.com/title/${show.ids.imdb.id}" +
+        "\n" +
+        "https://trakt.tv/shows/${show.ids.slug.id}"
       action = Intent.ACTION_SEND
       putExtra(Intent.EXTRA_TEXT, text)
       type = "text/plain"

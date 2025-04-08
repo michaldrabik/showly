@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="textBackupAndRestore">Резервне копіювання &amp; Відновлення</string>
+  <string name="textBackupExport">Експорт даних</string>
+  <string name="textBackupExportDescription">Експортуйте дані серіалів та фільмів у файл, щоб створити резервну копію або перенести їх на новий пристрій.</string>
+  <string name="textBackupImport">Імпорт даних</string>
+  <string name="textBackupImportDescription">Імпортуйте ваші дані серіалів та фільмів з файлу резервної копії.\n\nВаша поточна колекція не буде видалена, будуть додані тільки відсутні елементи.</string>
+  <string name="textBackupExportSuccess">Дані успішно експортовано.</string>
+  <string name="textBackupImportSuccess">Дані успішно імпортовано.</string>
+  <string name="errorImportCancelled">Імпорт даних скасовано.</string>
+</resources>

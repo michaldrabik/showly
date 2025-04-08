@@ -10,8 +10,7 @@
   <string name="textCommentDeleted">Ваш комментарий был удалён.</string>
   <string name="textCommentConfirmDeleteTitle">Удалить комментарий</string>
   <string name="textCommentConfirmDelete">Вы уверены, что хотите удалить этот комментарий?</string>
-  <string name="textSignBeforeRate">Пожалуйста, войдите перед оценкой сериала.</string>
-  <string name="textSignBeforeRateMovie">Пожалуйста, войдите перед оценкой фильма.</string>
+  <string name="textSignBefore">Пожалуйста, сначала войдите в свою учетную запись Trakt.tv. Вы можете сделать это через настройки.</string>
   <string name="errorCommentFormat">Ваш комментарий должен быть на английском языке и иметь более 5 слов.</string>
   <string name="errorCommentDelete">Этот комментарий больше не может быть удален.</string>
 </resources>

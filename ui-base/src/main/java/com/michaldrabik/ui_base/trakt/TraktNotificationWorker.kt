@@ -58,6 +58,20 @@ abstract class TraktNotificationWorker(
       .apply { action?.let { addAction(it) } }
       .build()
 
+  protected fun createErrorNotification(
+    @StringRes titleTextRes: Int,
+    @StringRes bigTextRes: Int,
+    actions: List<NotificationCompat.Action> = emptyList(),
+  ): Notification =
+    createBaseNotification()
+      .setContentTitle(context.getString(titleTextRes))
+      .setContentText(context.getString(bigTextRes))
+      .setStyle(NotificationCompat.BigTextStyle().bigText(context.getString(bigTextRes)))
+      .setPriority(NotificationCompat.PRIORITY_HIGH)
+      .apply {
+        actions.forEach { addAction(it) }
+      }.build()
+
   private fun createNotificationChannel(): String {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       val id = "Showly Trakt Sync Service"

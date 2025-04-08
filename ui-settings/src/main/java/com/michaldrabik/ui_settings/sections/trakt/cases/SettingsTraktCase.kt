@@ -76,7 +76,6 @@ class SettingsTraktCase @Inject constructor(
 
     userManager.revokeToken()
     syncLogLocalSource.deleteAll()
-    ratingsRepository.clear()
     disableTraktFeatures()
     TraktSyncWorker.cancelAllPeriodic(workManager)
   }

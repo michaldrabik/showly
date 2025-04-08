@@ -20,11 +20,12 @@
     android:id="@+id/statisticsMoviesCoordinator"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clipChildren="false"
     >
 
     <com.google.android.material.appbar.MaterialToolbar
       android:id="@+id/statisticsMoviesToolbar"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:background="?android:windowBackground"
       android:elevation="@dimen/elevationNormal"

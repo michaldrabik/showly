@@ -65,6 +65,11 @@
   <string name="textSettingsDateSelectionMessage">Varsayılan tarih seçme seçeneğini seçin.</string>
   <string name="textSettingsTabletColumnsTitle">Sütun Sayısını Listeler</string>
   <string name="textSettingsTabletColumnsSummary">Listeler için tercih edilen sütun sayısını seçin.</string>
+  <string name="textSettingsBackup">Yedekleme ve Geri Yükleme</string>
+  <string name="textSettingsBackupExportTitle">Dışa Aktar</string>
+  <string name="textSettingsBackupExportDescription">Yedek oluşturmak veya verilerinizi yeni bir cihaza aktarmak için verilerinizi dışa aktarın.</string>
+  <string name="textSettingsBackupImportTitle">İçe Aktar</string>
+  <string name="textSettingsBackupImportDescription">Bu cihazdaki verileri geri yüklemek için yedekleme dosyanızı içe aktarın.</string>
   <string name="textSettingsSpoilers">Spoiler</string>
   <string name="textSettingsSpoilersShows">Diziler</string>
   <string name="textSettingsSpoilersShowsSummary">Diziler için spoiler ayarlarını yönet.</string>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  tools:parentTag="android.widget.FrameLayout"
+  tools:theme="@style/AppTheme"
+  >
+
+  <HorizontalScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:overScrollMode="never"
+    android:scrollbars="none"
+    >
+
+    <com.google.android.material.chip.ChipGroup
+      android:id="@+id/chipsGroup"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:singleLine="true"
+      app:singleSelection="true"
+      >
+
+      <com.google.android.material.chip.Chip
+        android:id="@+id/traktChip"
+        style="@style/ShowlyChip.Filter"
+        android:checkable="true"
+        android:text="@string/textSettingsTrakt"
+        />
+
+      <com.google.android.material.chip.Chip
+        android:id="@+id/generalChip"
+        style="@style/ShowlyChip.Filter"
+        android:checkable="true"
+        android:text="@string/textSettingsGeneral"
+        />
+
+      <com.google.android.material.chip.Chip
+        android:id="@+id/notificationsChip"
+        style="@style/ShowlyChip.Filter"
+        android:checkable="true"
+        android:text="@string/textSettingsNotifications"
+        />
+
+      <com.google.android.material.chip.Chip
+        android:id="@+id/spoilersChip"
+        style="@style/ShowlyChip.Filter"
+        android:checkable="true"
+        android:text="@string/textSettingsSpoilers"
+        />
+
+      <com.google.android.material.chip.Chip
+        android:id="@+id/widgetsChip"
+        style="@style/ShowlyChip.Filter"
+        android:checkable="true"
+        android:text="@string/textSettingsWidgets"
+        />
+
+      <com.google.android.material.chip.Chip
+        android:id="@+id/backupChip"
+        style="@style/ShowlyChip.Filter"
+        android:checkable="true"
+        android:text="@string/textSettingsBackup"
+        />
+
+      <com.google.android.material.chip.Chip
+        android:id="@+id/miscChip"
+        style="@style/ShowlyChip.Filter"
+        android:checkable="true"
+        android:text="@string/textSettingsMisc"
+        />
+
+    </com.google.android.material.chip.ChipGroup>
+
+  </HorizontalScrollView>
+
+</merge>

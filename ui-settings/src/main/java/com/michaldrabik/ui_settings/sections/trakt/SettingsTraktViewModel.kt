@@ -19,7 +19,6 @@ import com.michaldrabik.ui_model.TraktSyncSchedule
 import com.michaldrabik.ui_settings.R
 import com.michaldrabik.ui_settings.sections.trakt.SettingsTraktUiEvent.RequestNotificationsPermission
 import com.michaldrabik.ui_settings.sections.trakt.SettingsTraktUiEvent.StartAuthorization
-import com.michaldrabik.ui_settings.sections.trakt.cases.SettingsRatingsCase
 import com.michaldrabik.ui_settings.sections.trakt.cases.SettingsTraktCase
 import com.michaldrabik.ui_settings.sections.trakt.cases.SettingsTraktMainCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,14 +27,12 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SettingsTraktViewModel @Inject constructor(
   private val mainCase: SettingsTraktMainCase,
   private val traktCase: SettingsTraktCase,
-  private val ratingsCase: SettingsRatingsCase,
 ) : ViewModel(),
   ChannelsDelegate by DefaultChannelsDelegate() {
 
@@ -56,17 +53,6 @@ class SettingsTraktViewModel @Inject constructor(
     settingsState.value = mainCase.getSettings()
     signedInTraktState.value = traktCase.isTraktAuthorized()
     traktNameState.value = traktCase.getTraktUsername()
-  }
-
-  private fun preloadRatings() {
-    viewModelScope.launch {
-      try {
-        ratingsCase.preloadRatings()
-      } catch (error: Throwable) {
-        Timber.e("Failed to preload some of ratings")
-        rethrowCancellation(error)
-      }
-    }
   }
 
   fun startAuthorization(context: Context) {
@@ -96,7 +82,6 @@ class SettingsTraktViewModel @Inject constructor(
         traktCase.authorizeTrakt(authData)
         traktCase.enableTraktQuickRemove(true)
         refreshSettings()
-        preloadRatings()
         messageChannel.send(MessageEvent.Info(R.string.textTraktLoginSuccess))
       } catch (error: Throwable) {
         Logger.record(error, "SettingsViewModel::authorizeTrakt()")

@@ -6,6 +6,7 @@
   <string name="textApply">Anwenden</string>
   <string name="textCancel">Abbrechen</string>
   <string name="textClose">Schließen</string>
+  <string name="textShare">Teilen</string>
   <string name="textNow">Jetzt</string>
   <string name="textNotNow">Nicht jetzt</string>
   <string name="textReleaseDay">Erscheinungstag</string>
@@ -26,7 +27,7 @@
   <string name="textSpoilersWarning">Dieser Kommentar enthält Spoiler.\nTippen um zu lesen.</string>
   <string name="textCommentedOn">Kommentiert von %s</string>
   <string name="textNetwork">%1$s (%2$s)</string>
-  <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">Fernseh-Network:</string>
+  <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">Sender:</string>
   <string name="textGenres">Genres:</string>
   <string name="textShows">Serien</string>
   <string name="textMovies">Filme</string>

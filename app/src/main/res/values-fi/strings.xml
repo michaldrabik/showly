@@ -4,7 +4,7 @@
   <string name="menuDiscover">Etsi</string>
   <string name="menuCollection">Kokoelma</string>
   <string name="menuNews">Uutiset</string>
-  <string name="textRateAppTitle">Nautitko Showly 2.0:sta?</string>
+  <string name="textRateAppTitle">Pidätkö Showly 2.0:sta?</string>
   <string name="textRateAppMessage">Haluaisitko arvioida sovelluksen?\nTämä kestää vain muutaman sekunnin. Kiitos!\n\n<i>Sovellusta ei suljeta.</i></string>
   <string name="textRateAppYesButton">Toki, miksipä en?</string>
   <string name="textRateAppNoButton">En nyt</string>

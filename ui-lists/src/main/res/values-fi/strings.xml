@@ -4,7 +4,7 @@
   <string name="menuList">Lista</string>
   <string name="textFilters">Suodattimet:</string>
   <string name="textListsEmpty">Listakokoelmasi on tyhjä.</string>
-  <string name="textListEmpty">Listasi on tyhjä.</string>
+  <string name="textListEmpty">Lista on tyhjä.</string>
   <string name="textCreateList">Luo lista</string>
   <string name="textCreateListDescription">Luo uusi mukautettu lista.</string>
   <string name="textName">Nimi</string>

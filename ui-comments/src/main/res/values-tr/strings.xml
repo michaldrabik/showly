@@ -10,8 +10,7 @@
   <string name="textCommentDeleted">Yorumunuz silindi.</string>
   <string name="textCommentConfirmDeleteTitle">Yorumu Sil</string>
   <string name="textCommentConfirmDelete">Bu yorumu silmek istediğinizden emin misiniz?</string>
-  <string name="textSignBeforeRate">Bir diziye oy vermeden önce lütfen oturum açın.</string>
-  <string name="textSignBeforeRateMovie">Bir filme oy vermeden önce lütfen oturum açın.</string>
+  <string name="textSignBefore">Lütfen önce Trakt.tv hesabınızda oturum açın. Bunu ayarlar üzerinden yapabilirsiniz.</string>
   <string name="errorCommentFormat">Yorumunuz İngilizce dilinde olmalı ve en az 5 kelime içermelidir.</string>
   <string name="errorCommentDelete">Bu yorum artık silinemez.</string>
 </resources>

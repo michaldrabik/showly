@@ -173,7 +173,12 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
       viewModel.loadRatings(options.episode)
       setFragmentResult(REQUEST_EPISODE_DETAILS, bundleOf(NavigationArgs.ACTION_RATING_CHANGED to true))
     }
-    val bundle = RatingsBottomSheet.createBundle(options.episode.ids.trakt, Type.EPISODE)
+    val bundle = RatingsBottomSheet.createBundle(
+      id = options.episode.ids.trakt,
+      type = Type.EPISODE,
+      seasonNumber = options.episode.season,
+      episodeNumber = options.episode.number,
+    )
     navigateTo(R.id.actionEpisodeDetailsDialogToRate, bundle)
   }
 
@@ -253,13 +258,7 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
           episodeDetailsRateProgress.visibleIf(state.rateLoading == true)
           episodeDetailsRateButton.visibleIf(state.rateLoading == false, gone = false)
           episodeDetailsRateButton.isEnabled = state.rateLoading == false
-          episodeDetailsRateButton.onClick {
-            if (state.rateAllowed == true) {
-              openRateDialog()
-            } else {
-              renderSnackbar(MessageEvent.Info(R.string.textSignBeforeRate))
-            }
-          }
+          episodeDetailsRateButton.onClick { openRateDialog() }
           if (state.hasRating()) {
             episodeDetailsRateButton.text = "${state.userRating?.rating} / 10"
           } else {

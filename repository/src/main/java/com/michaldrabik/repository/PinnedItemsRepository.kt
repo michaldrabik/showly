@@ -1,6 +1,7 @@
 package com.michaldrabik.repository
 
 import android.content.SharedPreferences
+import com.michaldrabik.ui_model.IdTrakt
 import com.michaldrabik.ui_model.Movie
 import com.michaldrabik.ui_model.Show
 import javax.inject.Inject
@@ -13,10 +14,14 @@ class PinnedItemsRepository @Inject constructor(
   @Named("progressMoviesPreferences") private val sharedPreferencesMovies: SharedPreferences,
 ) {
 
-  fun addPinnedItem(show: Show) = sharedPreferences.edit().putLong(show.traktId.toString(), show.traktId).apply()
+  fun addPinnedItem(show: Show) = addShowPinnedItem(IdTrakt(show.traktId))
 
-  fun addPinnedItem(movie: Movie) =
-    sharedPreferencesMovies.edit().putLong(movie.traktId.toString(), movie.traktId).apply()
+  fun addPinnedItem(movie: Movie) = addMoviePinnedItem(IdTrakt(movie.traktId))
+
+  fun addShowPinnedItem(showId: IdTrakt) = sharedPreferences.edit().putLong(showId.id.toString(), showId.id).apply()
+
+  fun addMoviePinnedItem(movieId: IdTrakt) =
+    sharedPreferencesMovies.edit().putLong(movieId.id.toString(), movieId.id).apply()
 
   fun removePinnedItem(show: Show) = sharedPreferences.edit().remove(show.traktId.toString()).apply()
 
@@ -25,4 +30,8 @@ class PinnedItemsRepository @Inject constructor(
   fun isItemPinned(show: Show) = sharedPreferences.contains(show.traktId.toString())
 
   fun isItemPinned(movie: Movie) = sharedPreferencesMovies.contains(movie.traktId.toString())
+
+  fun getAllMovies(): List<Long> = sharedPreferencesMovies.all.values.map { it as Long }
+
+  fun getAllShows(): List<Long> = sharedPreferences.all.values.map { it as Long }
 }

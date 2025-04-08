@@ -33,7 +33,6 @@ import com.michaldrabik.ui_base.viewmodel.DefaultChannelsDelegate
 import com.michaldrabik.ui_model.TraktSyncSchedule
 import com.michaldrabik.ui_trakt_sync.TraktSyncUiEvent.RequestNotificationsPermission
 import com.michaldrabik.ui_trakt_sync.TraktSyncUiEvent.StartAuthorization
-import com.michaldrabik.ui_trakt_sync.cases.TraktSyncRatingsCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -49,7 +48,6 @@ class TraktSyncViewModel @Inject constructor(
   @Named("miscPreferences") private var miscPreferences: SharedPreferences,
   private val userManager: UserTraktManager,
   private val workManager: WorkManager,
-  private val ratingsCase: TraktSyncRatingsCase,
   private val settingsRepository: SettingsRepository,
   private val dateFormatProvider: DateFormatProvider,
   private val eventsManager: EventsManager,
@@ -112,7 +110,6 @@ class TraktSyncViewModel @Inject constructor(
         messageChannel.send(MessageEvent.Info(R.string.textTraktLoginSuccess))
         invalidate()
         saveTraktQuickRemove()
-        preloadRatings()
       } catch (error: Throwable) {
         when (ErrorHelper.parse(error)) {
           is CoroutineCancellation -> rethrowCancellation(error)
@@ -142,17 +139,6 @@ class TraktSyncViewModel @Inject constructor(
       settings.let {
         val new = it.copy(traktQuickRemoveEnabled = true)
         settingsRepository.update(new)
-      }
-    }
-  }
-
-  private fun preloadRatings() {
-    viewModelScope.launch {
-      try {
-        ratingsCase.preloadRatings()
-      } catch (error: Throwable) {
-        Timber.e("Failed to preload some of ratings")
-        rethrowCancellation(error)
       }
     }
   }

@@ -11,6 +11,8 @@ interface MoviesLocalDataSource {
 
   suspend fun getAll(ids: List<Long>): List<Movie>
 
+  suspend fun getAllTmdbIds(traktIds: List<Long>): Map<Long, Long>
+
   suspend fun getAllChunked(ids: List<Long>): List<Movie>
 
   suspend fun getById(traktId: Long): Movie?

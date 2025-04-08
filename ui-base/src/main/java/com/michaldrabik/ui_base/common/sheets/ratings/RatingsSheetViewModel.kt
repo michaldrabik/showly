@@ -61,6 +61,8 @@ class RatingsSheetViewModel @Inject constructor(
     rating: Int,
     id: IdTrakt,
     type: Type,
+    seasonNumber: Int?,
+    episodeNumber: Int?,
   ) {
     viewModelScope.launch {
       try {
@@ -68,8 +70,8 @@ class RatingsSheetViewModel @Inject constructor(
         when (type) {
           Type.SHOW -> showRatingsCase.saveRating(id, rating)
           Type.MOVIE -> movieRatingsCase.saveRating(id, rating)
-          Type.EPISODE -> episodeRatingsCase.saveRating(id, rating)
-          Type.SEASON -> seasonRatingsCase.saveRating(id, rating)
+          Type.EPISODE -> episodeRatingsCase.saveRating(id, rating, seasonNumber ?: -1, episodeNumber ?: -1)
+          Type.SEASON -> seasonRatingsCase.saveRating(id, rating, seasonNumber ?: -1)
         }
         eventChannel.send(FinishUiEvent(operation = Operation.SAVE))
       } catch (error: Throwable) {

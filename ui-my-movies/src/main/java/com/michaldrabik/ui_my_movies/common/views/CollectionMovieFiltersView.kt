@@ -54,6 +54,7 @@ class CollectionMovieFiltersView : FrameLayout {
         ASCENDING -> R.drawable.ic_arrow_alt_up
         DESCENDING -> R.drawable.ic_arrow_alt_down
       }
+      followedMoviesCountText.text = "${item.count}"
       followedMoviesSortingChip.closeIcon = ContextCompat.getDrawable(context, sortIcon)
       followedMoviesSortingChip.text = context.getText(item.sortOrder.displayString)
       followedMoviesUpcomingChip.isChecked = item.upcoming.isActive()

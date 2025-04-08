@@ -6,6 +6,7 @@
   <string name="textApply">Käytä</string>
   <string name="textCancel">Peruuta</string>
   <string name="textClose">Sulje</string>
+  <string name="textShare">Jaa</string>
   <string name="textNow">Nyt</string>
   <string name="textNotNow">Ei nyt</string>
   <string name="textReleaseDay">Julkaisupäivä</string>
@@ -22,12 +23,12 @@
   <string name="textSpecials">Erikoisjaksot</string>
   <string name="textEpisode">Jakso %1$d</string>
   <string name="textSeasonEpisode">K.%02d J.%02d</string>
-  <string name="textSortBy">Lajittele:</string>
+  <string name="textSortBy">Järjestä:</string>
   <string name="textSpoilersWarning">Kommentti sisältää juonipaljastuksia.\nLue napauttamalla.</string>
   <string name="textCommentedOn">Kirjoittanut %s</string>
   <string name="textNetwork">%1$s (%2$s)</string>
   <string name="textNetworks" comment="TV network like HBO, AMC, Showtime, Disney etc.">Verkko:</string>
-  <string name="textGenres">Tyylilajit:</string>
+  <string name="textGenres">Lajityypit:</string>
   <string name="textShows">Sarjat</string>
   <string name="textMovies">Elokuvat</string>
   <string name="textLists">Listat</string>
@@ -121,8 +122,8 @@
   <string name="textPremiumAd">Ryhdy tukijaksi, niin saat käyttöösi lisäominaisuuksia! Napauta nähdäksesi lisää.</string>
   <string name="menuPin">Kiinnitä listan ylälaitaan</string>
   <string name="menuUnpin">Irrota listan ylälaidasta</string>
-  <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Kiinnitä \'pitoon\'</string>
-  <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Irrota \'pidosta\'</string>
+  <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Kiinnitä pitoon</string>
+  <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">Irrota pidosta</string>
   <string name="errorGeneral">Hups… Jotain meni pieleen.\nOta meihin yhteyttä, jos tämä jatkuu.</string>
   <string name="errorAuthorization">Valtuutus epäonnistui. Ota meihin yhteyttä, jos tämä jatkuu.</string>
   <string name="errorTraktAuthorization">Trakt.tv-tilin valtuutus epäonnistui.\nKirjaudu sisään ja yritä uudelleen.</string>

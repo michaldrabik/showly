@@ -9,10 +9,4 @@ import javax.inject.Singleton
 class RatingsRepository @Inject constructor(
   val shows: ShowsRatingsRepository,
   val movies: MoviesRatingsRepository,
-) {
-
-  suspend fun clear() {
-    shows.clear()
-    movies.clear()
-  }
-}
+)

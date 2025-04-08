@@ -37,6 +37,9 @@ interface EpisodesDao : EpisodesLocalDataSource {
     episodeTraktId: Long,
   ): Boolean
 
+  @Query("SELECT * FROM episodes WHERE id_trakt IN(:episodesIds)")
+  override suspend fun getAll(episodesIds: List<Long>): List<Episode>
+
   @Query("SELECT * FROM episodes WHERE id_season = :seasonTraktId")
   override suspend fun getAllForSeason(seasonTraktId: Long): List<Episode>
 
@@ -123,6 +126,9 @@ interface EpisodesDao : EpisodesLocalDataSource {
     "SELECT COUNT(id_trakt) FROM episodes WHERE id_show_trakt = :showTraktId AND is_watched = 1 AND season_number != 0",
   )
   override suspend fun getWatchedCount(showTraktId: Long): Int
+
+  @Query("SELECT * FROM episodes WHERE is_watched = 1")
+  override suspend fun getAllWatched(): List<Episode>
 
   @Query("SELECT * FROM episodes WHERE id_show_trakt IN(:showsIds) AND is_watched = 1")
   override suspend fun getAllWatchedForShows(showsIds: List<Long>): List<Episode>

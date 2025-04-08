@@ -5,8 +5,12 @@
   <string name="textNo">取消</string>
   <string name="textApply">应用</string>
   <string name="textCancel">取消</string>
+  <string name="textContinue">继续</string>
   <string name="textClose">关闭</string>
+  <string name="textShare">分享</string>
+  <string name="textNow">当前</string>
   <string name="textNotNow">稍后​​​​​</string>
+  <string name="textReleaseDay">发布日期</string>
   <string name="textNew">新播</string>
   <string name="textSelect">选择</string>
   <string name="textHot">热门</string>
@@ -34,12 +38,17 @@
   <string name="textPleaseWait">请稍等…</string>
   <string name="textRate">评分</string>
   <string name="textLink">链接</string>
+  <string name="textDisabled">禁用</string>
   <string name="textRateSaved">您的评分已发布。</string>
   <string name="textRateRemoved">您的评分已移除。</string>
+  <string name="textDays">%1$d 天</string>
+  <string name="textSelectDate">选择日期</string>
+  <string name="textDateSelectionTitle">日期选择</string>
+  <string name="textDateSelectionDescription">你是什么时候观看的？</string>
   <plurals name="textEpisodesLeft" comment="Number of episodes left to see">
     <item quantity="other">剩余 %d 集</item>
   </plurals>
-  <string name="textPeople">演职人员：</string>
+  <string name="textPeople">演员&amp;工作人员</string>
   <string name="textDirecting">导演</string>
   <string name="textDirector">导演</string>
   <string name="textWriting">编剧</string>
@@ -86,6 +95,7 @@
   <string name="textTraktSyncErrorFull">Trakt.tv 同步失败。请检查您的网络连接并重试，若该问题持续存在，请联系我们。</string>
   <string name="textTraktQuickSyncError">即时同步失败。</string>
   <string name="textTraktQuickSyncErrorFull">即时同步失败。下次打开应用时会自动重试。请检查您的网络连接。</string>
+  <string name="textTraktNotificationsRationale">请授予应用程序显示同步进度和结果信息的权限。\n\n现在要执行此操作吗？</string>
   <string name="textRemoveFromTrakt">是否从 Trakt.tv 中移除？</string>
   <string name="textRemoveFromTraktHidden">是否想要从您的 Trakt.tv「隐藏项目」中移除此项？</string>
   <string name="textRemoveFromTraktWatchlist">是否想要从您的 Trakt.tv「观看列表」中移除此项？</string>
@@ -109,7 +119,7 @@
   <string name="menuPin">置顶</string>
   <string name="menuUnpin">取消置顶</string>
   <string name="menuAddOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">设为「暂缓中」</string>
-  <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">取消「暂缓中」</string>
+  <string name="menuRemoveOnHold" comment="This is a button for Progress subsection. It will contain pending shows marked by user.">取消「暂缓」</string>
   <string name="errorGeneral">哎呀～ 出错了。\n如果这种情况持续发生，请联系我们。</string>
   <string name="errorAuthorization">授权失败。如果这种情况持续发生，请联系我们。</string>
   <string name="errorTraktAuthorization">Trakt 账号授权失败。\n请登录并重试。</string>

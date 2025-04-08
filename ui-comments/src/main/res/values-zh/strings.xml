@@ -10,8 +10,7 @@
   <string name="textCommentDeleted">您的评论已删除。</string>
   <string name="textCommentConfirmDeleteTitle">删除评论</string>
   <string name="textCommentConfirmDelete">确实是否删除此评论？</string>
-  <string name="textSignBeforeRate">给剧集评分前请先登录。</string>
-  <string name="textSignBeforeRateMovie">给电影评分前请先登录。</string>
+  <string name="textSignBefore">请先登录到您的 Trakt.tv 帐户，请在设置处登录。</string>
   <string name="errorCommentFormat">您的评论必须是英文且至少 5 个单词。</string>
   <string name="errorCommentDelete">此评论不能再被删除。</string>
 </resources>

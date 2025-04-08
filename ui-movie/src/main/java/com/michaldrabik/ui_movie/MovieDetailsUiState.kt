@@ -6,6 +6,7 @@ import com.michaldrabik.ui_model.RatingState
 import com.michaldrabik.ui_model.SpoilersSettings
 import com.michaldrabik.ui_model.Translation
 import com.michaldrabik.ui_movie.helpers.MovieDetailsMeta
+import java.time.ZonedDateTime
 
 data class MovieDetailsUiState(
   val movie: Movie? = null,
@@ -24,6 +25,7 @@ data class MovieDetailsUiState(
     val isWatchlist: Boolean,
     val isHidden: Boolean,
     val withAnimation: Boolean,
+    val watchedAt: ZonedDateTime? = null,
   ) {
 
     fun isInCollection() = isMyMovie || isWatchlist || isHidden

@@ -1,7 +1,6 @@
 package com.michaldrabik.ui_statistics_movies.cases
 
 import com.michaldrabik.repository.RatingsRepository
-import com.michaldrabik.repository.UserTraktManager
 import com.michaldrabik.repository.images.MovieImagesProvider
 import com.michaldrabik.repository.movies.MoviesRepository
 import com.michaldrabik.ui_model.ImageType
@@ -11,7 +10,6 @@ import javax.inject.Inject
 
 @ViewModelScoped
 class StatisticsMoviesLoadRatingsCase @Inject constructor(
-  private val userTraktManager: UserTraktManager,
   private val moviesRepository: MoviesRepository,
   private val ratingsRepository: RatingsRepository,
   private val imagesProvider: MovieImagesProvider,
@@ -22,10 +20,6 @@ class StatisticsMoviesLoadRatingsCase @Inject constructor(
   }
 
   suspend fun loadRatings(): List<StatisticsMoviesRatingItem> {
-    if (!userTraktManager.isAuthorized()) {
-      return emptyList()
-    }
-
     val ratings = ratingsRepository.movies.loadMoviesRatings()
     val ratingsIds = ratings.map { it.idTrakt }
     val myMovies = moviesRepository.myMovies.loadAll(ratingsIds).distinctBy { it.traktId }

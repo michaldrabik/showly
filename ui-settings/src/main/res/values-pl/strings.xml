@@ -65,6 +65,11 @@
   <string name="textSettingsDateSelectionMessage">Wybierz domyślną opcję wyboru daty.</string>
   <string name="textSettingsTabletColumnsTitle">Liczba kolumn w listach</string>
   <string name="textSettingsTabletColumnsSummary">Wybierz preferowaną liczbę kolumn dla list.</string>
+  <string name="textSettingsBackup">Import &amp; eksport</string>
+  <string name="textSettingsBackupExportTitle">Eksport</string>
+  <string name="textSettingsBackupExportDescription">Eksportuj dane, aby utworzyć kopię zapasową lub przenieść je na nowe urządzenie.</string>
+  <string name="textSettingsBackupImportTitle">Import</string>
+  <string name="textSettingsBackupImportDescription">Importuj plik kopii zapasowej, aby przywrócić dane na tym urządzeniu.</string>
   <string name="textSettingsSpoilers">Spoilery</string>
   <string name="textSettingsSpoilersShows">Seriale</string>
   <string name="textSettingsSpoilersShowsSummary">Ustawienia spoilerów dla seriali.</string>

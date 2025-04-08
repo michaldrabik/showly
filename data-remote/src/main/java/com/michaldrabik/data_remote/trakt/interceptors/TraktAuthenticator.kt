@@ -36,6 +36,8 @@ class TraktAuthenticator @Inject constructor(
         tokenProvider.saveTokens(
           accessToken = newToken.access_token,
           refreshToken = newToken.refresh_token,
+          expiresIn = newToken.expires_in,
+          createdAt = newToken.created_at,
         )
         response.request
           .newBuilder()

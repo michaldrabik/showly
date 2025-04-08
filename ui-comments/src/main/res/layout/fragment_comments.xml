@@ -99,7 +99,7 @@
     android:layout_width="@dimen/backArrowSize"
     android:layout_height="@dimen/backArrowSize"
     android:background="?android:attr/selectableItemBackground"
-    android:padding="@dimen/backArrowPadding"
+    android:padding="@dimen/spaceNormal"
     app:layout_behavior="com.michaldrabik.ui_base.common.behaviour.ScrollableViewBehaviour"
     app:srcCompat="@drawable/ic_arrow_back"
     app:tint="?android:attr/textColorPrimary"

@@ -9,8 +9,6 @@ import androidx.core.os.LocaleListCompat
 import com.michaldrabik.common.Config
 import com.michaldrabik.common.extensions.nowUtc
 import com.michaldrabik.common.extensions.nowUtcMillis
-import com.michaldrabik.repository.RatingsRepository
-import com.michaldrabik.repository.UserTraktManager
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.showly2.BuildConfig
 import com.michaldrabik.ui_base.common.AppCountry
@@ -18,9 +16,6 @@ import com.michaldrabik.ui_base.utilities.extensions.withApiAtLeast
 import com.michaldrabik.ui_settings.helpers.AppLanguage
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import timber.log.Timber
 import java.util.Locale
 import javax.inject.Inject
@@ -29,8 +24,6 @@ import javax.inject.Named
 @ViewModelScoped
 class MainInitialsCase @Inject constructor(
   @ApplicationContext private val context: Context,
-  private val userTraktManager: UserTraktManager,
-  private val ratingsRepository: RatingsRepository,
   private val settingsRepository: SettingsRepository,
   @Named("miscPreferences") private var miscPreferences: SharedPreferences,
 ) {
@@ -117,21 +110,6 @@ class MainInitialsCase @Inject constructor(
 
     return AppLanguage.ENGLISH
   }
-
-  suspend fun preloadRatings() =
-    supervisorScope {
-      val errorHandler = CoroutineExceptionHandler { _, _ -> Timber.e("Failed to preload.") }
-
-      if (!userTraktManager.isAuthorized()) {
-        return@supervisorScope
-      }
-
-      userTraktManager.checkAuthorization()
-      launch(errorHandler) { ratingsRepository.shows.preloadRatings() }
-      if (settingsRepository.isMoviesEnabled) {
-        launch(errorHandler) { ratingsRepository.movies.preloadRatings() }
-      }
-    }
 
   fun showWhatsNew(isInitialRun: Boolean): Boolean {
     val keyAppVersion = "APP_VERSION"

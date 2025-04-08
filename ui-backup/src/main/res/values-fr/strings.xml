@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="textBackupAndRestore">Sauvegarder &amp; Restaurer</string>
+  <string name="textBackupExport">Exporter les données</string>
+  <string name="textBackupExportDescription">Exportez les données de vos séries et films dans un fichier pour créer une sauvegarde ou la transférer vers un nouvel appareil.</string>
+  <string name="textBackupImport">Importer des données</string>
+  <string name="textBackupImportDescription">Importez vos données de séries et de films à partir d\'un fichier de sauvegarde.\n\nVotre collection actuelle ne sera pas supprimée et seuls les éléments manquants seront ajoutés.</string>
+  <string name="textBackupExportSuccess">Données exportées avec succès.</string>
+  <string name="textBackupImportSuccess">Données importées avec succès.</string>
+  <string name="errorImportCancelled">L\'importation des données a été annulée.</string>
+</resources>

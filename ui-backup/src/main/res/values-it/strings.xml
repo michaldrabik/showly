@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="textBackupAndRestore">Backup &amp; Ripristino</string>
+  <string name="textBackupExport">Esporta dati</string>
+  <string name="textBackupExportDescription">Esporta le tue serie e i tuoi film in un file per creare un backup o trasferirlo su un nuovo dispositivo.</string>
+  <string name="textBackupImport">Importa dati</string>
+  <string name="textBackupImportDescription">Importa le tue serie e i tuoi filmati da un file di backup.\n\nLa tua collezione attuale non verrà rimossa e solo gli elementi mancanti verranno aggiunti.</string>
+  <string name="textBackupExportSuccess">Dati esportati con successo.</string>
+  <string name="textBackupImportSuccess">Dati importati con successo.</string>
+  <string name="errorImportCancelled">Importazione dati annullata.</string>
+</resources>

@@ -65,6 +65,11 @@
   <string name="textSettingsDateSelectionMessage">Valitse päiväyksen oletusvalinta.</string>
   <string name="textSettingsTabletColumnsTitle">Listausten sarakemäärä</string>
   <string name="textSettingsTabletColumnsSummary">Valitse listauksissa näytettävä sarakkeiden määrä.</string>
+  <string name="textSettingsBackup">Varmuuskopiointi ja palautus</string>
+  <string name="textSettingsBackupExportTitle">Vienti</string>
+  <string name="textSettingsBackupExportDescription">Vie tietosi tiedostoon varmuuskopioidaksesi tai siirtääksesi ne uuteen laitteeseen.</string>
+  <string name="textSettingsBackupImportTitle">Tuonti</string>
+  <string name="textSettingsBackupImportDescription">Palauta tietosi tälle laitteelle tuomalla aiemmin luotu varmuuskopio.</string>
   <string name="textSettingsSpoilers">Juonipaljastukset</string>
   <string name="textSettingsSpoilersShows">Sarjat</string>
   <string name="textSettingsSpoilersShowsSummary">Hallitse sarjojen jounipaljastusasetuksia.</string>

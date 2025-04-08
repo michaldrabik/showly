@@ -2,12 +2,15 @@
 <resources>
   <string name="tabCalendar">时间表</string>
   <string name="tabProgress">进度</string>
+  <string name="tabHistory">历史</string>
   <string name="textCalendarEmpty">目前暂无即将播出的剧集。</string>
   <string name="textRecentsEmpty">最近没有已播剧集。</string>
+  <string name="textHistoryEmpty">您的历史记录中没有任何内容。</string>
   <string name="textOnHold" comment="This is a header for Progress subsection. It will contain pending shows marked by user.">暂缓观看</string>
   <string name="textDiscoverShows">发现剧集</string>
   <string name="textEpisodeInfo">详情</string>
   <string name="textTraktSynchronize">从 Trakt.tv 导入数据</string>
   <string name="textProgressEmpty">您的 <b>进度</b> 目前为空。\n\n访问 <b>发现</b> 选项卡去添加剧集或从 Trakt.tv 导入数据。</string>
   <string name="textNewSeason">新季首播</string>
+  <string name="textPremieres">首映</string>
 </resources>

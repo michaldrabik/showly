@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="textBackupAndRestore">نسخة احتياطية واستعادة</string>
+  <string name="textBackupExport">تصدير البيانات</string>
+  <string name="textBackupExportDescription">قم بتصدير المسلسلات والأفلام الخاصة بك إلى ملف لإنشاء نسخة احتياطية أو نقلها إلى جهاز جديد.</string>
+  <string name="textBackupImport">استيراد البيانات</string>
+  <string name="textBackupImportDescription">استيراد المسلسلات والأفلام الخاصة بك من ملف النسخة الاحتياطية.\n\nلن يتم إزالة مجموعتك الحالية وسيتم إضافة العناصر المفقودة فقط.</string>
+  <string name="textBackupExportSuccess">تم تصدير البيانات بنجاح.</string>
+  <string name="textBackupImportSuccess">تم استيراد البيانات بنجاح.</string>
+  <string name="errorImportCancelled">تم إلغاء استيراد البيانات.</string>
+</resources>

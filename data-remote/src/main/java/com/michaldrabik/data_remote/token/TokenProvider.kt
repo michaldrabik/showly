@@ -15,6 +15,8 @@ interface TokenProvider {
   fun saveTokens(
     accessToken: String,
     refreshToken: String,
+    expiresIn: Long,
+    createdAt: Long,
   )
 
   /**

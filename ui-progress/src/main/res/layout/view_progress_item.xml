@@ -280,7 +280,7 @@
         app:icon="@drawable/ic_check"
         app:iconGravity="textStart"
         app:iconPadding="0dp"
-        app:iconSize="21dp"
+        app:iconSize="24dp"
         app:iconTint="?android:attr/textColorPrimary"
         app:rippleColor="?android:attr/textColorPrimary"
         app:strokeColor="?android:attr/textColorPrimary"

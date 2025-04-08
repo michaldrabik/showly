@@ -18,6 +18,7 @@ import com.michaldrabik.data_remote.trakt.model.SyncHistoryItem
 import com.michaldrabik.data_remote.trakt.model.SyncItem
 import com.michaldrabik.data_remote.trakt.model.User
 import com.michaldrabik.data_remote.trakt.model.request.CommentRequest
+import com.michaldrabik.data_remote.trakt.model.request.RatingRequest
 import retrofit2.Response
 
 /**
@@ -108,24 +109,30 @@ interface AuthorizedTraktRemoteDataSource {
 
   suspend fun deleteRating(season: Season)
 
+  suspend fun postRatings(request: RatingRequest)
+
   suspend fun postRating(
     movie: Movie,
     rating: Int,
+    ratedAt: String,
   )
 
   suspend fun postRating(
     show: Show,
     rating: Int,
+    ratedAt: String,
   )
 
   suspend fun postRating(
     episode: Episode,
     rating: Int,
+    ratedAt: String,
   )
 
   suspend fun postRating(
     season: Season,
     rating: Int,
+    ratedAt: String,
   )
 
   suspend fun fetchShowsRatings(): List<RatingResultShow>

@@ -18,6 +18,7 @@ import com.michaldrabik.data_remote.trakt.model.SyncItem
 import com.michaldrabik.data_remote.trakt.model.request.CommentRequest
 import com.michaldrabik.data_remote.trakt.model.request.CreateListRequest
 import com.michaldrabik.data_remote.trakt.model.request.RatingRequest
+import com.michaldrabik.data_remote.trakt.model.request.RatingRequestIds
 import com.michaldrabik.data_remote.trakt.model.request.RatingRequestValue
 import okhttp3.Headers
 
@@ -195,34 +196,42 @@ internal class AuthorizedTraktApi(
   }
 
   override suspend fun deleteRating(show: Show) {
-    val requestValue = RatingRequestValue(0, show.ids)
+    val requestIds = RatingRequestIds(show.ids?.trakt ?: -1)
+    val requestValue = RatingRequestValue(0, "", requestIds)
     val body = RatingRequest(shows = listOf(requestValue))
     syncService.postRemoveRating(body)
   }
 
   override suspend fun deleteRating(movie: Movie) {
-    val requestValue = RatingRequestValue(0, movie.ids)
+    val requestIds = RatingRequestIds(movie.ids?.trakt ?: -1)
+    val requestValue = RatingRequestValue(0, "", requestIds)
     val body = RatingRequest(movies = listOf(requestValue))
     syncService.postRemoveRating(body)
   }
 
   override suspend fun deleteRating(episode: Episode) {
-    val requestValue = RatingRequestValue(0, episode.ids)
+    val requestIds = RatingRequestIds(episode.ids?.trakt ?: -1)
+    val requestValue = RatingRequestValue(0, "", requestIds)
     val body = RatingRequest(episodes = listOf(requestValue))
     syncService.postRemoveRating(body)
   }
 
   override suspend fun deleteRating(season: Season) {
-    val requestValue = RatingRequestValue(0, season.ids)
+    val requestIds = RatingRequestIds(season.ids?.trakt ?: -1)
+    val requestValue = RatingRequestValue(0, "", requestIds)
     val body = RatingRequest(seasons = listOf(requestValue))
     syncService.postRemoveRating(body)
   }
 
+  override suspend fun postRatings(request: RatingRequest) = syncService.postRating(request)
+
   override suspend fun postRating(
     movie: Movie,
     rating: Int,
+    ratedAt: String,
   ) {
-    val requestValue = RatingRequestValue(rating, movie.ids)
+    val requestIds = RatingRequestIds(movie.ids?.trakt ?: -1)
+    val requestValue = RatingRequestValue(rating, ratedAt, requestIds)
     val body = RatingRequest(movies = listOf(requestValue))
     syncService.postRating(body)
   }
@@ -230,8 +239,10 @@ internal class AuthorizedTraktApi(
   override suspend fun postRating(
     show: Show,
     rating: Int,
+    ratedAt: String,
   ) {
-    val requestValue = RatingRequestValue(rating, show.ids)
+    val requestIds = RatingRequestIds(show.ids?.trakt ?: -1)
+    val requestValue = RatingRequestValue(rating, ratedAt, requestIds)
     val body = RatingRequest(shows = listOf(requestValue))
     syncService.postRating(body)
   }
@@ -239,8 +250,10 @@ internal class AuthorizedTraktApi(
   override suspend fun postRating(
     episode: Episode,
     rating: Int,
+    ratedAt: String,
   ) {
-    val requestValue = RatingRequestValue(rating, episode.ids)
+    val requestIds = RatingRequestIds(episode.ids?.trakt ?: -1)
+    val requestValue = RatingRequestValue(rating, ratedAt, requestIds)
     val body = RatingRequest(episodes = listOf(requestValue))
     syncService.postRating(body)
   }
@@ -248,8 +261,10 @@ internal class AuthorizedTraktApi(
   override suspend fun postRating(
     season: Season,
     rating: Int,
+    ratedAt: String,
   ) {
-    val requestValue = RatingRequestValue(rating, season.ids)
+    val requestIds = RatingRequestIds(season.ids?.trakt ?: -1)
+    val requestValue = RatingRequestValue(rating, ratedAt, requestIds)
     val body = RatingRequest(seasons = listOf(requestValue))
     syncService.postRating(body)
   }

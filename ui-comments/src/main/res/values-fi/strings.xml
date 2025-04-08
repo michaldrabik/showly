@@ -10,8 +10,7 @@
   <string name="textCommentDeleted">Kommenttisi poistettiin.</string>
   <string name="textCommentConfirmDeleteTitle">Poista kommentti</string>
   <string name="textCommentConfirmDelete">Haluatko varmasti poistaa kommentin?</string>
-  <string name="textSignBeforeRate">Kirjaudu sisään ennen sarjojen arviointia.</string>
-  <string name="textSignBeforeRateMovie">Kirjaudu sisään ennen elokuvien arviointia.</string>
+  <string name="textSignBefore">Kirjaudu ensin Trakt.tv-tilillesi. Voit tehdä tämän asetuksista.</string>
   <string name="errorCommentFormat">Kommenttisi on oltava englanninkielinen ja sisältää vähintään 5 sanaa.</string>
   <string name="errorCommentDelete">Kommentin poisto ei ole enää mahdollista.</string>
 </resources>

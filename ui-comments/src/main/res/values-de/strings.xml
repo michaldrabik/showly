@@ -10,8 +10,7 @@
   <string name="textCommentDeleted">Dein Kommentar wurde gelöscht.</string>
   <string name="textCommentConfirmDeleteTitle">Kommentar löschen</string>
   <string name="textCommentConfirmDelete">Möchtest du diesen Kommentar wirklich löschen?</string>
-  <string name="textSignBeforeRate">Bitte melde dich an, um eine Serie zu bewerten.</string>
-  <string name="textSignBeforeRateMovie">Bitte melde dich an bevor du einen Film bewerten kannst.</string>
+  <string name="textSignBefore">Bitte meld dich zuerst bei Ihrem Trakt.tv-Konto an. Du kannst dies über die Einstellungen tun.</string>
   <string name="errorCommentFormat">Dein Kommentar muss auf Englisch sein und mindestens 5 Wörter haben.</string>
   <string name="errorCommentDelete">Dieser Kommentar kann nicht mehr gelöscht werden.</string>
 </resources>

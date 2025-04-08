@@ -10,8 +10,7 @@
   <string name="textCommentDeleted">تم حذف تعليقك.</string>
   <string name="textCommentConfirmDeleteTitle">حذف التعليق</string>
   <string name="textCommentConfirmDelete">أمتأكد أنك تريد حذف هذا التعليق؟</string>
-  <string name="textSignBeforeRate">رجاءً قُم بتسجيل الدخول قبل تقييم المسلسل.</string>
-  <string name="textSignBeforeRateMovie">رجاءً قُم بتسجيل الدخول قبل تقييم الفيلم.</string>
+  <string name="textSignBefore">الرجاء تسجيل الدخول إلى حساب Trakt.tv الخاص بك أولاً. يمكنك القيام بذلك من خلال الإعدادات.</string>
   <string name="errorCommentFormat">يجب أن يكون التعليق بالإنجليزية، وأكثر من 5 كلمات.</string>
   <string name="errorCommentDelete">لا يُمكن حذف التعليق.</string>
 </resources>

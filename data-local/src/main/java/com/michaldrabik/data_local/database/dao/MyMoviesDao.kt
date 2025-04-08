@@ -32,7 +32,9 @@ interface MyMoviesDao : MyMoviesLocalDataSource {
   @Query("SELECT movies.id_trakt FROM movies INNER JOIN movies_my_movies USING(id_trakt)")
   override suspend fun getAllTraktIds(): List<Long>
 
-  @Query("SELECT movies.* FROM movies INNER JOIN movies_my_movies USING(id_trakt) WHERE id_trakt == :traktId")
+  @Query(
+    "SELECT movies.*, movies_my_movies.updated_at AS updated_at FROM movies INNER JOIN movies_my_movies USING(id_trakt) WHERE id_trakt == :traktId",
+  )
   override suspend fun getById(traktId: Long): Movie?
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)

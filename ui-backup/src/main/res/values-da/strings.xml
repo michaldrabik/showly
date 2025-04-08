@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="textBackupAndRestore">Backup &amp; Gendan</string>
+  <string name="textBackupExport">Eksporter data</string>
+  <string name="textBackupExportDescription">Eksporter dine serie- og filmdata til en fil for at lave en sikkerhedskopi eller overføre den til en ny enhed.</string>
+  <string name="textBackupImport">Importer data</string>
+  <string name="textBackupImportDescription">Importer dine serie- og filmdata fra en sikkerhedskopifil.\n\nDin nuværende samling vil ikke blive fjernet, og kun manglende elementer vil blive tilføjet.</string>
+  <string name="textBackupExportSuccess">Data blev eksporteret med succes.</string>
+  <string name="textBackupImportSuccess">Data blev importeret med succes.</string>
+  <string name="errorImportCancelled">Dataimporten er blevet annulleret.</string>
+</resources>

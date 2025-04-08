@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="textBackupAndRestore">Varmuuskopiointi ja palautus</string>
+  <string name="textBackupExport">Vie tietoja</string>
+  <string name="textBackupExportDescription">Vie sarjojesi ja elokuviesi tiedot tiedostoon varmuuskopioidaksesi tai siirtääksesi ne uuteen laitteeseen.</string>
+  <string name="textBackupImport">Tuo tietoja</string>
+  <string name="textBackupImportDescription">Palauta sarjojesi ja elokuviesi tiedot tuomalla aiemmin luotu varmuuskopio.\n\nNykyistä kokoelmaa ei tyhjennetä, vaan vain puuttuvat kohteet lisätään.</string>
+  <string name="textBackupExportSuccess">Tietojen vienti onnistui.</string>
+  <string name="textBackupImportSuccess">Tietojen tuonti onnistui.</string>
+  <string name="errorImportCancelled">Tietojen tuonti peruttiin.</string>
+</resources>

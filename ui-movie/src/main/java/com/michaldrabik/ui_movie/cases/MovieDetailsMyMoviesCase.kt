@@ -31,9 +31,9 @@ class MovieDetailsMyMoviesCase @Inject constructor(
       Pair(myMovies, watchlistMovies)
     }
 
-  suspend fun isMyMovie(movie: Movie) =
+  suspend fun getMyMovie(movie: Movie): Movie? =
     withContext(dispatchers.IO) {
-      moviesRepository.myMovies.load(movie.ids.trakt) != null
+      moviesRepository.myMovies.load(movie.ids.trakt)
     }
 
   suspend fun addToMyMovies(

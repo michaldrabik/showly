@@ -19,7 +19,6 @@ import com.michaldrabik.ui_base.events.TraktSyncSuccess
 import com.michaldrabik.ui_base.utilities.events.MessageEvent
 import com.michaldrabik.ui_model.Settings
 import com.michaldrabik.ui_model.TraktSyncSchedule
-import com.michaldrabik.ui_trakt_sync.cases.TraktSyncRatingsCase
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -48,7 +47,6 @@ class TraktSyncViewModelTest : BaseMockTest() {
   @MockK lateinit var userTraktManager: UserTraktManager
   @MockK lateinit var settingsRepository: SettingsRepository
   @MockK lateinit var eventsManager: EventsManager
-  @MockK lateinit var ratingsCase: TraktSyncRatingsCase
   @MockK lateinit var dateFormatProvider: DateFormatProvider
 
   private lateinit var SUT: TraktSyncViewModel
@@ -69,7 +67,6 @@ class TraktSyncViewModelTest : BaseMockTest() {
       miscPreferences,
       userTraktManager,
       workManager,
-      ratingsCase,
       settingsRepository,
       dateFormatProvider,
       eventsManager,

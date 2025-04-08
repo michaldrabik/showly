@@ -33,8 +33,10 @@ class RatingsBottomSheet : BaseBottomSheetFragment(R.layout.view_rate_sheet) {
     fun createBundle(
       id: IdTrakt,
       type: Options.Type,
+      seasonNumber: Int? = null,
+      episodeNumber: Int? = null,
     ): Bundle {
-      val options = Options(id, type)
+      val options = Options(id, type, seasonNumber, episodeNumber)
       return bundleOf(NavigationArgs.ARG_OPTIONS to options)
     }
 
@@ -73,7 +75,15 @@ class RatingsBottomSheet : BaseBottomSheetFragment(R.layout.view_rate_sheet) {
   private fun setupView() {
     renderRating(INITIAL_RATING)
     starsViews.forEach { star -> star.onClick { renderRating(it.tag.toString().toInt(), animate = true) } }
-    binding.viewRateSheetSaveButton.onClick { viewModel.saveRating(selectedRating, id, type) }
+    binding.viewRateSheetSaveButton.onClick {
+      viewModel.saveRating(
+        rating = selectedRating,
+        id = id,
+        type = type,
+        seasonNumber = options.seasonNumber,
+        episodeNumber = options.episodeNumber,
+      )
+    }
     binding.viewRateSheetRemoveButton.onClick { viewModel.removeRating(id, type) }
   }
 
@@ -141,6 +151,8 @@ class RatingsBottomSheet : BaseBottomSheetFragment(R.layout.view_rate_sheet) {
   data class Options(
     val id: IdTrakt,
     val type: Type,
+    val seasonNumber: Int?,
+    val episodeNumber: Int?,
   ) : Parcelable {
 
     enum class Type {

@@ -19,7 +19,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.michaldrabik.ui_base.BaseFragment
-import com.michaldrabik.ui_base.utilities.extensions.colorStateListFromAttr
 import com.michaldrabik.ui_base.utilities.extensions.dimenToPx
 import com.michaldrabik.ui_base.utilities.extensions.doOnApplyWindowInsets
 import com.michaldrabik.ui_base.utilities.extensions.gone
@@ -93,15 +92,11 @@ class ArtGalleryFragment : BaseFragment<ArtGalleryViewModel>(R.layout.fragment_a
     with(binding) {
       when (newConfig.orientation) {
         ORIENTATION_LANDSCAPE -> {
-          val color = requireContext().colorStateListFromAttr(R.attr.textColorOnSurface)
-          artGalleryBackArrow.imageTintList = color
           artGalleryPagerIndicatorWhite.visible()
           artGalleryPagerIndicator.gone()
           artGalleryPagerIndicatorWhite.setViewPager(artGalleryPager)
         }
         ORIENTATION_PORTRAIT -> {
-          val color = requireContext().colorStateListFromAttr(android.R.attr.textColorPrimary)
-          artGalleryBackArrow.imageTintList = color
           artGalleryPagerIndicatorWhite.gone()
           artGalleryPagerIndicator.visible()
           artGalleryPagerIndicator.setViewPager(artGalleryPager)

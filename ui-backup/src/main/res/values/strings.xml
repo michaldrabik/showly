@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="textBackupAndRestore">Backup &amp; Restore</string>
+
+  <string name="textBackupExport">Export data</string>
+  <string name="textBackupExportDescription">Export your shows and movies data into a file to create a backup or transfer it to a new device.</string>
+
+  <string name="textBackupImport">Import data</string>
+  <string name="textBackupImportDescription">Import your shows and movies data from a backup file.\n\nYour current collection will not be removed and only missing items will be added.</string>
+
+  <string name="textBackupExportSuccess">Data exported successfully.</string>
+  <string name="textBackupImportSuccess">Data imported successfully.</string>
+
+  <string name="errorImportCancelled">Data import has been cancelled.</string>
+</resources>

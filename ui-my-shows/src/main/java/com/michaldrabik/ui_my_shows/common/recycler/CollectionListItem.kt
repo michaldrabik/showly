@@ -50,6 +50,7 @@ sealed class CollectionListItem(
     val networks: List<Network>,
     val genres: List<Genre>,
     val upcoming: UpcomingFilter,
+    val count: Int,
   ) : CollectionListItem(
       show = Show.EMPTY,
       image = Image.createUnknown(ImageType.POSTER),

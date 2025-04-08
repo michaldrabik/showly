@@ -198,6 +198,7 @@ class TraktImportWatchedRunner @Inject constructor(
                     localSource.watchlistShows.deleteById(showId)
                   }
                 }
+
                 localSource.seasons.upsert(seasons)
                 localSource.episodes.upsert(episodes)
 

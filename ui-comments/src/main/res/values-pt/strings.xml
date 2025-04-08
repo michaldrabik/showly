@@ -10,8 +10,6 @@
   <string name="textCommentDeleted">Seu comentário foi excluído.</string>
   <string name="textCommentConfirmDeleteTitle">Excluir comentário</string>
   <string name="textCommentConfirmDelete">Você tem certeza de que deseja excluir este comentário?</string>
-  <string name="textSignBeforeRate">Por favor, inicie a sessão antes de avaliar uma série.</string>
-  <string name="textSignBeforeRateMovie">Por favor, inicie a sessão antes de avaliar um filme.</string>
   <string name="errorCommentFormat">O seu comentário deve ser em inglês e ter 5 palavras ou mais.</string>
   <string name="errorCommentDelete">Este comentário não pode ser mais excluído.</string>
 </resources>

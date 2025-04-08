@@ -1,40 +1,41 @@
 [versions]
 
-agp = "8.7.3"
-kotlin = "2.1.0"
-devtools = "2.1.0-1.0.29"
-core-ktx = "1.13.1" # Compile SDK 35 to update.
-appcompat = "1.7.0"
-gridlayout = "1.0.0"
-desugar_jdk_libs = "2.1.4"
-material = "1.12.0"
-dynamicanimation = "1.0.0"
-work-runtime-ktx = "2.9.1" # Compile SDK 35 to update.
-swiperefreshlayout = "1.1.0"
-constraintlayout = "2.2.0"
-recyclerview = "1.3.2"
-fragment-ktx = "1.8.5"
-androidNavigation = "2.8.5"
-androidRoom = "2.6.1"
+agp = "8.9.1"
 androidLifecycle = "2.8.7"
+androidNavigation = "2.8.9"
+androidRoom = "2.6.1"
 androidTestRunner = "1.6.2"
 androidTestTruth = "1.6.0"
+appcompat = "1.7.0"
+circleindicator = "2.1.6"
+constraintlayout = "2.2.1"
+core-ktx = "1.15.0"
+core-testing = "2.2.0"
+desugar_jdk_libs = "2.1.5"
+devtools = "2.1.20-1.0.32"
+dynamicanimation = "1.0.0"
+fragment-ktx = "1.8.6"
 glide = "4.16.0"
-retrofit = "2.11.0"
-hilt = "2.54"
-hiltWork = "1.2.0"
+gridlayout = "1.0.0"
+hilt = "2.56.1"
 hilt-compiler = "1.2.0"
+hiltWork = "1.2.0"
+junit = "5.12.1"
+kotlin = "2.1.20"
 kotlinx-coroutines = "1.10.1"
 kotlinx-coroutines-test = "1.10.1"
-process-phoenix = "3.0.0"
-timber = "5.0.1"
-circleindicator = "2.1.6"
 logging-interceptor = "4.12.0"
+material = "1.12.0"
+mockk = "1.13.17"
+moshi = "1.15.2"
 overscroll-decor = "1.1.1"
-junit = "5.11.4"
-mockk = "1.13.14"
+process-phoenix = "3.0.0"
+recyclerview = "1.4.0"
+retrofit = "2.11.0"
+swiperefreshlayout = "1.1.0"
+timber = "5.0.1"
 truth = "1.4.4"
-core-testing = "2.2.0"
+work-runtime-ktx = "2.10.0"
 
 [libraries]
 
@@ -69,7 +70,7 @@ glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", versi
 
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
-moshi = { group = "com.squareup.moshi", name = "moshi-kotlin", version = "1.15.2" }
+moshi = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
 
 hilt-plugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "hilt" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }

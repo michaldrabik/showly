@@ -29,12 +29,12 @@ class MovieDetailsRatingSpoilersCase @Inject constructor(
     withContext(dispatchers.IO) {
       val spoilers = settingsSpoilersRepository.getAll()
 
-      val isMy = async { myMoviesCase.isMyMovie(movie) }
+      val isMy = async { myMoviesCase.getMyMovie(movie) }
       val isWatchlist = async { watchlistCase.isWatchlist(movie) }
       val isHidden = async { hiddenCase.isHidden(movie) }
 
       val state = FollowedState(
-        isMyMovie = isMy.await(),
+        isMyMovie = isMy.await() != null,
         isWatchlist = isWatchlist.await(),
         isHidden = isHidden.await(),
         withAnimation = false,

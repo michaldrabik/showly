@@ -1,0 +1,54 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'dagger.hilt.android.plugin'
+apply from: '../versions.gradle'
+
+android {
+  kotlinOptions { jvmTarget = "17" }
+  compileOptions {
+    coreLibraryDesugaringEnabled true
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+  }
+
+  buildFeatures {
+    viewBinding true
+    buildConfig = true
+  }
+
+  compileSdkVersion versions.compileSdk
+
+  defaultConfig {
+    minSdkVersion versions.minSdk
+    targetSdkVersion versions.targetSdk
+    compileSdkVersion versions.compileSdk
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles "consumer-rules.pro"
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+    }
+  }
+
+  namespace 'com.michaldrabik.ui_backup'
+}
+
+dependencies {
+  implementation project(':common')
+  implementation project(':data-local')
+  implementation project(':data-remote')
+  implementation project(':repository')
+  implementation project(':ui-base')
+  implementation project(':ui-model')
+
+  implementation libs.moshi
+  implementation libs.hilt.android
+  ksp libs.hilt.compiler
+
+  api libs.phoenix
+
+  coreLibraryDesugaring libs.android.desugar
+}

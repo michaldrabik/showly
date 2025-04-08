@@ -1,1 +1,2 @@
-* Fix issue where Instant Sync would post an error notification after syncing.
+- Added the ability to see the date when a movie was watched in its details screen.
+- Updated language translations

@@ -64,7 +64,7 @@ class ProgressWidgetEpisodeCheckService :
     }
 
     runBlocking {
-      episodesManager.setEpisodeWatched(episodeId, seasonId, IdTrakt(showId))
+      episodesManager.setEpisodeWatched(episodeId, seasonId, IdTrakt(showId), null)
       quickSyncManager.scheduleEpisodes(
         showId = showId,
         episodesIds = listOf(episodeId),

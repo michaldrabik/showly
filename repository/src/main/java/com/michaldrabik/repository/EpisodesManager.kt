@@ -98,6 +98,7 @@ class EpisodesManager @Inject constructor(
     episodeId: Long,
     seasonId: Long,
     showId: IdTrakt,
+    customDate: ZonedDateTime?,
   ) {
     val episodeDb = episodesLocalSource.getAllForSeason(seasonId).find { it.idTrakt == episodeId }!!
     val seasonDb = seasonsLocalSource.getById(seasonId)!!
@@ -108,7 +109,7 @@ class EpisodesManager @Inject constructor(
         season = mappers.season.fromDatabase(seasonDb),
         show = show,
       ),
-      customDate = null,
+      customDate = customDate,
     )
   }
 

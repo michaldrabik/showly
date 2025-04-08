@@ -59,16 +59,18 @@ class ListsRepository @Inject constructor(
     listId: Long,
     itemTraktId: IdTrakt,
     itemType: String,
+    listedAt: Long = nowUtcMillis(),
+    createdAt: Long = nowUtcMillis(),
+    updatedAt: Long = nowUtcMillis(),
   ) {
-    val timestamp = nowUtcMillis()
     val itemDb = CustomListItem(
       rank = 0,
       idList = listId,
       idTrakt = itemTraktId.id,
       type = itemType,
-      listedAt = timestamp,
-      createdAt = timestamp,
-      updatedAt = timestamp,
+      listedAt = listedAt,
+      createdAt = createdAt,
+      updatedAt = updatedAt,
     )
     transactions.withTransaction {
       localSource.customListsItems.insertItem(itemDb)

@@ -9,7 +9,7 @@
   <string name="textRateAppYesButton">好，没问题。</string>
   <string name="textRateAppNoButton">稍后</string>
   <string name="textDisclaimerTitle">欢迎!</string>
-  <string name="textDisclaimerText">请注意您 <b>不能</b> 使用此应用观看或下载剧集和电影。\n\n使用 <b>Netflix</b> 等应用来观看。</string>
+  <string name="textDisclaimerText">请注意您<b>不能</b>使用此应用观看或下载剧集和电影。\n\n请使用 <b>Netflix</b> 等应用观看。</string>
   <string name="textDisclaimerConfirmText">好的，我已了解</string>
   <string name="textWhatsNewTitle">更新内容</string>
   <string name="textWhatsNewSubtitle">版本：%s</string>

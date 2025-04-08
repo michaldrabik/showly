@@ -5,8 +5,8 @@
   <string name="textSortNewest">Neuste</string>
   <string name="textSortRated">Top Bewertung</string>
   <string name="textSortRatedUser">Meine Bewertungen</string>
-  <string name="textSortDateAdded">Zuletzt Hinzugefügt</string>
-  <string name="textSortDateUpdated">Kürzlich Aktualisiert</string>
+  <string name="textSortDateAdded">Zuletzt hinzugefügt</string>
+  <string name="textSortDateUpdated">Kürzlich aktualisiert</string>
   <string name="textSortRecentlyWatched">Zuletzt Geguckt</string>
   <string name="textSortEpisodesLeft">Folgen Übrig</string>
   <string name="textSortRuntime">Laufzeit</string>
@@ -36,7 +36,7 @@
   <string name="textSettingsShowsNotificationsWhen12Hours">Nach 12 Stunden</string>
   <string name="textSettingsShowsNotificationsWhenNextDay">1 Tag danach</string>
   <string name="textTipDiscover">Tippe zweimal auf \'Entdecken\', um eine Schnellsuche zu starten.</string>
-  <string name="textTipMyShows">Tippe zweimal auf \'Sammlung\', um schnell zwischen den Registerkarten zu wechseln.</string>
+  <string name="textTipMyShows">Tippe zweimal auf \'Sammlung\', um schnell zwischen den Tabs zu wechseln.</string>
   <string name="textTipShowDetailsGallery">Bild antippen, um Galerie zu öffnen.</string>
   <string name="textTipWatchlistPinItem">Tippe &amp; Halte um oben anzupinnen.</string>
   <string name="textTipBottomModeMenu">Wische im Menü unten nach links oder rechts um den Modus zu wechseln.</string>
@@ -90,5 +90,5 @@
   <string name="textStreamingAds">Werbung</string>
   <string name="textStreamingBuy">Kaufen</string>
   <string name="textStreamingRent">Leihen</string>
-  <string name="textStreamingFree">Frei</string>
+  <string name="textStreamingFree">Kostenlos</string>
 </resources>

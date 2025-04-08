@@ -25,9 +25,10 @@ android {
       minifyEnabled false
     }
   }
-
   packagingOptions {
-    exclude 'META-INF/*.md'
+    resources {
+      excludes += ['META-INF/*.md']
+    }
   }
 
   namespace 'com.michaldrabik.test_base'

@@ -7,7 +7,6 @@ import com.michaldrabik.data_remote.RemoteDataSource
 import com.michaldrabik.repository.EpisodesManager
 import com.michaldrabik.repository.RatingsRepository
 import com.michaldrabik.repository.TranslationsRepository
-import com.michaldrabik.repository.UserTraktManager
 import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.repository.shows.ShowsRepository
@@ -37,7 +36,6 @@ class ShowDetailsLoadSeasonsCase @Inject constructor(
   private val ratingsRepository: RatingsRepository,
   private val translationsRepository: TranslationsRepository,
   private val episodesManager: EpisodesManager,
-  private val userManager: UserTraktManager,
   private val dateFormatProvider: DateFormatProvider,
   private val networkStatusProvider: NetworkStatusProvider,
 ) {
@@ -89,7 +87,6 @@ class ShowDetailsLoadSeasonsCase @Inject constructor(
     remoteSeasons: List<Season>,
     show: Show,
   ) = coroutineScope {
-    val isSignedIn = userManager.isAuthorized()
     val format = dateFormatProvider.loadFullHourFormat()
     val seasonsRatings = ratingsRepository.shows.loadRatingsSeasons(remoteSeasons)
     val spoilers = settingsRepository.spoilers.getAll()
@@ -97,7 +94,6 @@ class ShowDetailsLoadSeasonsCase @Inject constructor(
       .map {
         val userRating = RatingState(
           userRating = seasonsRatings.find { rating -> rating.idTrakt == it.ids.trakt },
-          rateAllowed = isSignedIn,
         )
         val episodes = it.episodes
           .map { episode ->
