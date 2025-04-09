@@ -49,7 +49,6 @@ import com.michaldrabik.ui_episodes.databinding.ViewEpisodeDetailsBinding
 import com.michaldrabik.ui_episodes.details.links.EpisodeLinksBottomSheet
 import com.michaldrabik.ui_model.Comment
 import com.michaldrabik.ui_model.Episode
-import com.michaldrabik.ui_model.IdTmdb
 import com.michaldrabik.ui_model.Ids
 import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_model.SpoilersSettings
@@ -77,14 +76,14 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
 
   companion object {
     fun createBundle(
-      ids: Ids,
+      showIds: Ids,
       episode: Episode,
       seasonEpisodesIds: List<Int>?,
       isWatched: Boolean,
       showTabs: Boolean,
     ): Bundle {
       val options = Options(
-        ids = ids,
+        showIds = showIds,
         episode = episode,
         seasonEpisodesIds = seasonEpisodesIds,
         isWatched = isWatched,
@@ -131,7 +130,7 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
 
   private fun setupView() {
     binding.run {
-      val (ids, episode, _, isWatched, showTabs) = options
+      val (showIds, episode, _, isWatched, showTabs) = options
       episodeDetailsTitle.text = when (episode.title) {
         "Episode ${episode.number}" -> String.format(
           ENGLISH,
@@ -151,55 +150,11 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
         episode.commentCount,
       )
       episodeDetailsCommentsButton.onClick {
-        viewModel.loadComments(ids.trakt, episode.season, episode.number)
+        viewModel.loadComments(showIds.trakt, episode.season, episode.number)
       }
       episodeDetailsPostCommentButton.onClick { openPostCommentSheet() }
-      episodeDetailsLink.onClick { openEpisodeImdbLink(ids.tmdb,episode) }
+      episodeDetailsLinksButton.onClick { openLinksSheet() }
     }
-  }
-
-  private fun openEpisodeImdbLink(idTmdb: IdTmdb, episode: Episode) {
-    val bundle = EpisodeLinksBottomSheet.createBundle(idTmdb, episode)
-    navigateTo(R.id.actionEpisodeDetailsDialogToLink, bundle)
-  }
-
-  private fun openRateDialog() {
-    setFragmentResultListener(NavigationArgs.REQUEST_RATING) { _, bundle ->
-      when (bundle.optionalParcelable<Operation>(NavigationArgs.RESULT)) {
-        Operation.SAVE -> renderSnackbar(MessageEvent.Info(R.string.textRateSaved))
-        Operation.REMOVE -> renderSnackbar(MessageEvent.Info(R.string.textRateRemoved))
-        else -> Timber.w("Unknown result.")
-      }
-      viewModel.loadRatings(options.episode)
-      setFragmentResult(REQUEST_EPISODE_DETAILS, bundleOf(NavigationArgs.ACTION_RATING_CHANGED to true))
-    }
-    val bundle = RatingsBottomSheet.createBundle(
-      id = options.episode.ids.trakt,
-      type = Type.EPISODE,
-      seasonNumber = options.episode.season,
-      episodeNumber = options.episode.number,
-    )
-    navigateTo(R.id.actionEpisodeDetailsDialogToRate, bundle)
-  }
-
-  private fun openPostCommentSheet(comment: Comment? = null) {
-    setFragmentResultListener(REQUEST_COMMENT) { _, bundle ->
-      renderSnackbar(MessageEvent.Info(R.string.textCommentPosted))
-      when (bundle.getString(ARG_COMMENT_ACTION)) {
-        ACTION_NEW_COMMENT -> {
-          val newComment = bundle.getParcelable<Comment>(ARG_COMMENT)!!
-          viewModel.addNewComment(newComment)
-        }
-      }
-    }
-    val bundle = when {
-      comment != null -> bundleOf(
-        ARG_COMMENT_ID to comment.getReplyId(),
-        ARG_REPLY_USER to comment.user.username,
-      )
-      else -> bundleOf(ARG_EPISODE_ID to options.episode.ids.trakt.id)
-    }
-    navigateTo(R.id.actionEpisodeDetailsDialogToPostComment, bundle)
   }
 
   @SuppressLint("SetTextI18n")
@@ -463,6 +418,53 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
       .show()
   }
 
+  private fun openRateDialog() {
+    setFragmentResultListener(NavigationArgs.REQUEST_RATING) { _, bundle ->
+      when (bundle.optionalParcelable<Operation>(NavigationArgs.RESULT)) {
+        Operation.SAVE -> renderSnackbar(MessageEvent.Info(R.string.textRateSaved))
+        Operation.REMOVE -> renderSnackbar(MessageEvent.Info(R.string.textRateRemoved))
+        else -> Timber.w("Unknown result.")
+      }
+      viewModel.loadRatings(options.episode)
+      setFragmentResult(REQUEST_EPISODE_DETAILS, bundleOf(NavigationArgs.ACTION_RATING_CHANGED to true))
+    }
+    val bundle = RatingsBottomSheet.createBundle(
+      id = options.episode.ids.trakt,
+      type = Type.EPISODE,
+      seasonNumber = options.episode.season,
+      episodeNumber = options.episode.number,
+    )
+    navigateTo(R.id.actionEpisodeDetailsDialogToRate, bundle)
+  }
+
+  private fun openPostCommentSheet(comment: Comment? = null) {
+    setFragmentResultListener(REQUEST_COMMENT) { _, bundle ->
+      renderSnackbar(MessageEvent.Info(R.string.textCommentPosted))
+      when (bundle.getString(ARG_COMMENT_ACTION)) {
+        ACTION_NEW_COMMENT -> {
+          val newComment = bundle.getParcelable<Comment>(ARG_COMMENT)!!
+          viewModel.addNewComment(newComment)
+        }
+      }
+    }
+    val bundle = when {
+      comment != null -> bundleOf(
+        ARG_COMMENT_ID to comment.getReplyId(),
+        ARG_REPLY_USER to comment.user.username,
+      )
+      else -> bundleOf(ARG_EPISODE_ID to options.episode.ids.trakt.id)
+    }
+    navigateTo(R.id.actionEpisodeDetailsDialogToPostComment, bundle)
+  }
+
+  private fun openLinksSheet() {
+    val bundle = EpisodeLinksBottomSheet.createBundle(
+      showIds = options.showIds,
+      episode = options.episode,
+    )
+    navigateTo(R.id.actionEpisodeDetailsDialogToLink, bundle)
+  }
+
   private val tabSelectedListener = object : TabLayout.OnTabSelectedListener {
     override fun onTabSelected(tab: TabLayout.Tab?) {
       binding.episodeDetailsTabs.removeOnTabSelectedListener(this)
@@ -477,7 +479,7 @@ class EpisodeDetailsBottomSheet : BaseBottomSheetFragment(R.layout.view_episode_
 
   @Parcelize
   private data class Options(
-    val ids: Ids,
+    val showIds: Ids,
     val episode: Episode,
     val seasonEpisodesIds: List<Int>?,
     val isWatched: Boolean,

@@ -99,7 +99,7 @@ class ShowDetailsNextEpisodeFragment :
   private fun openDetails(episodeBundle: NextEpisodeBundle) {
     val (show, episode) = episodeBundle.nextEpisode
     val bundle = EpisodeDetailsBottomSheet.createBundle(
-      ids = show.ids,
+      showIds = show.ids,
       episode = episode,
       seasonEpisodesIds = null,
       isWatched = episodeBundle.isWatched,

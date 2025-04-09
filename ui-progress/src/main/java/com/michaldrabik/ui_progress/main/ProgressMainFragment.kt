@@ -388,7 +388,7 @@ class ProgressMainFragment :
     when (event) {
       is OpenEpisodeDetails -> {
         val bundle = EpisodeDetailsBottomSheet.createBundle(
-          ids = event.show.ids,
+          showIds = event.show.ids,
           episode = event.episode,
           seasonEpisodesIds = null,
           isWatched = event.isWatched,

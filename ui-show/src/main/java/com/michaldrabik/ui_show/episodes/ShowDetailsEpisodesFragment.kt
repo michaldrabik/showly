@@ -250,7 +250,7 @@ class ShowDetailsEpisodesFragment :
     }
 
     val bundle = EpisodeDetailsBottomSheet.createBundle(
-      ids = show.ids,
+      showIds = show.ids,
       episode = episode,
       seasonEpisodesIds = season.episodes.map { it.number },
       isWatched = isWatched,

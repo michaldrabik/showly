@@ -282,19 +282,14 @@
 
         </FrameLayout>
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
-
-          <com.google.android.material.chip.Chip
-              android:id="@+id/episodeDetailsLink"
-              style="@style/ShowlyChip.Button"
-              android:text="@string/textLink"
-              app:chipIcon="@drawable/ic_link"
-              />
-
-        </FrameLayout>
+        <com.google.android.material.chip.Chip
+          android:id="@+id/episodeDetailsLinksButton"
+          style="@style/ShowlyChip.Button"
+          android:layout_marginStart="@dimen/spaceSmall"
+          android:text="@string/textLink"
+          app:chipBackgroundColor="?colorSheetBackground"
+          app:chipIcon="@drawable/ic_link"
+          />
 
       </LinearLayout>
 
