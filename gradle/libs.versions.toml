@@ -5,7 +5,7 @@ androidLifecycle = "2.8.7"
 androidNavigation = "2.8.9"
 # Reverted as 2.7.0 started returning different results for queries. Investigating.
 # https://issuetracker.google.com/issues/410288395
-androidRoom = "2.6.1"
+androidRoom = "2.7.1"
 androidTestRunner = "1.6.2"
 androidTestTruth = "1.6.0"
 appcompat = "1.7.0"
