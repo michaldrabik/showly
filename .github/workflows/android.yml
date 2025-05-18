@@ -2,6 +2,8 @@ name: Master Flow
 
 on:
   push:
+    branches:
+      - master
 
 jobs:
   verify-lint:
