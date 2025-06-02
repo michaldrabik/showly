@@ -1,6 +1,6 @@
 [versions]
 
-agp = "8.10.0"
+agp = "8.10.1"
 androidLifecycle = "2.9.0"
 androidNavigation = "2.9.0"
 androidRoom = "2.7.1"
@@ -20,7 +20,7 @@ gridlayout = "1.1.0"
 hilt = "2.56.2"
 hilt-compiler = "1.2.0"
 hiltWork = "1.2.0"
-junit = "5.12.2"
+junit = "5.13.0"
 kotlin = "2.1.21"
 kotlinx-coroutines = "1.10.2"
 kotlinx-coroutines-test = "1.10.2"
