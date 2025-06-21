@@ -40,6 +40,7 @@ import com.michaldrabik.ui_model.SortOrder
 import com.michaldrabik.ui_model.SortOrder.EPISODES_LEFT
 import com.michaldrabik.ui_model.SortOrder.NAME
 import com.michaldrabik.ui_model.SortOrder.NEWEST
+import com.michaldrabik.ui_model.SortOrder.RANDOM
 import com.michaldrabik.ui_model.SortOrder.RATING
 import com.michaldrabik.ui_model.SortOrder.RECENTLY_WATCHED
 import com.michaldrabik.ui_model.SortOrder.USER_RATING
@@ -288,7 +289,7 @@ class ProgressFragment :
     type: SortType,
     newAtTop: Boolean,
   ) {
-    val options = listOf(NAME, RATING, USER_RATING, NEWEST, RECENTLY_WATCHED, EPISODES_LEFT)
+    val options = listOf(NAME, RATING, USER_RATING, NEWEST, RECENTLY_WATCHED, EPISODES_LEFT, RANDOM)
     val args = SortOrderBottomSheet.createBundle(options, order, type, newAtTop = Pair(true, newAtTop))
 
     requireParentFragment().setFragmentResultListener(REQUEST_SORT_ORDER) { _, bundle ->

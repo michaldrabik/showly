@@ -31,6 +31,7 @@ import com.michaldrabik.ui_model.SortOrder
 import com.michaldrabik.ui_model.SortOrder.DATE_ADDED
 import com.michaldrabik.ui_model.SortOrder.NAME
 import com.michaldrabik.ui_model.SortOrder.NEWEST
+import com.michaldrabik.ui_model.SortOrder.RANDOM
 import com.michaldrabik.ui_model.SortOrder.RATING
 import com.michaldrabik.ui_model.SortOrder.RECENTLY_WATCHED
 import com.michaldrabik.ui_model.SortOrder.USER_RATING
@@ -181,7 +182,7 @@ class MyShowsFragment :
     order: SortOrder,
     type: SortType,
   ) {
-    val options = listOf(NAME, RATING, USER_RATING, NEWEST, DATE_ADDED, RECENTLY_WATCHED)
+    val options = listOf(NAME, RATING, USER_RATING, NEWEST, DATE_ADDED, RECENTLY_WATCHED, RANDOM)
     val key = NavigationArgs.requestSortOrderSection(section.name)
     val args = SortOrderBottomSheet.createBundle(options, order, type, key)
 

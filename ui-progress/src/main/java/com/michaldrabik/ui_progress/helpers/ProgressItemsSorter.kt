@@ -5,6 +5,7 @@ import com.michaldrabik.ui_model.SortOrder
 import com.michaldrabik.ui_model.SortOrder.EPISODES_LEFT
 import com.michaldrabik.ui_model.SortOrder.NAME
 import com.michaldrabik.ui_model.SortOrder.NEWEST
+import com.michaldrabik.ui_model.SortOrder.RANDOM
 import com.michaldrabik.ui_model.SortOrder.RATING
 import com.michaldrabik.ui_model.SortOrder.RECENTLY_WATCHED
 import com.michaldrabik.ui_model.SortOrder.USER_RATING
@@ -15,6 +16,7 @@ import com.michaldrabik.ui_progress.progress.recycler.ProgressListItem
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.random.Random
 
 @Singleton
 class ProgressItemsSorter @Inject constructor() {
@@ -37,6 +39,7 @@ class ProgressItemsSorter @Inject constructor() {
           .thenBy { it.userRating }
           .thenBy { getTitle(it) }
       EPISODES_LEFT -> compareBy<ProgressListItem.Episode> { it.totalCount - it.watchedCount }.thenBy { getTitle(it) }
+      RANDOM -> compareBy { Random.nextInt() }
       else -> throw IllegalStateException("Invalid sort order")
     }
 
@@ -53,6 +56,7 @@ class ProgressItemsSorter @Inject constructor() {
       EPISODES_LEFT -> compareByDescending<ProgressListItem.Episode> {
         it.totalCount - it.watchedCount
       }.thenBy { getTitle(it) }
+      RANDOM -> compareBy { Random.nextInt() }
       else -> throw IllegalStateException("Invalid sort order")
     }
 
