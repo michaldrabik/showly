@@ -71,7 +71,7 @@ class BackupExportScheduleWorker @AssistedInject constructor(
 
       val request = PeriodicWorkRequestBuilder<BackupExportScheduleWorker>(schedule.duration, schedule.durationUnit)
         .setInputData(data)
-//        .setInitialDelay(schedule.duration, schedule.durationUnit) // TODO Backup: Add back when ready to make a pull request
+        .setInitialDelay(schedule.duration, schedule.durationUnit)
         .addTag(TAG)
         .build()
 
