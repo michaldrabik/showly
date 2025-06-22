@@ -120,7 +120,7 @@
       android:text="@string/textBackupExport"
       android:textColor="?attr/textColorOnSurface"
       app:backgroundTint="?attr/colorAccent"
-      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintBottom_toTopOf="@id/exportScheduleButton"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/descriptionText"
@@ -128,13 +128,47 @@
       app:strokeColor="?android:attr/textColorPrimary"
       />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/exportScheduleButton"
+        style="@style/RoundTextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="200dp"
+        android:text="@string/textTraktSyncSchedule"
+        android:textColor="?android:attr/textColorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/exportButton"
+        app:layout_constraintBottom_toBottomOf="@id/lastExportTimestamp"
+        app:rippleColor="?android:attr/textColorPrimary"
+        app:strokeColor="?android:attr/textColorPrimary"
+        />
+
+    <TextView
+        android:id="@+id/lastExportTimestamp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spaceBig"
+        android:layout_marginTop="@dimen/spaceNormal"
+        android:layout_marginEnd="@dimen/spaceBig"
+        android:layout_marginBottom="@dimen/spaceNormal"
+        android:gravity="center"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/exportScheduleButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="Last Backup: 23 Feb 2020 17:23"
+        />
+
     <ProgressBar
       android:id="@+id/progressBar"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:foregroundTint="?attr/colorAccent"
       android:visibility="gone"
-      app:layout_constraintBottom_toBottomOf="@id/exportButton"
+      app:layout_constraintBottom_toBottomOf="@id/exportScheduleButton"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="@id/exportButton"
