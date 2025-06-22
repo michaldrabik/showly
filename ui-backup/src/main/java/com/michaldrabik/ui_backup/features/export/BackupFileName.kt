@@ -6,10 +6,15 @@ import java.time.format.DateTimeFormatter
 
 object BackupFileName {
 
+  val prefix = "showly_export_"
+  val fileType = ".json"
+  val dateTimePattern = "yyyyMMddHHmmss"
+  val memeType = "application/json"
+
   fun create(): String {
-    val dateFormat = DateTimeFormatter.ofPattern("yyyyMMddHHmmss")
+    val dateFormat = DateTimeFormatter.ofPattern(dateTimePattern)
     val currentDate = nowUtc().toLocalZone()
-    return "showly_export_${dateFormat.format(currentDate)}.json"
+    return prefix + dateFormat.format(currentDate) + fileType
   }
 
 }

@@ -24,17 +24,14 @@ import javax.inject.Named
 import androidx.core.content.edit
 import androidx.core.net.toUri
 import androidx.work.Data
-import com.michaldrabik.common.extensions.nowUtc
-import com.michaldrabik.common.extensions.toLocalZone
 import com.michaldrabik.ui_backup.features.export.BackupFileName
-import java.time.format.DateTimeFormatter
 
 /**
  * Worker that creates a backup JSON file automatically on behalf of the user.
  */
 @HiltWorker
 class BackupExportScheduleWorker @AssistedInject constructor(
-  @Assisted private val appContext: Context,
+  @Assisted appContext: Context,
   @Assisted workerParams: WorkerParameters,
   private val createBackupJsonUseCase: CreateBackupJsonUseCase,
   private val writeBackupJsonToFileUseCase: WriteBackupJsonToFileUseCase,
@@ -49,6 +46,7 @@ class BackupExportScheduleWorker @AssistedInject constructor(
     const val KEY_BACKUP_EXPORT_DIRECTORY_URI = "KEY_BACKUP_EXPORT_DIRECTORY_URI"
     const val KEY_LAST_LAST_BACKUP_EXPORT_TIMESTAMP = "KEY_LAST_LAST_BACKUP_EXPORT_TIMESTAMP"
     private const val ARG_DIRECTORY_URI = "ARG_DIRECTORY_URI"
+    private const val MAX_BACKUPS = 5
 
     /**
      * Schedules a periodic backup export.
@@ -92,86 +90,129 @@ class BackupExportScheduleWorker @AssistedInject constructor(
 
   /**
    * Executes the backup export process.
+   * This involves two main steps:
+   * 1. Exporting a new backup. If this fails, the worker returns [Result.failure].
+   * 2. Cleaning up old backups. If this step fails, the error is logged, but the worker still returns [Result.success]
+   *    as creating a new backup is considered more critical than cleaning up old ones.
    *
-   * This involves generating a filename, creating a file, writing backup JSON,
-   * verifying the JSON, and updating the last backup timestamp on success.
-   *
-   * @return [Result.success] if the backup export was successful, [Result.failure] otherwise.
+   * @return [Result.success] if the new backup was successfully exported, otherwise [Result.failure].
    */
   override suspend fun doWork(): Result {
     Timber.i("Exporting automatic backup")
 
-    val onFailure = { error: Throwable ->
-      Timber.w("Exporting automatic backup failed")
-      error.log()
-      Result.failure()
-    }
-
-    val fileName = BackupFileName.create()
-
-    return try {
-      val directoryUriString = inputData.getString(ARG_DIRECTORY_URI)
-      if (directoryUriString == null) {
-        Timber.e("Directory URI is null")
-        return Result.failure()
-      }
-      val fileUri = createFile(appContext, directoryUriString.toUri(), fileName, "application/json")
-      if (fileUri == null) {
-        Timber.e("File URI is null")
-        return Result.failure()
-      }
-
-      val json = createBackupJsonUseCase()
-      writeBackupJsonToFileUseCase(appContext, fileUri, json).fold(
-        onFailure = onFailure,
-        onSuccess = {
-          readBackupJsonFromFileUseCase(appContext, fileUri).fold(
-            onFailure = onFailure,
-            onSuccess = { json ->
-              // Validate that the JSON was saved correctly
-              createBackupSchemeFromJsonUseCase(json).fold(
-                onFailure = onFailure,
-                onSuccess = {
-                  miscPreferences.edit { putLong(KEY_LAST_LAST_BACKUP_EXPORT_TIMESTAMP, nowUtcMillis()) }
-                  Timber.i("Exporting automatic backup successful")
-                  Result.success()
-                }
-              )
-            }
-          )
-        },
-      )
+    // Export the backup first
+    try {
+      exportNewBackup()
+      Timber.i("Exporting automatic backup successful")
     } catch (exception: Exception) {
-      onFailure.invoke(exception)
+      Timber.w(exception, "Exporting automatic backup failed")
+      exception.log()
+      return Result.failure()
     }
+
+    // Clean up old backups second
+    try {
+      cleanupOldBackups()
+      Timber.i("Cleaning up old backups successful")
+    } catch (exception: Exception) {
+      Timber.w("Cleaning up of old backups failed")
+      exception.log()
+    }
+
+    // Returning success and not checking whether cleanup of old backups failed or not as creating a backup is more important then cleaning up old backups.
+    return Result.success()
   }
 
   /**
-   * Creates a new file in the specified directory.
+   * Exports a new backup.
    *
-   * @param context The application context.
-   * @param directoryUri The URI of the directory where the file should be created.
-   * @param fileName The name of the file to be created.
-   * @param mimeType The MIME type of the file.
-   * @return The URI of the newly created file, or null if creation failed.
+   * Creates a backup JSON file in the specified directory, writes data to it,
+   * verifies the written data, and updates the last export timestamp.
+   *
+   * @throws IllegalArgumentException if the directory or file URI is null.
+   * @throws Exception if any other error occurs during backup.
    */
-  private fun createFile(context: Context, directoryUri: Uri, fileName: String, mimeType: String): Uri? {
-    // Get the document ID from the tree URI
+  private suspend fun exportNewBackup() {
+    val directoryUri = inputData.getString(ARG_DIRECTORY_URI)?.toUri()
+      ?: throw IllegalArgumentException("Directory URI is null")
+
     val treeDocumentId = DocumentsContract.getTreeDocumentId(directoryUri)
+    val childDocumentsUri = DocumentsContract.buildChildDocumentsUriUsingTree(directoryUri, treeDocumentId)
+    val fileUri = DocumentsContract.createDocument(
+      applicationContext.contentResolver,
+      childDocumentsUri,
+      BackupFileName.memeType,
+      BackupFileName.create()
+    ) ?: throw IllegalArgumentException("File URI is null")
 
-    // Build a URI representing the directory's contents
-    val childDocumentsUri = DocumentsContract.buildChildDocumentsUriUsingTree(
-      directoryUri,
-      treeDocumentId
-    )
+    val backupJson = createBackupJsonUseCase()
 
-    // Create the new file
-    return DocumentsContract.createDocument(
-      context.contentResolver,
-      childDocumentsUri, // Note: some older examples use directoryUri here, but childDocumentsUri is more correct
-      mimeType,
-      fileName
+    writeBackupJsonToFileUseCase(applicationContext, fileUri, backupJson).fold(
+      onFailure = { throw it },
+      onSuccess = {
+        readBackupJsonFromFileUseCase(applicationContext, fileUri).fold(
+          onFailure = { throw it },
+          onSuccess = { json ->
+            // Validate that the JSON was saved correctly
+            createBackupSchemeFromJsonUseCase(json).fold(
+              onFailure = { throw it },
+              onSuccess = {
+                miscPreferences.edit { putLong(KEY_LAST_LAST_BACKUP_EXPORT_TIMESTAMP, nowUtcMillis()) }
+              }
+            )
+          }
+        )
+      },
     )
+  }
+
+  /**
+   * Deletes old backup files, keeping only the [MAX_BACKUPS] newest.
+   * Backups are identified by prefix/type and sorted by timestamp in their name.
+   * Deletion errors are logged but don't halt the process.
+   *
+   * @throws IllegalArgumentException if directory URI is null.
+   */
+  private fun cleanupOldBackups() {
+    val contentResolver = applicationContext.contentResolver
+
+    val directoryUri = inputData.getString(ARG_DIRECTORY_URI)?.toUri()
+      ?: throw IllegalArgumentException("Directory URI is null")
+
+    val treeDocumentId = DocumentsContract.getTreeDocumentId(directoryUri)
+    val childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(directoryUri, treeDocumentId)
+    val projection = arrayOf(
+      DocumentsContract.Document.COLUMN_DOCUMENT_ID, // Unique document ID
+      DocumentsContract.Document.COLUMN_DISPLAY_NAME // User viewable name
+    )
+    val cursor = contentResolver.query(childrenUri, projection, null, null, null)
+
+    val backupFiles = mutableListOf<Pair<Uri, String>>()
+    cursor?.use {
+      while (it.moveToNext()) {
+        val documentId = it.getString(it.getColumnIndexOrThrow(DocumentsContract.Document.COLUMN_DOCUMENT_ID))
+        val documentName = it.getString(it.getColumnIndexOrThrow(DocumentsContract.Document.COLUMN_DISPLAY_NAME))
+        if (documentName.startsWith(BackupFileName.prefix) && documentName.endsWith(BackupFileName.fileType)) {
+          val documentUri = DocumentsContract.buildDocumentUriUsingTree(directoryUri, documentId)
+          backupFiles.add(Pair(documentUri, documentName))
+        }
+      }
+    }
+
+    if (backupFiles.size > MAX_BACKUPS) {
+      backupFiles.sortBy { it.second } // Sort by name, which is effectively by date
+      val filesToDelete = backupFiles.take(backupFiles.size - 5)
+      filesToDelete.forEach { (uri, name) ->
+        try {
+          if (!DocumentsContract.deleteDocument(contentResolver, uri)) {
+            Timber.w("Failed to delete old backup: $name")
+          }
+        } catch (exception: Exception) {
+          Timber.e(exception, "Error deleting old backup: $name")
+          exception.log()
+        }
+      }
+    }
   }
 
   /**
