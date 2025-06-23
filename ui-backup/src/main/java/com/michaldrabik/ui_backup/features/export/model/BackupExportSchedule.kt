@@ -26,13 +26,6 @@ enum class BackupExportSchedule(
     R.string.textBackupExportOptionOffMessage,
     R.string.textBackupExportSchedule,
   ),
-  EVERY_15_MINUTES( // TODO Backup: Remove when ready to make a pull request
-    15,
-    MINUTES,
-    R.string.textBackupExportOption1Hour,
-    R.string.textBackupExportOptionConfirmMessage,
-    R.string.textBackupExportOptionHourButton,
-  ),
   EVERY_HOUR(
     1,
     HOURS,
