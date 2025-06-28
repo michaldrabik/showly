@@ -10,6 +10,7 @@
   <string name="textSortRecentlyWatched">Senest Set</string>
   <string name="textSortEpisodesLeft">Afsnit Tilbage</string>
   <string name="textSortRuntime">Spilletid</string>
+  <string name="textSortRandom">Tilfældig</string>
   <string name="textPeriodThisWeek">Denne uge</string>
   <string name="textPeriodLastWeek">Sidste uge</string>
   <string name="textPeriodThisMonth">Denne måned</string>

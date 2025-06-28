@@ -10,6 +10,7 @@
   <string name="textSortRecentlyWatched">Недавно просмотренные</string>
   <string name="textSortEpisodesLeft">Оставшиеся эпизоды</string>
   <string name="textSortRuntime">Продолжительность</string>
+  <string name="textSortRandom">Случайный</string>
   <string name="textPeriodThisWeek">Эта неделя</string>
   <string name="textPeriodLastWeek">Прошлая неделя</string>
   <string name="textPeriodThisMonth">Этот месяц</string>
