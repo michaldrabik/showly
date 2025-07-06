@@ -1,1 +1,2 @@
+* Added option to sort lists randomly
 * Updated dependencies
