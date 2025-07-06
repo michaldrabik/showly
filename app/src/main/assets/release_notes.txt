@@ -1,3 +1,1 @@
-* Fixed a bug where credits collection filter was not working correctly
-* Possible fix for duplicated notifications affecting some of the users
-* Updated language translations
+* Updated dependencies
