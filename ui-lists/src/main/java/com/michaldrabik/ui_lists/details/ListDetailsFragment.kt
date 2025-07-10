@@ -56,6 +56,7 @@ import com.michaldrabik.ui_model.SortOrder
 import com.michaldrabik.ui_model.SortOrder.DATE_ADDED
 import com.michaldrabik.ui_model.SortOrder.NAME
 import com.michaldrabik.ui_model.SortOrder.NEWEST
+import com.michaldrabik.ui_model.SortOrder.RANDOM
 import com.michaldrabik.ui_model.SortOrder.RANK
 import com.michaldrabik.ui_model.SortOrder.RATING
 import com.michaldrabik.ui_model.SortOrder.USER_RATING
@@ -236,7 +237,7 @@ class ListDetailsFragment :
     order: SortOrder,
     type: SortType,
   ) {
-    val options = listOf(RANK, NAME, RATING, USER_RATING, NEWEST, DATE_ADDED)
+    val options = listOf(RANK, NAME, RATING, USER_RATING, NEWEST, DATE_ADDED, RANDOM)
     val args = SortOrderBottomSheet.createBundle(options, order, type)
 
     setFragmentResultListener(REQUEST_SORT_ORDER) { _, bundle ->

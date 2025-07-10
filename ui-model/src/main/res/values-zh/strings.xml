@@ -10,6 +10,7 @@
   <string name="textSortRecentlyWatched">最近观看</string>
   <string name="textSortEpisodesLeft">剩余未看集数</string>
   <string name="textSortRuntime">时长</string>
+  <string name="textSortRandom">随机</string>
   <string name="textPeriodThisWeek">本周</string>
   <string name="textPeriodLastWeek">上周</string>
   <string name="textPeriodThisMonth">本月</string>

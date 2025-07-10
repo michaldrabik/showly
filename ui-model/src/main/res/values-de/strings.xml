@@ -10,6 +10,7 @@
   <string name="textSortRecentlyWatched">Zuletzt Geguckt</string>
   <string name="textSortEpisodesLeft">Folgen Übrig</string>
   <string name="textSortRuntime">Laufzeit</string>
+  <string name="textSortRandom">Zufällig</string>
   <string name="textPeriodThisWeek">Diese Woche</string>
   <string name="textPeriodLastWeek">Letze Woche</string>
   <string name="textPeriodThisMonth">Diesen Monat</string>

@@ -10,6 +10,7 @@
   <string name="textSortRecentlyWatched">شوهد مؤخرًا</string>
   <string name="textSortEpisodesLeft">عدد الحلقات المتبقية</string>
   <string name="textSortRuntime">مدة العرض</string>
+  <string name="textSortRandom">عشوائي</string>
   <string name="textPeriodThisWeek">هذا الأسبوع</string>
   <string name="textPeriodLastWeek">الأسبوع الماضي</string>
   <string name="textPeriodThisMonth">هذا الشهر</string>

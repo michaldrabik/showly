@@ -9,6 +9,7 @@
   <string name="textSortDateUpdated">Atualizadas recentemente</string>
   <string name="textSortRecentlyWatched">Assistidos recentemente</string>
   <string name="textSortEpisodesLeft">Episódios restantes</string>
+  <string name="textSortRandom">Aleatório</string>
   <string name="textHeaderRecentlyAdded">Adicionado recentemente</string>
   <string name="textHeaderWatching">Assistindo</string>
   <string name="textHeaderFinished">Finalizado</string>

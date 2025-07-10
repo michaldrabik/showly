@@ -14,9 +14,10 @@ enum class SortOrder(
   DATE_UPDATED("updated", R.string.textSortDateUpdated),
   RECENTLY_WATCHED("recently_watched", R.string.textSortRecentlyWatched),
   EPISODES_LEFT("episodes_left", R.string.textSortEpisodesLeft),
+  RANDOM("random", R.string.textSortRandom),
   ;
 
   companion object {
-    fun fromSlug(slug: String) = values().firstOrNull { it.slug == slug }
+    fun fromSlug(slug: String) = entries.firstOrNull { it.slug == slug }
   }
 }

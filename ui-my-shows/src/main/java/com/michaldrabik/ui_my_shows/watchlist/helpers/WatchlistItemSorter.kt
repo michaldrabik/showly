@@ -4,6 +4,7 @@ import com.michaldrabik.ui_model.SortOrder
 import com.michaldrabik.ui_model.SortOrder.DATE_ADDED
 import com.michaldrabik.ui_model.SortOrder.NAME
 import com.michaldrabik.ui_model.SortOrder.NEWEST
+import com.michaldrabik.ui_model.SortOrder.RANDOM
 import com.michaldrabik.ui_model.SortOrder.RATING
 import com.michaldrabik.ui_model.SortOrder.USER_RATING
 import com.michaldrabik.ui_model.SortType
@@ -12,6 +13,7 @@ import com.michaldrabik.ui_model.SortType.DESCENDING
 import com.michaldrabik.ui_my_shows.common.recycler.CollectionListItem
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.random.Random
 
 @Singleton
 class WatchlistItemSorter @Inject constructor() {
@@ -34,6 +36,7 @@ class WatchlistItemSorter @Inject constructor() {
           .thenBy { getTitle(it) }
       DATE_ADDED -> compareBy { it.show.createdAt }
       NEWEST -> compareBy<CollectionListItem.ShowItem> { it.show.firstAired }.thenBy { it.show.year }
+      RANDOM -> compareBy { Random.nextInt() }
       else -> throw IllegalStateException("Invalid sort order")
     }
 
@@ -46,8 +49,10 @@ class WatchlistItemSorter @Inject constructor() {
           .thenByDescending { it.userRating }
           .thenBy { getTitle(it) }
       DATE_ADDED -> compareByDescending { it.show.createdAt }
-      NEWEST -> compareByDescending<CollectionListItem.ShowItem> { it.show.firstAired }
-        .thenByDescending { it.show.year }
+      NEWEST -> compareByDescending<CollectionListItem.ShowItem> {
+        it.show.firstAired
+      }.thenByDescending { it.show.year }
+      RANDOM -> compareBy { Random.nextInt() }
       else -> throw IllegalStateException("Invalid sort order")
     }
 

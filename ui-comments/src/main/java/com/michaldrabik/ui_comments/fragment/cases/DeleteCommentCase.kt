@@ -7,7 +7,7 @@ import com.michaldrabik.repository.CommentsRepository
 import com.michaldrabik.ui_model.Comment
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.withContext
-import okhttp3.internal.EMPTY_RESPONSE
+import okhttp3.ResponseBody.Companion.EMPTY
 import retrofit2.HttpException
 import retrofit2.Response
 import java.util.concurrent.TimeUnit
@@ -23,7 +23,7 @@ class DeleteCommentCase @Inject constructor(
     val dateMillis = comment.createdAt?.toMillis()
     dateMillis?.let {
       if (nowUtcMillis() - it >= TimeUnit.DAYS.toMillis(13)) {
-        throw HttpException(Response.error<Any>(409, EMPTY_RESPONSE))
+        throw HttpException(Response.error<Any>(409, EMPTY))
       }
     }
     withContext(dispatchers.IO) {
