@@ -125,6 +125,19 @@ class BackupExportViewModel @Inject constructor(
     }
   }
 
+  /**
+   * Set schedule to OFF. This cancels ongoing schedules.
+   */
+  fun saveExportBackupScheduleOff() {
+    val offSchedule = BackupExportSchedule.OFF
+    viewModelScope.launch {
+      miscPreferences.edit { putString(BackupExportScheduleWorker.KEY_BACKUP_EXPORT_SCHEDULE, offSchedule.name) }
+      miscPreferences.edit { remove(BackupExportScheduleWorker.KEY_BACKUP_EXPORT_DIRECTORY_URI) }
+      BackupExportScheduleWorker.cancelAllPeriodic(workManager)
+      backupExportScheduleState.value = offSchedule
+    }
+  }
+
   fun clearOneOffState() {
     loadingState.update { false }
     exportContentState.update { null }

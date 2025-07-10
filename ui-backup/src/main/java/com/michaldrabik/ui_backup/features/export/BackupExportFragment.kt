@@ -70,6 +70,7 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
         selectedSchedule?.let {
           selectedSchedule = null
           viewModel.saveExportBackupSchedule(directoryUri, it)
+          showSnack(MessageEvent.Info(it.confirmationStringRes))
         }
       }
     }
@@ -217,9 +218,16 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
     MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
       .setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.bg_dialog))
       .setSingleChoiceItems(optionsStrings, options.indexOf(currentSchedule)) { dialog, index ->
-        selectedSchedule = options[index]
-        createFolderContract.launch(null)
-        showSnack(MessageEvent.Info(currentSchedule.confirmationStringRes))
+        val newSchedule = options[index]
+        if (newSchedule == BackupExportSchedule.OFF) {
+          // For OFF schedule, we don't need a folder - directly save the schedule
+          viewModel.saveExportBackupScheduleOff()
+          showSnack(MessageEvent.Info(newSchedule.confirmationStringRes))
+        } else {
+          // For other schedules, ask for folder first
+          selectedSchedule = newSchedule
+          createFolderContract.launch(null)
+        }
         dialog.dismiss()
       }.show()
   }
