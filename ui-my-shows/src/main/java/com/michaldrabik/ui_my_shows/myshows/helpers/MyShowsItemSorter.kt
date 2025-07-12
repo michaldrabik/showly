@@ -12,9 +12,9 @@ import com.michaldrabik.ui_model.SortType
 import com.michaldrabik.ui_model.SortType.ASCENDING
 import com.michaldrabik.ui_model.SortType.DESCENDING
 import com.michaldrabik.ui_my_shows.myshows.recycler.MyShowsItem
+import java.util.UUID
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.random.Random
 
 @Singleton
 class MyShowsItemSorter @Inject constructor() {
@@ -38,7 +38,7 @@ class MyShowsItemSorter @Inject constructor() {
       DATE_ADDED -> compareBy { it.show.createdAt }
       RECENTLY_WATCHED -> compareBy { it.show.updatedAt }
       NEWEST -> compareBy<MyShowsItem> { it.show.year }.thenBy { it.show.firstAired }
-      RANDOM -> compareBy { Random.nextInt() }
+      RANDOM -> compareBy { UUID.randomUUID() }
       else -> throw IllegalStateException("Invalid sort order")
     }
 
@@ -53,7 +53,7 @@ class MyShowsItemSorter @Inject constructor() {
       DATE_ADDED -> compareByDescending { it.show.createdAt }
       RECENTLY_WATCHED -> compareByDescending { it.show.updatedAt }
       NEWEST -> compareByDescending<MyShowsItem> { it.show.year }.thenByDescending { it.show.firstAired }
-      RANDOM -> compareBy { Random.nextInt() }
+      RANDOM -> compareBy { UUID.randomUUID() }
       else -> throw IllegalStateException("Invalid sort order")
     }
 

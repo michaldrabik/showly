@@ -12,8 +12,8 @@ import com.michaldrabik.ui_model.SortOrder.USER_RATING
 import com.michaldrabik.ui_model.SortType
 import com.michaldrabik.ui_model.SortType.ASCENDING
 import com.michaldrabik.ui_model.SortType.DESCENDING
+import java.util.UUID
 import javax.inject.Inject
-import kotlin.random.Random
 
 class ListDetailsSorter @Inject constructor() {
 
@@ -36,7 +36,7 @@ class ListDetailsSorter @Inject constructor() {
           .thenBy { it.userRating }
           .thenBy { getTitle(it) }
       DATE_ADDED -> compareBy { it.listedAt }
-      RANDOM -> compareBy { Random.nextInt() }
+      RANDOM -> compareBy { UUID.randomUUID() }
       else -> throw IllegalStateException("Invalid sort order")
     }
 
@@ -51,7 +51,7 @@ class ListDetailsSorter @Inject constructor() {
           .thenByDescending { it.userRating }
           .thenBy { getTitle(it) }
       DATE_ADDED -> compareByDescending { it.listedAt }
-      RANDOM -> compareBy { Random.nextInt() }
+      RANDOM -> compareBy { UUID.randomUUID() }
       else -> throw IllegalStateException("Invalid sort order")
     }
 

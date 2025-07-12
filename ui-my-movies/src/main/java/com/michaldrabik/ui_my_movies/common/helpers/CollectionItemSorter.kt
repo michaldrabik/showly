@@ -12,8 +12,8 @@ import com.michaldrabik.ui_model.SortType
 import com.michaldrabik.ui_model.SortType.ASCENDING
 import com.michaldrabik.ui_model.SortType.DESCENDING
 import com.michaldrabik.ui_my_movies.common.recycler.CollectionListItem
+import java.util.UUID
 import javax.inject.Inject
-import kotlin.random.Random
 
 class CollectionItemSorter @Inject constructor() {
 
@@ -38,7 +38,7 @@ class CollectionItemSorter @Inject constructor() {
       NEWEST -> compareBy<CollectionListItem.MovieItem> { it.movie.released == null }
         .thenBy { it.movie.released }
         .thenBy { it.movie.year }
-      RANDOM -> compareBy { Random.nextInt() }
+      RANDOM -> compareBy { UUID.randomUUID() }
       else -> throw IllegalStateException("Invalid sort order")
     }
 
@@ -54,7 +54,7 @@ class CollectionItemSorter @Inject constructor() {
       DATE_ADDED -> compareByDescending { it.movie.createdAt }
       NEWEST -> compareByDescending<CollectionListItem.MovieItem> { it.movie.released }
         .thenByDescending { it.movie.year }
-      RANDOM -> compareBy { Random.nextInt() }
+      RANDOM -> compareBy { UUID.randomUUID() }
       else -> throw IllegalStateException("Invalid sort order")
     }
 
