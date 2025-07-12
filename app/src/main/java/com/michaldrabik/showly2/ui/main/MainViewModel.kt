@@ -111,6 +111,12 @@ class MainViewModel @Inject constructor(
     }
   }
 
+  fun refreshBackupExportSchedule() {
+    traktCase.run {
+      refreshBackupExportSchedule()
+    }
+  }
+
   fun setMode(mode: Mode) = modesCase.setMode(mode)
 
   fun getMode(): Mode = modesCase.getMode()
