@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
 import com.michaldrabik.ui_backup.R
 import com.michaldrabik.ui_backup.databinding.FragmentBackupImportBinding
+import com.michaldrabik.ui_backup.features.export.cases.ReadBackupJsonFromFileUseCase
 import com.michaldrabik.ui_backup.features.import_.model.BackupImportStatus.Idle
 import com.michaldrabik.ui_backup.features.import_.model.BackupImportStatus.Importing
 import com.michaldrabik.ui_backup.features.import_.model.BackupImportStatus.Initializing
@@ -25,13 +26,14 @@ import com.michaldrabik.ui_base.utilities.extensions.visibleIf
 import com.michaldrabik.ui_base.utilities.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import java.io.BufferedReader
-import java.io.InputStream
-import java.io.InputStreamReader
+import javax.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
 
 @AndroidEntryPoint
 class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragment_backup_import) {
+
+  @Inject
+  lateinit var readBackupJsonFromFileUseCase: ReadBackupJsonFromFileUseCase
 
   override val viewModel by viewModels<BackupImportViewModel>()
   private val binding by viewBinding(FragmentBackupImportBinding::bind)
@@ -81,29 +83,13 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
   }
 
   private fun readImportFile(uri: Uri) {
-    var inputStream: InputStream? = null
-    var reader: BufferedReader? = null
-
-    try {
-      inputStream = requireContext().contentResolver.openInputStream(uri)
-      reader = BufferedReader(InputStreamReader(inputStream))
-
-      val stringBuilder = StringBuilder()
-      var line: String?
-
-      while (reader.readLine().also { line = it } != null) {
-        stringBuilder.append(line)
+    readBackupJsonFromFileUseCase(requireContext(), uri).fold(
+      onSuccess = { viewModel.runImport(it) },
+      onFailure = {
+        showErrorSnack(it)
+        Timber.e(it)
       }
-
-      val jsonInput = stringBuilder.toString()
-      viewModel.runImport(jsonInput)
-    } catch (error: Throwable) {
-      showErrorSnack(error)
-      Timber.e(error)
-    } finally {
-      inputStream?.close()
-      reader?.close()
-    }
+    )
   }
 
   private fun showSuccessSnack() {
