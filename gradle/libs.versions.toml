@@ -1,11 +1,11 @@
 [versions]
 
-agp = "8.11.1"
+agp = "8.12.0"
 androidLifecycle = "2.9.2"
-androidNavigation = "2.9.2"
+androidNavigation = "2.9.3"
 androidRoom = "2.7.2"
-androidTestRunner = "1.6.2"
-androidTestTruth = "1.6.0"
+androidTestRunner = "1.7.0"
+androidTestTruth = "1.7.0"
 appcompat = "1.7.1"
 circleindicator = "2.1.6"
 constraintlayout = "2.2.1"
@@ -35,7 +35,7 @@ retrofit = "3.0.0"
 swiperefreshlayout = "1.1.0"
 timber = "5.0.1"
 truth = "1.4.4"
-work-runtime-ktx = "2.10.2"
+work-runtime-ktx = "2.10.3"
 
 [libraries]
 
