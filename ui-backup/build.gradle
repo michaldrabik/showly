@@ -48,6 +48,10 @@ dependencies {
   implementation libs.hilt.android
   ksp libs.hilt.compiler
 
+  implementation libs.android.work
+  implementation libs.hilt.work
+  ksp libs.hilt.work.compiler
+
   api libs.phoenix
 
   coreLibraryDesugaring libs.android.desugar
