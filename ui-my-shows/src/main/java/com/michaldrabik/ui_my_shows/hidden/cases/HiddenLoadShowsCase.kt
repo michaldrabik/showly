@@ -7,6 +7,7 @@ import com.michaldrabik.repository.images.ShowImagesProvider
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.repository.shows.ShowsRepository
 import com.michaldrabik.ui_base.dates.DateFormatProvider
+import com.michaldrabik.ui_base.utilities.extensions.removeDiacritics
 import com.michaldrabik.ui_model.ImageType
 import com.michaldrabik.ui_model.Show
 import com.michaldrabik.ui_model.SortOrder
@@ -86,8 +87,8 @@ class HiddenLoadShowsCase @Inject constructor(
 
   private fun List<CollectionListItem.ShowItem>.filterByQuery(query: String) =
     filter {
-      it.show.title.contains(query, true) ||
-        it.translation?.title?.contains(query, true) == true
+      it.show.title.removeDiacritics().contains(query, true) ||
+        it.translation?.title?.removeDiacritics()?.contains(query, true) == true
     }
 
   private fun List<CollectionListItem.ShowItem>.filterByNetwork(networks: List<String>) =

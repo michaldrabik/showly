@@ -1,6 +1,7 @@
 package com.michaldrabik.ui_my_shows.watchlist.helpers
 
 import com.michaldrabik.common.extensions.nowUtc
+import com.michaldrabik.ui_base.utilities.extensions.removeDiacritics
 import com.michaldrabik.ui_model.UpcomingFilter
 import com.michaldrabik.ui_model.UpcomingFilter.OFF
 import com.michaldrabik.ui_model.UpcomingFilter.RELEASED
@@ -47,7 +48,8 @@ class WatchlistItemFilter @Inject constructor() {
   fun filterByQuery(
     item: CollectionListItem.ShowItem,
     query: String,
-  ): Boolean =
-    item.show.title.contains(query, true) ||
-      item.translation?.title?.contains(query, true) == true
+  ): Boolean {
+    return item.show.title.removeDiacritics().contains(query, true) ||
+      item.translation?.title?.removeDiacritics()?.contains(query, true) == true
+  }
 }

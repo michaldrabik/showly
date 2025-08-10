@@ -6,6 +6,7 @@ import com.michaldrabik.data_local.LocalDataSource
 import com.michaldrabik.data_local.database.model.Season
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.repository.shows.ShowsRepository
+import com.michaldrabik.ui_base.utilities.extensions.removeDiacritics
 import com.michaldrabik.ui_model.MyShowsSection.FINISHED
 import com.michaldrabik.ui_model.MyShowsSection.UPCOMING
 import com.michaldrabik.ui_model.MyShowsSection.WATCHING
@@ -98,8 +99,8 @@ class MyShowsLoadShowsCase @Inject constructor(
     when {
       query.isNullOrBlank() -> this
       else -> this.filter {
-        it.show.title.contains(query, true) ||
-          it.translation?.title?.contains(query, true) == true
+        it.show.title.removeDiacritics().contains(query, true) ||
+          it.translation?.title?.removeDiacritics()?.contains(query, true) == true
       }
     }
 

@@ -7,6 +7,7 @@ import com.michaldrabik.repository.images.MovieImagesProvider
 import com.michaldrabik.repository.movies.MoviesRepository
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.ui_base.dates.DateFormatProvider
+import com.michaldrabik.ui_base.utilities.extensions.removeDiacritics
 import com.michaldrabik.ui_model.Genre
 import com.michaldrabik.ui_model.ImageType
 import com.michaldrabik.ui_model.Movie
@@ -103,8 +104,8 @@ class HiddenLoadMoviesCase @Inject constructor(
 
   private fun List<CollectionListItem.MovieItem>.filterByQuery(query: String) =
     this.filter {
-      it.movie.title.contains(query, true) ||
-        it.translation?.title?.contains(query, true) == true
+      it.movie.title.removeDiacritics().contains(query, true) ||
+        it.translation?.title?.removeDiacritics()?.contains(query, true) == true
     }
 
   private fun List<CollectionListItem.MovieItem>.filterByGenre(genres: List<String>) =
