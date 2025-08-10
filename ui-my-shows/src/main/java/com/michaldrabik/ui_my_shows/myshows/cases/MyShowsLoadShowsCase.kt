@@ -99,8 +99,13 @@ class MyShowsLoadShowsCase @Inject constructor(
     when {
       query.isNullOrBlank() -> this
       else -> this.filter {
-        it.show.title.removeDiacritics().contains(query, true) ||
-          it.translation?.title?.removeDiacritics()?.contains(query, true) == true
+        it.show.title
+          .removeDiacritics()
+          .contains(query, true) ||
+          it.translation
+            ?.title
+            ?.removeDiacritics()
+            ?.contains(query, true) == true
       }
     }
 

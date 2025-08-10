@@ -9,6 +9,7 @@ import com.michaldrabik.repository.images.MovieImagesProvider
 import com.michaldrabik.repository.movies.MoviesRepository
 import com.michaldrabik.repository.settings.SettingsSpoilersRepository
 import com.michaldrabik.ui_base.dates.DateFormatProvider
+import com.michaldrabik.ui_base.utilities.extensions.removeDiacritics
 import com.michaldrabik.ui_model.CalendarMode.PRESENT_FUTURE
 import com.michaldrabik.ui_model.CalendarMode.RECENTS
 import com.michaldrabik.ui_model.ImageType
@@ -89,8 +90,13 @@ abstract class CalendarMoviesItemsCase constructor(
     query: String,
     items: List<CalendarMovieListItem.MovieItem>,
   ) = items.filter {
-    it.movie.title.contains(query, true) ||
-      it.translation?.title?.contains(query, true) == true ||
+    it.movie.title
+      .removeDiacritics()
+      .contains(query, true) ||
+      it.translation
+        ?.title
+        ?.removeDiacritics()
+        ?.contains(query, true) == true ||
       it.movie.released
         ?.format(it.dateFormat)
         ?.contains(query, true) == true

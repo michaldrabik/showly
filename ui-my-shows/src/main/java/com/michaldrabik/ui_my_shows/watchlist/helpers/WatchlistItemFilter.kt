@@ -48,8 +48,12 @@ class WatchlistItemFilter @Inject constructor() {
   fun filterByQuery(
     item: CollectionListItem.ShowItem,
     query: String,
-  ): Boolean {
-    return item.show.title.removeDiacritics().contains(query, true) ||
-      item.translation?.title?.removeDiacritics()?.contains(query, true) == true
-  }
+  ): Boolean =
+    item.show.title
+      .removeDiacritics()
+      .contains(query, true) ||
+      item.translation
+        ?.title
+        ?.removeDiacritics()
+        ?.contains(query, true) == true
 }

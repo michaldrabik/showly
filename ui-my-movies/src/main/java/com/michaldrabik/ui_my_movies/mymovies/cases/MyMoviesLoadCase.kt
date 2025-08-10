@@ -54,8 +54,13 @@ class MyMoviesLoadCase @Inject constructor(
     when {
       query.isNullOrBlank() -> this
       else -> this.filter {
-        it.movie.title.removeDiacritics().contains(query, true) ||
-          it.translation?.title?.removeDiacritics()?.contains(query, true) == true
+        it.movie.title
+          .removeDiacritics()
+          .contains(query, true) ||
+          it.translation
+            ?.title
+            ?.removeDiacritics()
+            ?.contains(query, true) == true
       }
     }
 

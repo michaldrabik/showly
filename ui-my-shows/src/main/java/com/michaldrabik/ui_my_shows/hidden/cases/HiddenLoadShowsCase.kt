@@ -87,8 +87,13 @@ class HiddenLoadShowsCase @Inject constructor(
 
   private fun List<CollectionListItem.ShowItem>.filterByQuery(query: String) =
     filter {
-      it.show.title.removeDiacritics().contains(query, true) ||
-        it.translation?.title?.removeDiacritics()?.contains(query, true) == true
+      it.show.title
+        .removeDiacritics()
+        .contains(query, true) ||
+        it.translation
+          ?.title
+          ?.removeDiacritics()
+          ?.contains(query, true) == true
     }
 
   private fun List<CollectionListItem.ShowItem>.filterByNetwork(networks: List<String>) =

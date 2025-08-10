@@ -104,8 +104,13 @@ class HiddenLoadMoviesCase @Inject constructor(
 
   private fun List<CollectionListItem.MovieItem>.filterByQuery(query: String) =
     this.filter {
-      it.movie.title.removeDiacritics().contains(query, true) ||
-        it.translation?.title?.removeDiacritics()?.contains(query, true) == true
+      it.movie.title
+        .removeDiacritics()
+        .contains(query, true) ||
+        it.translation
+          ?.title
+          ?.removeDiacritics()
+          ?.contains(query, true) == true
     }
 
   private fun List<CollectionListItem.MovieItem>.filterByGenre(genres: List<String>) =

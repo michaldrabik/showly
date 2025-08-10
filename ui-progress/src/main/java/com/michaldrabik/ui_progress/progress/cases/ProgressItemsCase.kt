@@ -15,6 +15,7 @@ import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.repository.shows.ShowsRepository
 import com.michaldrabik.ui_base.dates.DateFormatProvider
+import com.michaldrabik.ui_base.utilities.extensions.removeDiacritics
 import com.michaldrabik.ui_model.Image
 import com.michaldrabik.ui_model.ImageType
 import com.michaldrabik.ui_model.ProgressNextEpisodeType
@@ -193,15 +194,22 @@ class ProgressItemsCase @Inject constructor(
     query: String,
     items: List<ProgressListItem.Episode>,
   ) = items.filter {
-    it.show.title.contains(query, true) ||
-      it.episode?.title?.contains(query, true) == true ||
+    it.show.title
+      .removeDiacritics()
+      .contains(query, true) ||
+      it.episode
+        ?.title
+        ?.removeDiacritics()
+        ?.contains(query, true) == true ||
       it.translations
         ?.show
         ?.title
+        ?.removeDiacritics()
         ?.contains(query, true) == true ||
       it.translations
         ?.episode
         ?.title
+        ?.removeDiacritics()
         ?.contains(query, true) == true
   }
 

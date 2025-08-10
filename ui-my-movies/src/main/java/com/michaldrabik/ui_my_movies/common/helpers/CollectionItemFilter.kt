@@ -36,8 +36,13 @@ class CollectionItemFilter @Inject constructor() {
     item: CollectionListItem.MovieItem,
     query: String,
   ): Boolean =
-    item.movie.title.removeDiacritics().contains(query, true) ||
-      item.translation?.title?.removeDiacritics()?.contains(query, true) == true
+    item.movie.title
+      .removeDiacritics()
+      .contains(query, true) ||
+      item.translation
+        ?.title
+        ?.removeDiacritics()
+        ?.contains(query, true) == true
 
   fun filterGenres(
     item: CollectionListItem,
