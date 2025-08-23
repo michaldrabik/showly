@@ -1,6 +1,6 @@
 [versions]
 
-agp = "8.12.0"
+agp = "8.12.1"
 androidLifecycle = "2.9.2"
 androidNavigation = "2.9.3"
 androidRoom = "2.7.2"
@@ -17,7 +17,7 @@ dynamicanimation = "1.1.0"
 fragment-ktx = "1.8.9"
 glide = "4.16.0"
 gridlayout = "1.1.0"
-hilt = "2.57"
+hilt = "2.57.1"
 hilt-compiler = "1.2.0"
 hiltWork = "1.2.0"
 junit = "5.13.4"
