@@ -12,4 +12,24 @@
   <string name="textBackupImportSuccess">Data imported successfully.</string>
 
   <string name="errorImportCancelled">Data import has been cancelled.</string>
+  
+  <string name="textBackupExportSchedule">Schedule</string>
+  <string name="textBackupExportOptionOff">Off</string>
+  <string name="textBackupExportOption1Hour">Every Hour</string>
+  <string name="textBackupExportOption3Hours">Every 3 Hours</string>
+  <string name="textBackupExportOption6Hours">Every 6 Hours</string>
+  <string name="textBackupExportOptionDaily">Every Day</string>
+  <string name="textBackupExportOption3Day">Every 3 Days</string>
+  <string name="textBackupExportOptionWeekly">Every Week</string>
+  <string name="textBackupExportOptionOffMessage">Backup will not run automatically.</string>
+  <string name="textBackupExportOptionConfirmMessage">Automatic backup has been scheduled.</string>
+
+  <string name="textBackupExportOptionHourButton">Scheduled to run every hour</string>
+  <string name="textBackupExportOption3HoursButton">Scheduled to run every 3 hours</string>
+  <string name="textBackupExportOption6HoursButton">Scheduled to run every 6 hours</string>
+  <string name="textBackupExportOptionDailyButton">Scheduled to run every day</string>
+  <string name="textBackupExportOption3DayButton">Scheduled to run every 3 days</string>
+  <string name="textBackupExportOptionWeeklyButton">Scheduled to run every week</string>
+
+  <string name="textBackupExportLastTimestamp">Last Backup: %s</string>
 </resources>
