@@ -1,5 +1,6 @@
 ![Version](https://img.shields.io/github/v/tag/michaldrabik/showly-2.0?label=version)
-![Build]( https://img.shields.io/github/actions/workflow/status/michaldrabik/showly-2.0/android.yml?branch=master)
+![Build](https://img.shields.io/github/actions/workflow/status/michaldrabik/showly-2.0/android.yml?branch=master)
+[![RB Shield](https://shields.rbtlog.dev/simple/com.michaldrabik.showly2)](https://shields.rbtlog.dev/com.michaldrabik.showly2)
 [![Crowdin](https://badges.crowdin.net/showly-android-app/localized.svg)](https://crowdin.com/project/showly-android-app)
 [![Crowdin](https://badges.crowdin.net/showly-ios-app/localized.svg)](https://crowdin.com/project/showly-ios-app)
 
@@ -23,6 +24,11 @@ The OSS version for Android available in this repo is completely free of all Goo
     alt="Get it on Google Play"
     height="80"
     src="https://github.com/user-attachments/assets/3e49d1b3-1046-4e76-ad50-dfd859c23f3a"/></a>
+&nbsp;&nbsp;
+<a href="https://apt.izzysoft.de/packages/com.michaldrabik.showly2"><img
+    alt="Get it at IzzyOnDroid"
+    height="80"
+    src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png"/></a>
 &nbsp;&nbsp;
 <a href="https://apps.apple.com/us/app/6739016219"><img
     alt="Get it on App Store"
