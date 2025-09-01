@@ -1,7 +1,7 @@
 [versions]
 
-agp = "8.12.1"
-androidLifecycle = "2.9.2"
+agp = "8.12.2"
+androidLifecycle = "2.9.3"
 androidNavigation = "2.9.3"
 androidRoom = "2.7.2"
 androidTestRunner = "1.7.0"
