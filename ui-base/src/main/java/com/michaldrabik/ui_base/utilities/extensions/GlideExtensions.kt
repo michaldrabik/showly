@@ -20,7 +20,7 @@ inline fun RequestBuilder<Drawable>.withFailListener(crossinline action: () -> U
     }
 
     override fun onResourceReady(
-      resource: Drawable,
+      resource: Drawable?,
       model: Any,
       target: Target<Drawable?>?,
       dataSource: DataSource,
@@ -38,7 +38,7 @@ inline fun RequestBuilder<Drawable>.withSuccessListener(crossinline action: () -
     ): Boolean = false
 
     override fun onResourceReady(
-      resource: Drawable,
+      resource: Drawable?,
       model: Any,
       target: Target<Drawable?>?,
       dataSource: DataSource,
