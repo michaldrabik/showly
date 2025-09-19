@@ -16,6 +16,7 @@ import com.michaldrabik.repository.mappers.Mappers
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.repository.shows.ShowsRepository
 import com.michaldrabik.ui_base.dates.DateFormatProvider
+import com.michaldrabik.ui_base.utilities.extensions.removeDiacritics
 import com.michaldrabik.ui_model.HistoryPeriod
 import com.michaldrabik.ui_model.HistoryPeriod.ALL_TIME
 import com.michaldrabik.ui_model.HistoryPeriod.LAST_30_DAYS
@@ -137,15 +138,21 @@ internal class GetHistoryItemsCase @Inject constructor(
       return items
     }
     return items.filter {
-      it.show.title.contains(query, true) ||
-        it.episode.title.contains(query, true) ||
+      it.show.title
+        .removeDiacritics()
+        .contains(query, true) ||
+        it.episode.title
+          .removeDiacritics()
+          .contains(query, true) ||
         it.translations
           ?.show
           ?.title
+          ?.removeDiacritics()
           ?.contains(query, true) == true ||
         it.translations
           ?.episode
           ?.title
+          ?.removeDiacritics()
           ?.contains(query, true) == true ||
         it.episode.lastWatchedAt
           ?.toLocalZone()

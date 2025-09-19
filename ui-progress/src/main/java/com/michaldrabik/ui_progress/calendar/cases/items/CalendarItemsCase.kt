@@ -14,6 +14,7 @@ import com.michaldrabik.repository.settings.SettingsFiltersRepository
 import com.michaldrabik.repository.settings.SettingsSpoilersRepository
 import com.michaldrabik.repository.shows.ShowsRepository
 import com.michaldrabik.ui_base.dates.DateFormatProvider
+import com.michaldrabik.ui_base.utilities.extensions.removeDiacritics
 import com.michaldrabik.ui_model.CalendarMode.PRESENT_FUTURE
 import com.michaldrabik.ui_model.CalendarMode.RECENTS
 import com.michaldrabik.ui_model.ImageType
@@ -162,15 +163,21 @@ abstract class CalendarItemsCase(
     query: String,
     items: List<CalendarListItem.Episode>,
   ) = items.filter {
-    it.show.title.contains(query, true) ||
-      it.episode.title.contains(query, true) ||
+    it.show.title
+      .removeDiacritics()
+      .contains(query, true) ||
+      it.episode.title
+        .removeDiacritics()
+        .contains(query, true) ||
       it.translations
         ?.show
         ?.title
+        ?.removeDiacritics()
         ?.contains(query, true) == true ||
       it.translations
         ?.episode
         ?.title
+        ?.removeDiacritics()
         ?.contains(query, true) == true ||
       it.episode.firstAired
         ?.toLocalZone()

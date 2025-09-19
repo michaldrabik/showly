@@ -1,2 +1,2 @@
-* Added option to sort lists randomly
-* Updated dependencies
+* Optimized lists search for special characters (like "ó" etc.)
+* Updated internal dependencies

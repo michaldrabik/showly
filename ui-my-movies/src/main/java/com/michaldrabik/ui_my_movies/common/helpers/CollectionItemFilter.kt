@@ -1,6 +1,7 @@
 package com.michaldrabik.ui_my_movies.common.helpers
 
 import com.michaldrabik.common.extensions.nowUtcDay
+import com.michaldrabik.ui_base.utilities.extensions.removeDiacritics
 import com.michaldrabik.ui_model.UpcomingFilter
 import com.michaldrabik.ui_my_movies.common.recycler.CollectionListItem
 import javax.inject.Inject
@@ -35,8 +36,13 @@ class CollectionItemFilter @Inject constructor() {
     item: CollectionListItem.MovieItem,
     query: String,
   ): Boolean =
-    item.movie.title.contains(query, true) ||
-      item.translation?.title?.contains(query, true) == true
+    item.movie.title
+      .removeDiacritics()
+      .contains(query, true) ||
+      item.translation
+        ?.title
+        ?.removeDiacritics()
+        ?.contains(query, true) == true
 
   fun filterGenres(
     item: CollectionListItem,

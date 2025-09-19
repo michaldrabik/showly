@@ -59,7 +59,6 @@ dependencies {
   api libs.timber
 
   api libs.glide
-  ksp libs.glide.compiler
 
   implementation libs.hilt.android
   ksp libs.hilt.compiler
