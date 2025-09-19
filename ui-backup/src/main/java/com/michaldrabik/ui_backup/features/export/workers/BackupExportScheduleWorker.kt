@@ -168,7 +168,7 @@ class BackupExportScheduleWorker @AssistedInject constructor(
 
   /**
    * Deletes old backup files, keeping only the [MAX_BACKUPS] newest.
-   * Backups are identified by prefix/type and sorted by timestamp in their name.
+   * Backups are identified by prefix/type and sorted by their last modified timestamp.
    * Deletion errors are logged but don't halt the process.
    *
    * @throws IllegalArgumentException if directory URI is null.
@@ -183,26 +183,28 @@ class BackupExportScheduleWorker @AssistedInject constructor(
     val childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(directoryUri, treeDocumentId)
     val projection = arrayOf(
       DocumentsContract.Document.COLUMN_DOCUMENT_ID, // Unique document ID
-      DocumentsContract.Document.COLUMN_DISPLAY_NAME // User viewable name
+      DocumentsContract.Document.COLUMN_DISPLAY_NAME, // User viewable name
+      DocumentsContract.Document.COLUMN_LAST_MODIFIED // Last modified timestamp
     )
     val cursor = contentResolver.query(childrenUri, projection, null, null, null)
 
-    val backupFiles = mutableListOf<Pair<Uri, String>>()
+    val backupFiles = mutableListOf<Triple<Uri, String, Long>>()
     cursor?.use {
       while (it.moveToNext()) {
         val documentId = it.getString(it.getColumnIndexOrThrow(DocumentsContract.Document.COLUMN_DOCUMENT_ID))
         val documentName = it.getString(it.getColumnIndexOrThrow(DocumentsContract.Document.COLUMN_DISPLAY_NAME))
+        val lastModified = it.getLong(it.getColumnIndexOrThrow(DocumentsContract.Document.COLUMN_LAST_MODIFIED))
         if (documentName.startsWith(BackupFileName.prefix) && documentName.endsWith(BackupFileName.fileType)) {
           val documentUri = DocumentsContract.buildDocumentUriUsingTree(directoryUri, documentId)
-          backupFiles.add(Pair(documentUri, documentName))
+          backupFiles.add(Triple(documentUri, documentName, lastModified))
         }
       }
     }
 
     if (backupFiles.size > MAX_BACKUPS) {
-      backupFiles.sortBy { it.second } // Sort by name, which is effectively by date
-      val filesToDelete = backupFiles.take(backupFiles.size - 5)
-      filesToDelete.forEach { (uri, name) ->
+      backupFiles.sortBy { it.third } // Sort by last modified timestamp (oldest first)
+      val filesToDelete = backupFiles.take(backupFiles.size - MAX_BACKUPS)
+      filesToDelete.forEach { (uri, name, _) ->
         try {
           if (!DocumentsContract.deleteDocument(contentResolver, uri)) {
             Timber.w("Failed to delete old backup: $name")
