@@ -88,7 +88,7 @@ class BackupImportFragment : BaseFragment<BackupImportViewModel>(R.layout.fragme
       onFailure = {
         showErrorSnack(it)
         Timber.e(it)
-      }
+      },
     )
   }
 

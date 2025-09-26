@@ -65,5 +65,4 @@ enum class BackupExportSchedule(
       return DEFAULT_OFF
     }
   }
-
 }

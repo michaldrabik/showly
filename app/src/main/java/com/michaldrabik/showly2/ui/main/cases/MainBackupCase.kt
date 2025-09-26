@@ -22,7 +22,7 @@ class MainBackupCase @Inject constructor(
    */
   fun refreshBackupExportSchedule() {
     val schedule = BackupExportSchedule.createFromName(
-      miscPreferences.getString(BackupExportScheduleWorker.KEY_BACKUP_EXPORT_SCHEDULE, null)
+      miscPreferences.getString(BackupExportScheduleWorker.KEY_BACKUP_EXPORT_SCHEDULE, null),
     )
     val uri = miscPreferences.getString(BackupExportScheduleWorker.KEY_BACKUP_EXPORT_DIRECTORY_URI, null)?.toUri()
     if (uri != null) {
@@ -31,7 +31,7 @@ class MainBackupCase @Inject constructor(
       miscPreferences.edit {
         putString(
           BackupExportScheduleWorker.KEY_BACKUP_EXPORT_SCHEDULE,
-          BackupExportSchedule.DEFAULT_OFF.name
+          BackupExportSchedule.DEFAULT_OFF.name,
         )
       }
       BackupExportScheduleWorker.cancelAllPeriodic(workManager)

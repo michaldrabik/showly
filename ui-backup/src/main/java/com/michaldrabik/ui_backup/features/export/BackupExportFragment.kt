@@ -13,7 +13,6 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.michaldrabik.common.extensions.dateFromMillis
-import com.michaldrabik.common.extensions.nowUtc
 import com.michaldrabik.common.extensions.toLocalZone
 import com.michaldrabik.ui_backup.R
 import com.michaldrabik.ui_backup.databinding.FragmentBackupExportBinding
@@ -33,7 +32,6 @@ import com.michaldrabik.ui_base.utilities.extensions.visibleIf
 import com.michaldrabik.ui_base.utilities.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.seconds
 
@@ -114,13 +112,16 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
     createFileContract.launch(fileName)
   }
 
-  private fun saveNewExport(uri: Uri, content: String) {
+  private fun saveNewExport(
+    uri: Uri,
+    content: String,
+  ) {
     writeBackupJsonToFileUseCase(requireContext(), uri, content).fold(
       onSuccess = { /* NO-OP */ },
       onFailure = {
         showErrorSnack(it)
         Timber.e(it)
-      }
+      },
     )
   }
 
@@ -132,8 +133,7 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
           .onSuccess {
             viewModel.onExportValidationSuccess()
             showShareSnack(uri)
-          }
-          .onFailure {
+          }.onFailure {
             showErrorSnack(it)
             Timber.e(it)
           }
@@ -141,7 +141,7 @@ class BackupExportFragment : BaseFragment<BackupExportViewModel>(R.layout.fragme
       onFailure = {
         showErrorSnack(it)
         Timber.e(it)
-      }
+      },
     )
   }
 

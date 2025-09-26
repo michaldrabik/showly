@@ -4,27 +4,28 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.provider.DocumentsContract
+import androidx.core.content.edit
+import androidx.core.net.toUri
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
+import androidx.work.Data
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.michaldrabik.common.extensions.nowUtcMillis
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedInject
+import com.michaldrabik.ui_backup.features.export.BackupFileName
 import com.michaldrabik.ui_backup.features.export.cases.CreateBackupJsonUseCase
-import com.michaldrabik.ui_backup.features.export.cases.ReadBackupJsonFromFileUseCase
 import com.michaldrabik.ui_backup.features.export.cases.CreateBackupSchemeFromJsonUseCase
+import com.michaldrabik.ui_backup.features.export.cases.ReadBackupJsonFromFileUseCase
 import com.michaldrabik.ui_backup.features.export.cases.WriteBackupJsonToFileUseCase
 import com.michaldrabik.ui_backup.features.export.model.BackupExportSchedule
+import com.michaldrabik.ui_backup.features.export.workers.BackupExportScheduleWorker.Companion.MAX_BACKUPS
 import com.michaldrabik.ui_base.Logger
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import timber.log.Timber
 import javax.inject.Named
-import androidx.core.content.edit
-import androidx.core.net.toUri
-import androidx.work.Data
-import com.michaldrabik.ui_backup.features.export.BackupFileName
 
 /**
  * Worker that creates a backup JSON file automatically on behalf of the user.
@@ -57,7 +58,11 @@ class BackupExportScheduleWorker @AssistedInject constructor(
      * @param directoryUri The [Uri] of the directory where backups should be saved.
      * @param schedule The [BackupExportSchedule] defining the frequency of backups.
      */
-    fun schedulePeriodic(workManager: WorkManager, directoryUri: Uri, schedule: BackupExportSchedule) {
+    fun schedulePeriodic(
+      workManager: WorkManager,
+      directoryUri: Uri,
+      schedule: BackupExportSchedule,
+    ) {
       cancelAllPeriodic(workManager)
 
       if (schedule == BackupExportSchedule.OFF) {
@@ -65,7 +70,8 @@ class BackupExportScheduleWorker @AssistedInject constructor(
         return
       }
 
-      val data = Data.Builder()
+      val data = Data
+        .Builder()
         .putString(ARG_DIRECTORY_URI, directoryUri.toString())
         .build()
 
@@ -85,7 +91,6 @@ class BackupExportScheduleWorker @AssistedInject constructor(
     fun cancelAllPeriodic(workManager: WorkManager) {
       workManager.cancelUniqueWork(TAG)
     }
-
   }
 
   /**
@@ -142,7 +147,7 @@ class BackupExportScheduleWorker @AssistedInject constructor(
       applicationContext.contentResolver,
       childDocumentsUri,
       BackupFileName.memeType,
-      BackupFileName.create()
+      BackupFileName.create(),
     ) ?: throw IllegalArgumentException("File URI is null")
 
     val backupJson = createBackupJsonUseCase()
@@ -158,9 +163,9 @@ class BackupExportScheduleWorker @AssistedInject constructor(
               onFailure = { throw it },
               onSuccess = {
                 miscPreferences.edit { putLong(KEY_LAST_LAST_BACKUP_EXPORT_TIMESTAMP, nowUtcMillis()) }
-              }
+              },
             )
-          }
+          },
         )
       },
     )
@@ -184,7 +189,7 @@ class BackupExportScheduleWorker @AssistedInject constructor(
     val projection = arrayOf(
       DocumentsContract.Document.COLUMN_DOCUMENT_ID, // Unique document ID
       DocumentsContract.Document.COLUMN_DISPLAY_NAME, // User viewable name
-      DocumentsContract.Document.COLUMN_LAST_MODIFIED // Last modified timestamp
+      DocumentsContract.Document.COLUMN_LAST_MODIFIED, // Last modified timestamp
     )
     val cursor = contentResolver.query(childrenUri, projection, null, null, null)
 

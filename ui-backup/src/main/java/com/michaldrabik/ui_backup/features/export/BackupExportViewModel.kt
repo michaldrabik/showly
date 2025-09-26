@@ -2,9 +2,11 @@ package com.michaldrabik.ui_backup.features.export
 
 import android.content.SharedPreferences
 import android.net.Uri
+import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.work.WorkManager
+import com.michaldrabik.common.extensions.nowUtcMillis
 import com.michaldrabik.ui_backup.features.export.cases.CreateBackupJsonUseCase
 import com.michaldrabik.ui_backup.features.export.cases.CreateBackupSchemeFromJsonUseCase
 import com.michaldrabik.ui_backup.features.export.model.BackupExportSchedule
@@ -23,8 +25,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
-import androidx.core.content.edit
-import com.michaldrabik.common.extensions.nowUtcMillis
 
 @HiltViewModel
 class BackupExportViewModel @Inject constructor(
@@ -37,11 +37,11 @@ class BackupExportViewModel @Inject constructor(
 
   private val initialState = BackupExportUiState(
     backupExportSchedule = BackupExportSchedule.createFromName(
-      miscPreferences.getString(BackupExportScheduleWorker.KEY_BACKUP_EXPORT_SCHEDULE, null)
+      miscPreferences.getString(BackupExportScheduleWorker.KEY_BACKUP_EXPORT_SCHEDULE, null),
     ),
     lastBackupExportTimestamp =
       miscPreferences.getLong(BackupExportScheduleWorker.KEY_LAST_LAST_BACKUP_EXPORT_TIMESTAMP, 0),
-    dateFormat = dateFormatProvider.loadFullHourFormat()
+    dateFormat = dateFormatProvider.loadFullHourFormat(),
   )
 
   private val exportContentState = MutableStateFlow(initialState.exportContent)
@@ -99,7 +99,7 @@ class BackupExportViewModel @Inject constructor(
           Logger.record(it, "BackupExportViewModel::validateExportData()")
         }
         return Result.failure(jsonError)
-      }
+      },
     )
   }
 
@@ -116,10 +116,18 @@ class BackupExportViewModel @Inject constructor(
   /**
    * Set up automatic export schedule.
    */
-  fun saveExportBackupSchedule(directoryUri: Uri, schedule: BackupExportSchedule) {
+  fun saveExportBackupSchedule(
+    directoryUri: Uri,
+    schedule: BackupExportSchedule,
+  ) {
     viewModelScope.launch {
       miscPreferences.edit { putString(BackupExportScheduleWorker.KEY_BACKUP_EXPORT_SCHEDULE, schedule.name) }
-      miscPreferences.edit { putString(BackupExportScheduleWorker.KEY_BACKUP_EXPORT_DIRECTORY_URI, directoryUri.toString()) }
+      miscPreferences.edit {
+        putString(
+          BackupExportScheduleWorker.KEY_BACKUP_EXPORT_DIRECTORY_URI,
+          directoryUri.toString(),
+        )
+      }
       BackupExportScheduleWorker.schedulePeriodic(workManager, directoryUri, schedule)
       backupExportScheduleState.value = schedule
     }

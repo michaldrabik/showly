@@ -16,5 +16,4 @@ object BackupFileName {
     val currentDate = nowUtc().toLocalZone()
     return prefix + dateFormat.format(currentDate) + fileType
   }
-
 }

@@ -10,7 +10,7 @@ import javax.inject.Inject
  * Creates a JSON backup string.
  */
 class CreateBackupJsonUseCase @Inject constructor(
-  private val backupExportWorker: BackupExportWorker
+  private val backupExportWorker: BackupExportWorker,
 ) {
 
   /**
@@ -22,7 +22,8 @@ class CreateBackupJsonUseCase @Inject constructor(
   }
 
   private fun createExportJson(exportContent: BackupScheme): String {
-    val moshi = Moshi.Builder()
+    val moshi = Moshi
+      .Builder()
       .add(KotlinJsonAdapterFactory())
       .build()
     val jsonAdapter = moshi.adapter(BackupScheme::class.java)

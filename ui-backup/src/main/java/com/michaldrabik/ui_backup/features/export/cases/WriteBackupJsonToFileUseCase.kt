@@ -19,7 +19,11 @@ class WriteBackupJsonToFileUseCase @Inject constructor() {
    * @param exportJson The JSON to write to the file.
    * @return A [Result] indicating the success or failure of the operation.
    */
-  operator fun invoke(context: Context, uri: Uri, exportJson: String): Result<Boolean> {
+  operator fun invoke(
+    context: Context,
+    uri: Uri,
+    exportJson: String,
+  ): Result<Boolean> {
     Timber.i("Writing backup JSON to file - uri: $uri")
     return try {
       val outputStream = context.contentResolver.openOutputStream(uri, "wt")
