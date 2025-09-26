@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.michaldrabik.common.Mode
 import com.michaldrabik.repository.settings.SettingsRepository
 import com.michaldrabik.showly2.ui.main.cases.MainAnnouncementsCase
+import com.michaldrabik.showly2.ui.main.cases.MainBackupCase
 import com.michaldrabik.showly2.ui.main.cases.MainClearingCase
 import com.michaldrabik.showly2.ui.main.cases.MainInitialsCase
 import com.michaldrabik.showly2.ui.main.cases.MainModesCase
@@ -38,6 +39,7 @@ class MainViewModel @Inject constructor(
   private val initCase: MainInitialsCase,
   private val tipsCase: MainTipsCase,
   private val traktCase: MainTraktCase,
+  private val backupCase: MainBackupCase,
   private val clearingCase: MainClearingCase,
   private val announcementsCase: MainAnnouncementsCase,
   private val modesCase: MainModesCase,
@@ -112,7 +114,7 @@ class MainViewModel @Inject constructor(
   }
 
   fun refreshBackupExportSchedule() {
-    traktCase.run {
+    backupCase.run {
       refreshBackupExportSchedule()
     }
   }

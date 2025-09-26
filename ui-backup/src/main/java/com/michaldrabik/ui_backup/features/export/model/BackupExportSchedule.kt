@@ -5,7 +5,6 @@ import com.michaldrabik.ui_backup.R
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeUnit.DAYS
 import java.util.concurrent.TimeUnit.HOURS
-import java.util.concurrent.TimeUnit.MINUTES
 import java.util.concurrent.TimeUnit.SECONDS
 
 /**
@@ -25,20 +24,6 @@ enum class BackupExportSchedule(
     R.string.textBackupExportOptionOff,
     R.string.textBackupExportOptionOffMessage,
     R.string.textBackupExportSchedule,
-  ),
-  EVERY_HOUR(
-    1,
-    HOURS,
-    R.string.textBackupExportOption1Hour,
-    R.string.textBackupExportOptionConfirmMessage,
-    R.string.textBackupExportOptionHourButton,
-  ),
-  EVERY_3_HOURS(
-    3,
-    HOURS,
-    R.string.textBackupExportOption3Hours,
-    R.string.textBackupExportOptionConfirmMessage,
-    R.string.textBackupExportOption3HoursButton,
   ),
   EVERY_6_HOURS(
     6,
