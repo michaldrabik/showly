@@ -1,2 +1,1 @@
-* Optimized lists search for special characters (like "ó" etc.)
-* Updated internal dependencies
+* Introducing new automatic backup feature!
