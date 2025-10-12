@@ -57,13 +57,17 @@ class BackupExportScheduleWorker @AssistedInject constructor(
      * @param workManager The [WorkManager] instance to use for scheduling.
      * @param directoryUri The [Uri] of the directory where backups should be saved.
      * @param schedule The [BackupExportSchedule] defining the frequency of backups.
+     * @param cancelExisting If true, any existing periodic work with the same tag will be cancelled before scheduling new work.
      */
     fun schedulePeriodic(
       workManager: WorkManager,
       directoryUri: Uri,
       schedule: BackupExportSchedule,
+      cancelExisting: Boolean,
     ) {
-      cancelAllPeriodic(workManager)
+      if (cancelExisting) {
+        cancelAllPeriodic(workManager)
+      }
 
       if (schedule == BackupExportSchedule.OFF) {
         Timber.i("Backup export scheduled: $schedule")
@@ -81,7 +85,12 @@ class BackupExportScheduleWorker @AssistedInject constructor(
         .addTag(TAG)
         .build()
 
-      workManager.enqueueUniquePeriodicWork(TAG, ExistingPeriodicWorkPolicy.KEEP, request)
+      workManager.enqueueUniquePeriodicWork(
+        uniqueWorkName = TAG,
+        existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.KEEP,
+        request = request,
+      )
+
       Timber.i("Backup export scheduled: $schedule")
     }
 

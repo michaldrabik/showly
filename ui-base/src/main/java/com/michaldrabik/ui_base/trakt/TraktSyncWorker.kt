@@ -126,7 +126,7 @@ class TraktSyncWorker @AssistedInject constructor(
       cancelExisting: Boolean,
     ) {
       if (cancelExisting) {
-        workManager.cancelUniqueWork(TAG)
+        cancelAllPeriodic(workManager)
       }
 
       if (schedule == TraktSyncSchedule.OFF) {
@@ -153,7 +153,11 @@ class TraktSyncWorker @AssistedInject constructor(
         .addTag(TAG)
         .build()
 
-      workManager.enqueueUniquePeriodicWork(TAG, ExistingPeriodicWorkPolicy.KEEP, request)
+      workManager.enqueueUniquePeriodicWork(
+        uniqueWorkName = TAG,
+        existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.KEEP,
+        request = request,
+      )
       Timber.i("Trakt sync scheduled: $schedule")
     }
 

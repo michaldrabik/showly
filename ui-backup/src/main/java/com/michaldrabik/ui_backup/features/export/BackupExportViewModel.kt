@@ -128,7 +128,12 @@ class BackupExportViewModel @Inject constructor(
           directoryUri.toString(),
         )
       }
-      BackupExportScheduleWorker.schedulePeriodic(workManager, directoryUri, schedule)
+      BackupExportScheduleWorker.schedulePeriodic(
+        workManager = workManager,
+        directoryUri = directoryUri,
+        schedule = schedule,
+        cancelExisting = true,
+      )
       backupExportScheduleState.value = schedule
     }
   }

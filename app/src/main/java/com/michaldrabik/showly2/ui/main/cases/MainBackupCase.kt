@@ -26,7 +26,12 @@ class MainBackupCase @Inject constructor(
     )
     val uri = miscPreferences.getString(BackupExportScheduleWorker.KEY_BACKUP_EXPORT_DIRECTORY_URI, null)?.toUri()
     if (uri != null) {
-      BackupExportScheduleWorker.schedulePeriodic(workManager, uri, schedule)
+      BackupExportScheduleWorker.schedulePeriodic(
+        workManager = workManager,
+        directoryUri = uri,
+        schedule = schedule,
+        cancelExisting = false,
+      )
     } else {
       miscPreferences.edit {
         putString(
