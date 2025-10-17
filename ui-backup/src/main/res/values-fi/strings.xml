@@ -8,4 +8,17 @@
   <string name="textBackupExportSuccess">Tietojen vienti onnistui.</string>
   <string name="textBackupImportSuccess">Tietojen tuonti onnistui.</string>
   <string name="errorImportCancelled">Tietojen tuonti peruttiin.</string>
+  <string name="textBackupExportSchedule">Ajoitus</string>
+  <string name="textBackupExportOptionOff">Ei käytössä</string>
+  <string name="textBackupExportOption6Hours">6 tunnin välein</string>
+  <string name="textBackupExportOptionDaily">Kerran päivässä</string>
+  <string name="textBackupExportOption3Day">3 päivän välein</string>
+  <string name="textBackupExportOptionWeekly">Kerran viikossa</string>
+  <string name="textBackupExportOptionOffMessage">Varmuuskopiointia ei suoriteta automaattisesti.</string>
+  <string name="textBackupExportOptionConfirmMessage">Automaattinen varmuuskopiointi on ajastettu.</string>
+  <string name="textBackupExportOption6HoursButton">Ajoitettu suoritettavaksi 6 tunnin välein</string>
+  <string name="textBackupExportOptionDailyButton">Ajoitettu suoritettavaksi kerran päivässä</string>
+  <string name="textBackupExportOption3DayButton">Ajoitettu suoritettavaksi 3 päivän välein</string>
+  <string name="textBackupExportOptionWeeklyButton">Ajoitettu suoritettavaksi kerran viikossa</string>
+  <string name="textBackupExportLastTimestamp">Viimeksi varmuuskopioitu: %s</string>
 </resources>

@@ -8,4 +8,17 @@
   <string name="textBackupExportSuccess">Datos exportados con éxito.</string>
   <string name="textBackupImportSuccess">Datos importados con éxito.</string>
   <string name="errorImportCancelled">La importación de datos ha sido cancelada.</string>
+  <string name="textBackupExportSchedule">Programar</string>
+  <string name="textBackupExportOptionOff">Apagado</string>
+  <string name="textBackupExportOption6Hours">Cada 6 Horas</string>
+  <string name="textBackupExportOptionDaily">Cada Día</string>
+  <string name="textBackupExportOption3Day">Cada 3 Días</string>
+  <string name="textBackupExportOptionWeekly">Cada Semana</string>
+  <string name="textBackupExportOptionOffMessage">La copia de seguridad no se ejecutará automáticamente.</string>
+  <string name="textBackupExportOptionConfirmMessage">La copia de seguridad automática ha sido programada.</string>
+  <string name="textBackupExportOption6HoursButton">Programada para ejecutarse cada 6 horas</string>
+  <string name="textBackupExportOptionDailyButton">Programada para ejecutarse cada día</string>
+  <string name="textBackupExportOption3DayButton">Programada para ejecutarse cada 3 días</string>
+  <string name="textBackupExportOptionWeeklyButton">Programada para ejecutarse cada semana</string>
+  <string name="textBackupExportLastTimestamp">Última copia de seguridad: %s</string>
 </resources>

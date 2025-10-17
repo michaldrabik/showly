@@ -8,4 +8,17 @@
   <string name="textBackupExportSuccess">数据成功导出。</string>
   <string name="textBackupImportSuccess">数据成功导入。</string>
   <string name="errorImportCancelled">数据导入已取消。</string>
+  <string name="textBackupExportSchedule">定时同步时间</string>
+  <string name="textBackupExportOptionOff">关闭</string>
+  <string name="textBackupExportOption6Hours">每隔 6 小时</string>
+  <string name="textBackupExportOptionDaily">每隔 1 天</string>
+  <string name="textBackupExportOption3Day">每隔 3 天</string>
+  <string name="textBackupExportOptionWeekly">每隔 1 周</string>
+  <string name="textBackupExportOptionOffMessage">备份不会自动运行。</string>
+  <string name="textBackupExportOptionConfirmMessage">自动备份已排定。</string>
+  <string name="textBackupExportOption6HoursButton">已设置每隔 6 小时运行</string>
+  <string name="textBackupExportOptionDailyButton">已设置每隔 1 天运行</string>
+  <string name="textBackupExportOption3DayButton">已设置每隔 3 天运行</string>
+  <string name="textBackupExportOptionWeeklyButton">已设置每隔 1 周运行</string>
+  <string name="textBackupExportLastTimestamp">上次备份: %s</string>
 </resources>
