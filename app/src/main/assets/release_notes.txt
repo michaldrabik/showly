@@ -1,1 +1,3 @@
 * Introducing new automatic backup feature!
+* Fixed potential bug where periodic backup work was rescheduled multiple times.
+* Added translations
