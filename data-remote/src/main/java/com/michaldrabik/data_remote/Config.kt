@@ -25,4 +25,13 @@ object Config {
   const val OMDB_API_KEY = BuildConfig.OMDB_API_KEY
 
   const val AWS_BASE_URL = "https://showly2.s3.eu-west-2.amazonaws.com/"
+
+  fun traktUserAgent(
+    buildVersion: String,
+    buildCode: Int,
+    androidVersion: Int,
+  ): String {
+    // "Showly/3.55.1 (com.michaldrabik.showly; build:1254; Android)"
+    return "Showly/$buildVersion (com.michaldrabik.showly; build:$buildCode; Android $androidVersion)"
+  }
 }
