@@ -126,7 +126,6 @@ class SearchFragment :
     viewModel.clearSuggestions()
     with(binding) {
       searchViewLayout.binding.searchViewInput.removeTextChangedListener(this@SearchFragment)
-      searchViewLayout.binding.searchViewInput.setText("")
     }
     super.onStop()
   }
