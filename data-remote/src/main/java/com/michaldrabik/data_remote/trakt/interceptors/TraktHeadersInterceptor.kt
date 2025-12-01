@@ -26,7 +26,7 @@ class TraktHeadersInterceptor @Inject constructor() : Interceptor {
       .header("trakt-api-key", Config.TRAKT_CLIENT_ID)
       .header("trakt-api-version", Config.TRAKT_VERSION)
       .build()
-    
+
     return chain.proceed(request)
   }
 }
