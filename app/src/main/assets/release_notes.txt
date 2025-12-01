@@ -1,3 +1,1 @@
-* Introducing new automatic backup feature!
-* Fixed potential bug where periodic backup work was rescheduled multiple times.
-* Added translations
+* Added User-Agent header for improved Trakt API compatibility.
